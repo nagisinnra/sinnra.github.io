@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f4f5ef">
+<meta name="description" content="神羅テクノロジー — SINNRA TECHNOLOGY。NagisinnraLinuxを中心とした技術開発、オープンソース活動、技術発信、技術連携。">
+<title>神羅テクノロジー | SINNRA TECHNOLOGY</title>
+
+<style>
+:root{
+    --bg:#f5f5f2;
+    --paper:#ffffff;
+    --ink:#171918;
+    --muted:#72766f;
+    --line:rgba(20,25,20,.09);
+    --soft:rgba(20,25,20,.055);
+    --green:#708d75;
+    --green-deep:#4d6852;
+    --mint:#dce6dd;
+    --dark:#171918;
+    --dark-2:#252725;
+    --white:#ffffff;
+    --radius:30px;
+    --radius-sm:18px;
+    --shadow:0 25px 80px rgba(0,0,0,.07);
+    --shadow-soft:0 12px 45px rgba(0,0,0,.055);
+    --max:1240px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"Inter","Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.8;
+    overflow-x:hidden;
+}
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:.035;
+    z-index:1000;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.container{width:min(var(--max),calc(100% - 48px));margin:auto}
+::selection{background:var(--green);color:var(--ink)}
+
+.progress{
+    position:fixed;top:0;left:0;height:3px;width:0;
+    background:var(--ink);z-index:2000;transition:width .08s linear;
+}
+
+.nav{
+    position:fixed;
+    top:18px;left:50%;transform:translateX(-50%);
+    width:min(1180px,calc(100% - 34px));
+    height:70px;
+    padding:0 12px 0 20px;
+    display:flex;align-items:center;justify-content:space-between;
+    border:1px solid rgba(17,20,18,.09);
+    background:rgba(249,250,246,.82);
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+    border-radius:22px;
+    z-index:1500;
+    box-shadow:0 12px 40px rgba(0,0,0,.055);
+    transition:.35s ease;
+}
+.logo{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:-.03em}
+.logo-symbol{
+    width:38px;height:38px;border-radius:12px;
+    display:grid;place-items:center;
+    background:var(--ink);color:var(--green);
+    font-size:17px;font-weight:900;
+}
+.logo-text{font-size:14px;line-height:1.1}
+.logo-text small{
+    display:block;margin-top:4px;
+    font-size:8px;letter-spacing:.18em;
+    color:var(--muted);font-weight:700;
+}
+.nav-links{display:flex;align-items:center;gap:30px}
+.nav-links a{
+    font-size:11px;text-transform:uppercase;
+    letter-spacing:.14em;color:#747770;
+    transition:.25s ease;
+}
+.nav-links a:hover{color:var(--ink)}
+.nav-button{
+    display:inline-flex;align-items:center;justify-content:center;
+    height:46px;padding:0 18px;
+    background:var(--ink);color:var(--white);
+    border-radius:14px;font-size:11px;font-weight:800;
+    letter-spacing:.08em;transition:.25s ease;
+}
+.nav-button:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.16)}
+.nav-toggle{display:none;border:0;background:none;width:44px;height:44px}
+
+.hero{
+    min-height:100vh;
+    padding:180px 0 80px;
+    position:relative;
+    display:flex;align-items:center;
+    isolation:isolate;
+}
+.hero::before{
+    content:"";
+    position:absolute;
+    width:680px;height:680px;
+    right:-210px;top:60px;
+    background:radial-gradient(circle,var(--mint),transparent 67%);
+    filter:blur(2px);z-index:-2;
+}
+.hero::after{
+    content:"";
+    position:absolute;
+    width:400px;height:400px;
+    left:-230px;bottom:-120px;
+    background:radial-gradient(circle,rgba(184,243,106,.25),transparent 70%);
+    z-index:-2;
+}
+.hero-grid{
+    display:grid;grid-template-columns:1.08fr .92fr;
+    gap:80px;align-items:end;
+}
+.hero-label,.eyebrow{
+    display:flex;align-items:center;gap:9px;
+    font-size:10px;letter-spacing:.18em;
+    font-weight:800;text-transform:uppercase;color:#72766f;
+}
+.hero-dot{
+    width:7px;height:7px;border-radius:50%;background:var(--green-deep);
+    box-shadow:0 0 0 6px rgba(139,207,57,.12);
+}
+.hero-title{
+    margin-top:26px;
+    font-size:clamp(68px,8.5vw,138px);
+    line-height:.88;letter-spacing:-.075em;
+    font-weight:800;
+}
+.hero-title .gray{color:#888c84}
+.hero-title .green{color:#69816e}
+.hero-copy{
+    max-width:650px;margin-top:38px;
+    color:#72766f;font-size:16px;
+}
+.hero-actions{display:flex;gap:12px;margin-top:34px;flex-wrap:wrap}
+.button{
+    min-height:52px;padding:0 21px;border-radius:15px;
+    display:inline-flex;align-items:center;gap:20px;
+    font-size:11px;font-weight:800;letter-spacing:.1em;
+    transition:.28s ease;
+}
+.button-dark{background:var(--ink);color:var(--white)}
+.button-light{border:1px solid var(--line);background:rgba(255,255,255,.48)}
+.button:hover{transform:translateY(-3px);box-shadow:0 14px 35px rgba(0,0,0,.09)}
+.hero-meta{
+    margin-top:70px;padding-top:20px;border-top:1px solid var(--line);
+    display:grid;grid-template-columns:repeat(4,1fr);gap:15px;
+}
+.meta-label{font-size:8px;letter-spacing:.16em;color:#8a9189;font-weight:800}
+.meta-value{margin-top:5px;font-size:12px;font-weight:750}
+.hero-visual{position:relative;min-height:570px;display:grid;place-items:center}
+.orbit{
+    position:absolute;width:480px;height:480px;border:1px solid rgba(17,20,18,.09);
+    border-radius:50%;animation:spin 28s linear infinite;
+}
+.orbit::before,.orbit::after{
+    content:"";position:absolute;border-radius:50%;background:var(--ink);
+}
+.orbit::before{width:7px;height:7px;left:50%;top:-4px}
+.orbit::after{width:5px;height:5px;right:13%;bottom:10%;background:var(--green-deep)}
+.orbit-2{
+    width:350px;height:350px;border-color:rgba(17,20,18,.07);
+    animation-duration:22s;animation-direction:reverse;
+}
+.orbit-2::before{background:var(--green-deep);left:auto;right:2%;top:38%}
+.core-card{
+    position:relative;width:min(390px,82vw);
+    padding:30px;border-radius:32px;
+    background:rgba(255,255,255,.76);
+    border:1px solid rgba(17,20,18,.1);
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(18px);
+}
+.core-top{display:flex;justify-content:space-between;align-items:center}
+.status{display:flex;gap:7px;align-items:center;font-size:9px;font-weight:800;letter-spacing:.14em}
+.status i{width:7px;height:7px;border-radius:50%;background:var(--green-deep)}
+.core-mark{
+    width:100%;height:190px;margin:28px 0;
+    border-radius:23px;background:var(--dark);
+    display:grid;place-items:center;overflow:hidden;position:relative;
+}
+.core-mark::before{
+    content:"S";font-size:150px;font-weight:900;line-height:1;
+    color:transparent;-webkit-text-stroke:1px rgba(184,243,106,.5);
+    transform:translateY(8px);
+}
+.core-mark::after{
+    content:"SINNRA";position:absolute;bottom:17px;left:20px;
+    font-size:8px;letter-spacing:.3em;color:#a4a9a3;font-weight:800;
+}
+.core-name{font-size:24px;font-weight:800;letter-spacing:-.04em}
+.core-sub{font-size:9px;letter-spacing:.18em;color:#7e827a;font-weight:800;margin-top:2px}
+.core-line{height:1px;background:var(--line);margin:24px 0}
+.core-row{display:flex;justify-content:space-between;font-size:11px}
+.core-row span:first-child{color:#8a9189}
+.core-row span:last-child{font-weight:750}
+
+.section{padding:150px 0}
+.section-header{max-width:780px;margin-bottom:70px}
+.section-title{
+    margin-top:20px;
+    font-size:clamp(50px,6vw,92px);
+    line-height:.96;letter-spacing:-.07em;
+    font-weight:800;
+}
+.section-description{max-width:600px;margin-top:28px;color:var(--muted);font-size:15px}
+.about-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:90px;align-items:start}
+.about-statement{
+    font-size:clamp(36px,4.5vw,67px);line-height:1.03;
+    letter-spacing:-.06em;font-weight:780;
+}
+.about-statement span{color:#8dc842}
+.about-text{color:#72766f;font-size:14px}
+.about-text p+p{margin-top:25px}
+
+.number-strip{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.number-cell{padding:28px 20px;border-right:1px solid var(--line)}
+.number-cell:last-child{border-right:0}
+.number{font-size:42px;letter-spacing:-.06em;font-weight:800}
+.number-label{margin-top:4px;font-size:9px;color:#777b74;letter-spacing:.16em;font-weight:800}
+
+.dark-section{padding:35px 0 150px}
+.dark-card{
+    min-height:650px;border-radius:42px;
+    padding:75px;position:relative;overflow:hidden;
+    background:var(--dark);color:var(--white);
+    box-shadow:0 30px 100px rgba(0,0,0,.15);
+}
+.dark-card::before{
+    content:"";position:absolute;width:600px;height:600px;
+    right:-220px;top:-250px;border-radius:50%;
+    background:radial-gradient(circle,rgba(184,243,106,.2),transparent 68%);
+}
+.dark-card::after{
+    content:"";position:absolute;inset:0;opacity:.08;
+    background-image:linear-gradient(rgba(255,255,255,.3) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.3) 1px,transparent 1px);
+    background-size:70px 70px;mask-image:linear-gradient(to bottom right,black,transparent 75%);
+}
+.dark-inner{position:relative;z-index:1;max-width:900px}
+.dark-label{font-size:10px;letter-spacing:.2em;color:#969a92;font-weight:800}
+.dark-title{
+    margin-top:30px;font-size:clamp(58px,7vw,108px);
+    line-height:.9;letter-spacing:-.075em;
+}
+.dark-title span{color:var(--green)}
+.dark-description{max-width:650px;margin-top:42px;color:#a4a9a3;font-size:15px}
+.dark-specs{
+    margin-top:60px;display:grid;grid-template-columns:repeat(3,1fr);
+    border-top:1px solid rgba(255,255,255,.12);
+}
+.dark-spec{padding:24px 0;border-right:1px solid rgba(255,255,255,.1)}
+.dark-spec:not(:first-child){padding-left:25px}
+.dark-spec:last-child{border-right:0}
+.dark-spec small{display:block;color:#777b74;font-size:8px;letter-spacing:.17em;font-weight:800}
+.dark-spec strong{display:block;margin-top:5px;font-size:14px}
+
+.mission-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.mission-card{
+    min-height:350px;padding:30px;border-radius:26px;
+    border:1px solid var(--line);background:rgba(255,255,255,.36);
+    transition:.35s ease;position:relative;overflow:hidden;
+}
+.mission-card::before{
+    content:"";position:absolute;width:180px;height:180px;border-radius:50%;
+    right:-90px;bottom:-90px;background:var(--mint);opacity:.6;
+}
+.mission-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-soft);background:var(--paper)}
+.mission-index{font-size:8px;letter-spacing:.17em;font-weight:800;color:#8a9189}
+.mission-icon{
+    width:58px;height:58px;border-radius:17px;margin:55px 0 28px;
+    display:grid;place-items:center;background:var(--ink);color:var(--green);
+    font-size:8px;letter-spacing:.12em;font-weight:900;
+}
+.mission-card h3{font-size:24px;letter-spacing:-.04em}
+.mission-card p{margin-top:13px;color:#72766f;font-size:12px;max-width:310px}
+
+.project{
+    background:#ededeb;padding:150px 0;position:relative;overflow:hidden;
+}
+.project::before{
+    content:"N";position:absolute;right:-30px;top:-120px;
+    font-size:560px;font-weight:900;color:rgba(17,20,18,.025);line-height:1;
+}
+.project-grid{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:center}
+.project-title{font-size:clamp(55px,6.5vw,100px);line-height:.88;letter-spacing:-.08em}
+.project-title small{display:block;font-size:10px;letter-spacing:.18em;color:#72766f;margin-bottom:20px}
+.project-title strong{color:#69816e}
+.project-copy{margin-top:30px;color:#72766f;font-size:14px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:28px}
+.tag{
+    padding:8px 11px;border:1px solid rgba(17,20,18,.1);
+    border-radius:999px;font-size:8px;letter-spacing:.1em;
+    font-weight:800;background:rgba(255,255,255,.35);
+}
+.device{
+    position:relative;padding:15px;border-radius:32px;
+    background:#252725;box-shadow:0 35px 80px rgba(0,0,0,.18);
+    transform:rotate(1.5deg);
+}
+.device-screen{
+    min-height:490px;border-radius:22px;overflow:hidden;
+    background:#171918;color:#e2e4df;border:1px solid rgba(255,255,255,.07);
+}
+.screen-bar{
+    height:44px;padding:0 16px;display:flex;align-items:center;
+    justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.07);
+}
+.screen-dots{display:flex;gap:5px}
+.screen-dots i{width:7px;height:7px;border-radius:50%;background:#777b74}
+.screen-title{font-size:8px;letter-spacing:.13em;color:#888c84}
+.terminal{padding:34px;font-family:"SFMono-Regular",Consolas,monospace;font-size:11px;line-height:2;color:#a4a9a3}
+.terminal .accent{color:#708d75}
+.terminal .dim{color:#72766f}
+.terminal .line{height:1px;background:rgba(255,255,255,.07);margin:20px 0}
+.metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}
+.metric{
+    padding:14px;border:1px solid rgba(255,255,255,.08);
+    border-radius:12px;background:rgba(255,255,255,.025)
+}
+.metric small{display:block;color:#72766f;font-size:7px}
+.metric strong{font-size:13px;color:#e7eae4}
+
+.tech-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.tech-card{
+    min-height:280px;padding:34px;border-radius:27px;
+    background:var(--paper);border:1px solid var(--line);
+    transition:.3s ease;position:relative;
+}
+.tech-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-soft)}
+.tech-number{font-size:8px;letter-spacing:.18em;color:#8a9189;font-weight:800}
+.tech-card h3{margin-top:65px;font-size:28px;letter-spacing:-.045em}
+.tech-card p{margin-top:10px;color:#72766f;font-size:12px;max-width:430px}
+.tech-corner{
+    position:absolute;right:28px;top:28px;
+    width:36px;height:36px;border:1px solid var(--line);border-radius:11px;
+    display:grid;place-items:center;font-size:12px
+}
+
+.architecture{padding:150px 0;background:#111512;color:#f4f7f1}
+.architecture .eyebrow{color:#7e827a}
+.arch-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:100px}
+.arch-title{font-size:clamp(50px,6vw,88px);line-height:.92;letter-spacing:-.07em}
+.arch-copy{margin-top:30px;color:#92958f;font-size:13px}
+.stack{margin-top:20px;border-top:1px solid rgba(255,255,255,.11)}
+.stack-row{
+    display:grid;grid-template-columns:80px 1fr auto;gap:25px;
+    align-items:center;padding:22px 0;border-bottom:1px solid rgba(255,255,255,.1);
+}
+.stack-index{font-size:9px;color:#72766f;letter-spacing:.12em}
+.stack-name{font-size:16px;font-weight:750}
+.stack-detail{font-size:9px;color:#7e827a;text-align:right}
+
+.activity-list{border-top:1px solid var(--line)}
+.activity{
+    display:grid;grid-template-columns:160px 1fr 40px;
+    gap:25px;align-items:center;padding:27px 0;
+    border-bottom:1px solid var(--line);transition:.25s ease
+}
+.activity:hover{padding-left:14px;padding-right:14px;background:rgba(255,255,255,.4)}
+.activity-type{font-size:8px;letter-spacing:.16em;font-weight:800;color:#8a9189}
+.activity-title{font-size:20px;font-weight:780;letter-spacing:-.03em}
+.activity-text{margin-top:2px;color:#72766f;font-size:11px}
+.activity-arrow{font-size:18px;text-align:right}
+
+.partnership{padding:150px 0}
+.partner-panel{
+    padding:70px;border-radius:38px;background:#dce6dd;
+    position:relative;overflow:hidden;
+}
+.partner-panel::after{
+    content:"";position:absolute;width:420px;height:420px;right:-150px;bottom:-230px;
+    border-radius:50%;border:1px solid rgba(17,20,18,.12);
+    box-shadow:0 0 0 55px rgba(17,20,18,.025),0 0 0 110px rgba(17,20,18,.018);
+}
+.partner-grid{display:grid;grid-template-columns:1fr 1fr;gap:90px}
+.partner-title{font-size:clamp(48px,5.5vw,82px);line-height:.92;letter-spacing:-.07em}
+.partner-text{color:#72766f;font-size:13px}
+.partner-list{margin-top:32px;border-top:1px solid rgba(17,20,18,.12)}
+.partner-item{
+    display:flex;justify-content:space-between;gap:20px;
+    padding:17px 0;border-bottom:1px solid rgba(17,20,18,.12);
+    font-size:10px;font-weight:750
+}
+.partner-item span:last-child{color:#737b73}
+
+.organization{display:grid;grid-template-columns:.95fr 1.05fr;gap:80px;align-items:start}
+.organization-box{
+    padding:40px;border-radius:30px;background:var(--ink);color:var(--white);
+    box-shadow:var(--shadow)
+}
+.organization-box-label{font-size:8px;color:#777b74;letter-spacing:.18em;font-weight:800}
+.organization-name{font-size:35px;line-height:1.05;font-weight:800;letter-spacing:-.05em;margin:35px 0}
+.organization-name small{display:block;font-size:8px;letter-spacing:.22em;color:#7e827a;margin-top:9px}
+.org-info{border-top:1px solid rgba(255,255,255,.1)}
+.org-row{display:flex;justify-content:space-between;gap:20px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:10px}
+.org-key{color:#777b74}
+.org-value{font-weight:700;text-align:right}
+.org-copy{color:#68716a;font-size:14px}
+.org-copy p+p{margin-top:25px}
+.role-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:45px}
+.role{
+    padding:25px;border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.3)
+}
+.role-num{font-size:8px;letter-spacing:.15em;color:#8a9189;font-weight:800}
+.role h3{font-size:18px;margin-top:32px}
+.role p{font-size:10px;color:#717971;margin-top:7px}
+
+.governance{background:#ededeb}
+.gov-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:100px}
+.gov-big{font-size:clamp(52px,6vw,90px);line-height:.91;letter-spacing:-.07em}
+.gov-big span{color:#88c73d}
+.gov-copy{margin-top:30px;color:#72766f;font-size:13px}
+.gov-table{border-top:1px solid var(--line)}
+.gov-row{display:grid;grid-template-columns:180px 1fr;gap:20px;padding:21px 0;border-bottom:1px solid var(--line)}
+.gov-key{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#8a9189;font-weight:800}
+.gov-value{font-size:12px;font-weight:750}
+.notice{
+    margin-top:20px;padding:22px;border-radius:18px;
+    border:1px solid rgba(17,20,18,.1);background:rgba(255,255,255,.45);
+    font-size:11px;color:#72766f
+}
+
+.articles{padding:150px 0}
+.article-list{border-top:1px solid var(--line)}
+details{border-bottom:1px solid var(--line)}
+summary{
+    list-style:none;cursor:pointer;padding:27px 0;
+    display:grid;grid-template-columns:80px 1fr 25px;gap:20px;align-items:center
+}
+summary::-webkit-details-marker{display:none}
+.article-no{font-size:9px;letter-spacing:.15em;color:#8b928c;font-weight:800}
+.article-title{font-size:17px;font-weight:780}
+.article-plus{font-size:20px;transition:.25s ease;text-align:right}
+details[open] .article-plus{transform:rotate(45deg)}
+.article-body{padding:0 45px 30px 100px;color:#72766f;font-size:12px;max-width:850px}
+.article-body p+p{margin-top:13px}
+.article-sub{font-weight:800;color:var(--ink);margin-top:15px}
+
+.roadmap{padding:150px 0;background:#ededeb}
+.road-grid{display:grid;grid-template-columns:1fr 1fr;gap:90px}
+.road-title{font-size:clamp(52px,6vw,88px);line-height:.92;letter-spacing:-.07em}
+.road-copy{margin-top:28px;color:#72766f;font-size:13px}
+.road-items{border-top:1px solid var(--line)}
+.road-item{
+    display:grid;grid-template-columns:90px 1fr;gap:25px;
+    padding:25px 0;border-bottom:1px solid var(--line)
+}
+.road-year{font-size:10px;letter-spacing:.12em;font-weight:800;color:#8b928c}
+.road-item h3{font-size:17px}
+.road-item p{font-size:10px;color:#737b74;margin-top:5px}
+
+.faq{border-top:1px solid var(--line)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-question{
+    width:100%;border:0;background:none;text-align:left;
+    cursor:pointer;padding:28px 0;display:flex;justify-content:space-between;
+    align-items:center;gap:25px;font-weight:750;font-size:14px
+}
+.faq-plus{font-size:22px;font-weight:300;transition:.25s ease}
+.faq-answer{display:grid;grid-template-rows:0fr;transition:.35s ease}
+.faq-answer-inner{overflow:hidden}
+.faq-item.active .faq-answer{grid-template-rows:1fr}
+.faq-item.active .faq-plus{transform:rotate(45deg)}
+.faq-answer p{padding:0 50px 28px 0;color:#72766f;font-size:12px;max-width:760px}
+
+.contact{padding:35px 0 150px}
+.contact-card{
+    min-height:590px;padding:75px;border-radius:42px;
+    background:var(--ink);color:var(--white);
+    position:relative;overflow:hidden;
+    display:flex;flex-direction:column;justify-content:center
+}
+.contact-card::before{
+    content:"";position:absolute;width:650px;height:650px;right:-200px;top:-270px;
+    border-radius:50%;background:radial-gradient(circle,rgba(184,243,106,.2),transparent 67%)
+}
+.contact-label{position:relative;font-size:9px;letter-spacing:.2em;color:#969a92;font-weight:800}
+.contact-title{
+    position:relative;margin-top:25px;
+    font-size:clamp(65px,8vw,120px);line-height:.86;letter-spacing:-.08em
+}
+.contact-title span{color:var(--green)}
+.contact-description{position:relative;max-width:600px;margin-top:35px;color:#a4a9a3;font-size:13px}
+.contact-actions{position:relative;display:flex;gap:10px;margin-top:32px;flex-wrap:wrap}
+.contact-button{
+    min-height:50px;padding:0 19px;border-radius:14px;
+    display:inline-flex;align-items:center;gap:15px;font-size:10px;font-weight:800;letter-spacing:.08em
+}
+.contact-primary{background:var(--green);color:var(--ink)}
+.contact-secondary{border:1px solid rgba(255,255,255,.14);color:var(--white)}
+
+footer{padding:90px 0 30px;background:#171918;color:#e9eee8}
+.footer-grid{display:grid;grid-template-columns:1.6fr repeat(3,1fr);gap:60px}
+.footer-brand{font-size:30px;font-weight:800;letter-spacing:-.05em}
+.footer-sub{font-size:8px;letter-spacing:.22em;color:#969a92;margin-top:5px}
+.footer-description{max-width:340px;color:#999c96;font-size:11px;margin-top:25px}
+.footer-column h4{font-size:8px;letter-spacing:.18em;color:#72766f;text-transform:uppercase;margin-bottom:20px}
+.footer-column a{display:block;color:#989c95;font-size:10px;margin:9px 0;transition:.2s ease}
+.footer-column a:hover{color:var(--green)}
+.footer-bottom{
+    margin-top:80px;padding-top:20px;border-top:1px solid rgba(255,255,255,.09);
+    display:flex;justify-content:space-between;gap:20px;color:#72766f;font-size:8px;letter-spacing:.08em
+}
+
+.reveal{opacity:0;transform:translateY(35px);transition:opacity .85s ease,transform .85s ease}
+.reveal.visible{opacity:1;transform:none}
+.delay-1{transition-delay:.08s}.delay-2{transition-delay:.16s}.delay-3{transition-delay:.24s}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:1050px){
+    .hero-grid,.project-grid,.organization,.gov-grid,.arch-grid,.partner-grid,.road-grid{grid-template-columns:1fr;gap:55px}
+    .hero-visual{min-height:500px}
+    .footer-grid{grid-template-columns:1.5fr 1fr 1fr}
+    .footer-column:last-child{grid-column:2}
+}
+@media(max-width:800px){
+    .container{width:min(var(--max),calc(100% - 30px))}
+    .nav{top:10px;width:calc(100% - 20px);height:62px}
+    .nav-links{
+        position:absolute;top:70px;left:0;right:0;padding:18px;
+        display:none;flex-direction:column;align-items:stretch;gap:4px;
+        background:rgba(249,250,246,.96);border:1px solid var(--line);
+        border-radius:18px;box-shadow:var(--shadow-soft)
+    }
+    .nav.open .nav-links{display:flex}
+    .nav-links a{padding:13px 12px}
+    .nav-button{display:none}
+    .nav-toggle{display:grid;place-items:center}
+    .nav-toggle span,.nav-toggle span::before,.nav-toggle span::after{
+        display:block;width:20px;height:1px;background:var(--ink);content:"";position:relative
+    }
+    .nav-toggle span::before{position:absolute;top:-6px}
+    .nav-toggle span::after{position:absolute;top:6px}
+    .hero{padding-top:145px}
+    .hero-grid{gap:40px}
+    .hero-title{font-size:clamp(61px,17vw,100px)}
+    .hero-meta{grid-template-columns:1fr 1fr;gap:18px}
+    .hero-visual{min-height:440px}
+    .orbit{width:370px;height:370px}.orbit-2{width:270px;height:270px}
+    .section,.architecture,.partnership,.articles,.roadmap{padding:105px 0}
+    .dark-section{padding:15px 0 105px}
+    .dark-card{padding:45px 27px;min-height:600px;border-radius:30px}
+    .dark-specs{grid-template-columns:1fr}
+    .dark-spec{border-right:0;border-bottom:1px solid rgba(255,255,255,.1)}
+    .dark-spec:not(:first-child){padding-left:0}
+    .mission-grid,.tech-grid,.role-grid,.number-strip{grid-template-columns:1fr}
+    .number-cell{border-right:0;border-bottom:1px solid var(--line)}
+    .number-cell:last-child{border-bottom:0}
+    .project{padding:105px 0}
+    .device{transform:none}
+    .device-screen{min-height:410px}
+    .partner-panel{padding:45px 27px;border-radius:30px}
+    .gov-row{grid-template-columns:1fr;gap:7px}
+    .article-body{padding-left:0}
+    summary{grid-template-columns:50px 1fr 20px}
+    .contact-card{padding:50px 27px;min-height:560px;border-radius:30px}
+    .footer-grid{grid-template-columns:1fr 1fr;gap:45px 25px}
+    .footer-grid>div:first-child{grid-column:1/-1}
+    .footer-column:last-child{grid-column:auto}
+    .footer-bottom{flex-direction:column;gap:8px}
+}
+@media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none}
+}
+
+/* =========================================================
+   PALETTE LOCK — based on the original SINNRA design
+   ========================================================= */
+:root{
+    --bg:#f5f5f2;
+    --paper:#ffffff;
+    --ink:#171918;
+    --muted:#72766f;
+    --line:rgba(20,25,20,.09);
+    --soft:rgba(20,25,20,.055);
+    --green:#708d75;
+    --green-deep:#4d6852;
+    --mint:#dce6dd;
+    --dark:#171918;
+    --dark-2:#252725;
+    --white:#ffffff;
+}
+.hero-title .gray{color:#888c84}
+.hero-title .green{color:var(--green);background:none}
+.hero-copy,.about-text,.section-description,.project-copy,.partner-text,
+.org-copy,.gov-copy,.article-body,.road-copy,.faq-answer p{color:var(--muted)}
+.about-statement span,.project-title strong,.gov-big span{color:var(--green)}
+.nav-links a{color:#747770}
+.eyebrow,.hero-label{color:var(--green-deep)}
+
+</style>
+</head>
+
+<body>
+<div class="progress" id="progress"></div>
+
+<nav class="nav" id="nav" aria-label="メインナビゲーション">
+    <a href="#top" class="logo">
+        <span class="logo-symbol">S</span>
+        <span class="logo-text">
+            神羅テクノロジー
+            <small>SINNRA TECHNOLOGY</small>
+        </span>
+    </a>
+
+    <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#mission">Mission</a>
+        <a href="#linux">NagisinnraLinux</a>
+        <a href="#technology">Technology</a>
+        <a href="#organization">Organization</a>
+        <a href="#governance">Governance</a>
+    </div>
+
+    <a href="#contact" class="nav-button">Contact</a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="メニューを開く" aria-expanded="false">
+        <span></span>
+    </button>
+</nav>
+
+<main id="top">
+
+<header class="hero">
+    <div class="container">
+        <div class="hero-grid">
+            <div class="hero-content reveal">
+                <div class="hero-label">
+                    <span class="hero-dot"></span>
+                    SINNRA TECHNOLOGY / 2026
+                </div>
+
+                <h1 class="hero-title">
+                    <span class="gray">Technology,</span><br>
+                    made <span class="green">human.</span>
+                </h1>
+
+                <p class="hero-copy">
+                    神羅テクノロジーは、オープンソースとコンピューティング技術を軸に、
+                    新しいソフトウェア体験をつくる技術組織です。
+                    <br><br>
+                    超軽量Linuxディストリビューション「NagisinnraLinux」を中心として、
+                    独自開発、技術発信、オープンソース活動、技術連携を行っています。
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#about" class="button button-dark">私たちについて <span>→</span></a>
+                    <a href="#linux" class="button button-light">NagisinnraLinux</a>
+                </div>
+
+                <div class="hero-meta">
+                    <div>
+                        <div class="meta-label">ORGANIZATION</div>
+                        <div class="meta-value">神羅テクノロジー</div>
+                    </div>
+                    <div>
+                        <div class="meta-label">PROJECT</div>
+                        <div class="meta-value">NagisinnraLinux</div>
+                    </div>
+                    <div>
+                        <div class="meta-label">FIELD</div>
+                        <div class="meta-value">Linux / OSS</div>
+                    </div>
+                    <div>
+                        <div class="meta-label">EFFECTIVE</div>
+                        <div class="meta-value">2026.09.04</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual reveal delay-2">
+                <div class="orbit"></div>
+                <div class="orbit orbit-2"></div>
+
+                <div class="core-card">
+                    <div class="core-top">
+                        <div class="status"><i></i> SYSTEM / ACTIVE</div>
+                        <div class="meta-label">001</div>
+                    </div>
+
+                    <div class="core-mark"></div>
+
+                    <div class="core-name">SINNRA TECHNOLOGY</div>
+                    <div class="core-sub">神羅テクノロジー</div>
+
+                    <div class="core-line"></div>
+
+                    <div class="core-row">
+                        <span>Primary Project</span>
+                        <span>NagisinnraLinux</span>
+                    </div>
+                    <div class="core-row">
+                        <span>Office</span>
+                        <span>Utsunomiya, Tochigi</span>
+                    </div>
+                    <div class="core-row">
+                        <span>Representative</span>
+                        <span>Nagisinnra</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="section reveal" id="about">
+    <div class="container">
+        <div class="section-header">
+            <div class="eyebrow">ABOUT SINNRA</div>
+            <h2 class="section-title">技術を、<br>もっと自由に。</h2>
+            <p class="section-description">
+                神羅テクノロジーは、技術をつくることだけでなく、
+                技術をどう届け、どう共有し、どう長く育てるかまで考える組織です。
+            </p>
+        </div>
+
+        <div class="about-layout">
+            <div class="about-statement">
+                私たちは<br>
+                <span>「使う人」</span>の視点から、<br>
+                技術を考えます。
+            </div>
+
+            <div class="about-text">
+                <p>
+                    高性能であること。新しいこと。複雑であること。
+                    それだけが、良い技術ではありません。
+                </p>
+                <p>
+                    必要なものを必要なだけ。わかりやすく、軽く、美しく。
+                    神羅テクノロジーでは、コンピューターを使う人が技術そのものに振り回されるのではなく、
+                    技術によって自由になれる環境を目指します。
+                </p>
+                <p>
+                    その思想を具体的なプロダクトとして形にしているのが、
+                    主要プロジェクト「NagisinnraLinux」です。
+                </p>
+            </div>
+        </div>
+
+        <div class="number-strip" style="margin-top:90px">
+            <div class="number-cell">
+                <div class="number">01</div>
+                <div class="number-label">LINUX</div>
+            </div>
+            <div class="number-cell">
+                <div class="number">02</div>
+                <div class="number-label">OPEN SOURCE</div>
+            </div>
+            <div class="number-cell">
+                <div class="number">03</div>
+                <div class="number-label">TECHNOLOGY</div>
+            </div>
+            <div class="number-cell">
+                <div class="number">04</div>
+                <div class="number-label">PARTNERSHIP</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="dark-section reveal">
+    <div class="container">
+        <div class="dark-card">
+            <div class="dark-inner">
+                <div class="dark-label">THE SINNRA APPROACH</div>
+                <h2 class="dark-title">
+                    Small teams.<br>
+                    <span>Serious technology.</span>
+                </h2>
+                <p class="dark-description">
+                    大規模であることを目的にはしない。
+                    一つひとつの技術について考え、実際に手を動かし、
+                    必要であれば何度でもつくり直す。
+                    小さな組織だからこそできる、技術への近さを大切にします。
+                </p>
+
+                <div class="dark-specs">
+                    <div class="dark-spec">
+                        <small>01 / FOCUS</small>
+                        <strong>必要な技術に集中する</strong>
+                    </div>
+                    <div class="dark-spec">
+                        <small>02 / BUILD</small>
+                        <strong>実際に動くものをつくる</strong>
+                    </div>
+                    <div class="dark-spec">
+                        <small>03 / SHARE</small>
+                        <strong>知識と成果を共有する</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section reveal" id="mission">
+    <div class="container">
+        <div class="section-header">
+            <div class="eyebrow">OUR MISSION</div>
+            <h2 class="section-title">三つの<br>基本思想。</h2>
+            <p class="section-description">
+                会則に定める目的を、日々の技術活動へ落とし込みます。
+            </p>
+        </div>
+
+        <div class="mission-grid">
+            <article class="mission-card">
+                <div class="mission-index">01 / OPEN</div>
+                <div class="mission-icon">OPEN</div>
+                <h3>オープンであること。</h3>
+                <p>
+                    オープンソースの思想を尊重し、技術を一部の人だけのものにせず、
+                    学び、改良し、共有できる環境をつくります。
+                </p>
+            </article>
+
+            <article class="mission-card">
+                <div class="mission-index">02 / LIGHT</div>
+                <div class="mission-icon">LIGHT</div>
+                <h3>軽くあること。</h3>
+                <p>
+                    ハードウェアの性能をOS自身が使い切るのではなく、
+                    ユーザーのために残す。軽量で効率的なコンピューティングを追求します。
+                </p>
+            </article>
+
+            <article class="mission-card">
+                <div class="mission-index">03 / HUMAN</div>
+                <div class="mission-icon">HUMAN</div>
+                <h3>人を中心にすること。</h3>
+                <p>
+                    技術仕様だけではなく、実際に使う人の感覚、
+                    わかりやすさ、美しさまで含めて体験を設計します。
+                </p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="project reveal" id="linux">
+    <div class="container">
+        <div class="project-grid">
+            <div>
+                <div class="project-title">
+                    <small>FLAGSHIP PROJECT</small>
+                    Nagisinnra<br>
+                    <strong>Linux.</strong>
+                </div>
+                <p class="project-copy">
+                    神羅テクノロジーが独自に開発・運営する超軽量Linuxディストリビューション。
+                    Linuxカーネルを基盤に、システム構成、パッケージング、入力環境などを考え、
+                    日常的に使えるコンピューティング環境を目指します。
+                </p>
+
+                <div class="tags">
+                    <span class="tag">LIGHTWEIGHT</span>
+                    <span class="tag">LINUX</span>
+                    <span class="tag">DEBIAN</span>
+                    <span class="tag">JAPANESE</span>
+                    <span class="tag">OPEN SOURCE</span>
+                </div>
+            </div>
+
+            <div class="device">
+                <div class="device-screen">
+                    <div class="screen-bar">
+                        <div class="screen-dots"><i></i><i></i><i></i></div>
+                        <div class="screen-title">NAGISINNRALINUX / SYSTEM</div>
+                        <div class="screen-title">ONLINE</div>
+                    </div>
+                    <div class="terminal">
+                        <div class="dim">$ cat /etc/os-release</div>
+                        <br>
+                        <div><span class="accent">NAME</span>="NagisinnraLinux"</div>
+                        <div><span class="accent">BASE</span>="Debian GNU/Linux"</div>
+                        <div><span class="accent">LANG</span>="ja_JP.UTF-8"</div>
+                        <div><span class="accent">PROJECT</span>="SINNRA TECHNOLOGY"</div>
+                        <div class="line"></div>
+                        <div class="dim">$ systemctl status system</div>
+                        <div><span class="accent">● active</span> lightweight-computing.target</div>
+                        <div class="dim">  optimization ........ ready</div>
+                        <div class="dim">  japanese-input ...... ready</div>
+                        <div class="dim">  memory-management ... ready</div>
+
+                        <div class="metric-grid">
+                            <div class="metric">
+                                <small>BASE</small>
+                                <strong>Debian</strong>
+                            </div>
+                            <div class="metric">
+                                <small>MEMORY</small>
+                                <strong>zram</strong>
+                            </div>
+                            <div class="metric">
+                                <small>INPUT</small>
+                                <strong>fcitx5 + Mozc</strong>
+                            </div>
+                            <div class="metric">
+                                <small>FOCUS</small>
+                                <strong>Lightweight</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section reveal" id="technology">
+    <div class="container">
+        <div class="section-header">
+            <div class="eyebrow">TECHNOLOGY</div>
+            <h2 class="section-title">技術領域。</h2>
+            <p class="section-description">
+                NagisinnraLinuxを中心に、OS、システム、オープンソース、
+                コンピューティング体験までを一つの技術領域として捉えます。
+            </p>
+        </div>
+
+        <div class="tech-grid">
+            <article class="tech-card">
+                <div class="tech-number">TECHNOLOGY / 01</div>
+                <div class="tech-corner">01</div>
+                <h3>Linux Engineering</h3>
+                <p>
+                    Linuxカーネル、システム構成、パッケージング、
+                    起動プロセスなどを含めたOSレベルの技術研究。
+                </p>
+            </article>
+
+            <article class="tech-card">
+                <div class="tech-number">TECHNOLOGY / 02</div>
+                <div class="tech-corner">02</div>
+                <h3>System Optimization</h3>
+                <p>
+                    CPU、メモリ、ストレージなどのハードウェア資源を
+                    効率的に利用するためのシステム最適化。
+                </p>
+            </article>
+
+            <article class="tech-card">
+                <div class="tech-number">TECHNOLOGY / 03</div>
+                <div class="tech-corner">03</div>
+                <h3>Open Source</h3>
+                <p>
+                    オープンソースコミュニティへの参加、技術情報の公開、
+                    開発成果の共有を通じてOSSエコシステムへ貢献します。
+                </p>
+            </article>
+
+            <article class="tech-card">
+                <div class="tech-number">TECHNOLOGY / 04</div>
+                <div class="tech-corner">04</div>
+                <h3>Computing Experience</h3>
+                <p>
+                    技術仕様だけではなく、UI、UX、デザイン、
+                    インストール体験まで含めたコンピューティング体験を考えます。
+                </p>
+            </article>
+
+            <article class="tech-card">
+                <div class="tech-number">TECHNOLOGY / 05</div>
+                <div class="tech-corner">05</div>
+                <h3>Build & Distribution</h3>
+                <p>
+                    NagisinnraLinuxのビルド、アップデート、
+                    配布までを継続的な開発プロセスとして扱います。
+                </p>
+            </article>
+
+            <article class="tech-card">
+                <div class="tech-number">TECHNOLOGY / 06</div>
+                <div class="tech-corner">06</div>
+                <h3>Technical Communication</h3>
+                <p>
+                    公式ウェブサイトや技術メディアを通じて、
+                    開発で得た知見や技術的な情報を発信します。
+                </p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="architecture reveal">
+    <div class="container">
+        <div class="arch-grid">
+            <div>
+                <div class="eyebrow">SYSTEM VIEW</div>
+                <h2 class="arch-title">技術を<br>積み重ねる。</h2>
+                <p class="arch-copy">
+                    一つの製品は、一つの技術だけでは成立しません。
+                    OSの基盤からユーザーが触れる環境まで、
+                    複数の層をつなげて考えます。
+                </p>
+            </div>
+
+            <div class="stack">
+                <div class="stack-row">
+                    <div class="stack-index">01</div>
+                    <div class="stack-name">Linux Kernel</div>
+                    <div class="stack-detail">SYSTEM CORE</div>
+                </div>
+                <div class="stack-row">
+                    <div class="stack-index">02</div>
+                    <div class="stack-name">System Configuration</div>
+                    <div class="stack-detail">FOUNDATION</div>
+                </div>
+                <div class="stack-row">
+                    <div class="stack-index">03</div>
+                    <div class="stack-name">Memory Optimization</div>
+                    <div class="stack-detail">zram</div>
+                </div>
+                <div class="stack-row">
+                    <div class="stack-index">04</div>
+                    <div class="stack-name">Japanese Input</div>
+                    <div class="stack-detail">fcitx5 / Mozc</div>
+                </div>
+                <div class="stack-row">
+                    <div class="stack-index">05</div>
+                    <div class="stack-name">Desktop Experience</div>
+                    <div class="stack-detail">USER LAYER</div>
+                </div>
+                <div class="stack-row">
+                    <div class="stack-index">06</div>
+                    <div class="stack-name">Distribution</div>
+                    <div class="stack-detail">DELIVERY</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section reveal">
+    <div class="container">
+        <div class="section-header">
+            <div class="eyebrow">ACTIVITIES</div>
+            <h2 class="section-title">活動内容。</h2>
+            <p class="section-description">
+                会則に定める活動を、開発、発信、コミュニティ、連携という複数の面から展開します。
+            </p>
+        </div>
+
+        <div class="activity-list">
+            <div class="activity">
+                <div class="activity-type">DEVELOPMENT</div>
+                <div>
+                    <div class="activity-title">NagisinnraLinux 開発</div>
+                    <div class="activity-text">カーネル最適化、ビルド、アップデートファイルの配布</div>
+                </div>
+                <div class="activity-arrow">→</div>
+            </div>
+
+            <div class="activity">
+                <div class="activity-type">MEDIA</div>
+                <div>
+                    <div class="activity-title">技術情報発信</div>
+                    <div class="activity-text">公式ウェブサイトおよびZenn等を通じた技術発信</div>
+                </div>
+                <div class="activity-arrow">→</div>
+            </div>
+
+            <div class="activity">
+                <div class="activity-type">COMMUNITY</div>
+                <div>
+                    <div class="activity-title">オープンソース活動</div>
+                    <div class="activity-text">オープンソースコミュニティへの技術的貢献</div>
+                </div>
+                <div class="activity-arrow">→</div>
+            </div>
+
+            <div class="activity">
+                <div class="activity-type">PARTNERSHIP</div>
+                <div>
+                    <div class="activity-title">国内外との技術連携</div>
+                    <div class="activity-text">企業・団体との技術的な連携および支援環境の構築</div>
+                </div>
+                <div class="activity-arrow">→</div>
+            </div>
+
+            <div class="activity">
+                <div class="activity-type">OPERATIONS</div>
+                <div>
+                    <div class="activity-title">開発・運営基盤</div>
+                    <div class="activity-text">プロジェクトを継続するための運営および資産管理</div>
+                </div>
+                <div class="activity-arrow">→</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="partnership reveal" id="partnership">
+    <div class="container">
+        <div class="partner-panel">
+            <div class="partner-grid">
+                <div>
+                    <div class="eyebrow">PARTNERSHIP</div>
+                    <h2 class="partner-title">技術を、<br>一緒につくる。</h2>
+                </div>
+
+                <div>
+                    <p class="partner-text">
+                        神羅テクノロジーでは、NagisinnraLinuxをはじめとする
+                        技術活動を支援していただける企業・団体との連携を想定しています。
+                        支援は資金だけに限りません。
+                    </p>
+
+                    <div class="partner-list">
+                        <div class="partner-item">
+                            <span>Financial Support</span>
+                            <span>資金支援</span>
+                        </div>
+                        <div class="partner-item">
+                            <span>Hardware</span>
+                            <span>機材提供</span>
+                        </div>
+                        <div class="partner-item">
+                            <span>Infrastructure</span>
+                            <span>開発環境</span>
+                        </div>
+                        <div class="partner-item">
+                            <span>Technical Partnership</span>
+                            <span>技術連携</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section reveal" id="organization">
+    <div class="container">
+        <div class="section-header">
+            <div class="eyebrow">ORGANIZATION</div>
+            <h2 class="section-title">組織について。</h2>
+            <p class="section-description">
+                技術開発を中心に、目的に賛同し開発または運営に協力する会員によって活動します。
+            </p>
+        </div>
+
+        <div class="organization">
+            <div class="organization-box">
+                <div class="organization-box-label">ORGANIZATION</div>
+                <div class="organization-name">
+                    神羅テクノロジー
+                    <small>SINNRA TECHNOLOGY</small>
+                </div>
+
+                <div class="org-info">
+                    <div class="org-row">
+                        <div class="org-key">Organization</div>
+                        <div class="org-value">神羅テクノロジー</div>
+                    </div>
+                    <div class="org-row">
+                        <div class="org-key">Location</div>
+                        <div class="org-value">栃木県宇都宮市</div>
+                    </div>
+                    <div class="org-row">
+                        <div class="org-key">Representative</div>
+                        <div class="org-value">Nagisinnra</div>
+                    </div>
+                    <div class="org-row">
+                        <div class="org-key">Main Project</div>
+                        <div class="org-value">NagisinnraLinux</div>
+                    </div>
+                    <div class="org-row">
+                        <div class="org-key">Fiscal Year</div>
+                        <div class="org-value">4月1日 — 3月31日</div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="org-copy">
+                    <p>
+                        神羅テクノロジーは、NagisinnraLinuxの独自開発・運営を中心として
+                        活動する技術組織です。
+                    </p>
+                    <p>
+                        会員は本会の目的に賛同し、開発または運営に協力する者によって構成されます。
+                    </p>
+                    <p>
+                        組織としての意思決定、技術開発、情報発信、外部との連携を通じて、
+                        長期的に活動できる技術コミュニティを目指します。
+                    </p>
+                </div>
+
+                <div class="role-grid">
+                    <div class="role">
+                        <div class="role-num">ROLE / 01</div>
+                        <h3>代表</h3>
+                        <p>本会を総理し、対外的に組織を代表します。</p>
+                    </div>
+                    <div class="role">
+                        <div class="role-num">ROLE / 02</div>
+                        <h3>会員</h3>
+                        <p>本会の目的に賛同し、開発または運営に協力します。</p>
+                    </div>
+                    <div class="role">
+                        <div class="role-num">ROLE / 03</div>
+                        <h3>Community</h3>
+                        <p>技術や知識を共有し、活動を継続的に支えます。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section governance reveal" id="governance">
+    <div class="container">
+        <div class="section-header">
+            <div class="eyebrow">GOVERNANCE</div>
+            <h2 class="section-title">透明性と、<br>責任。</h2>
+            <p class="section-description">
+                技術組織としての自由さと、対外的な責任を両立するため、
+                名称、目的、活動、会員、資産、会計年度、代表などを会則として定めています。
+            </p>
+        </div>
+
+        <div class="gov-grid">
+            <div>
+                <div class="gov-big">Built on<br><span>clear rules.</span></div>
+                <p class="gov-copy">
+                    技術だけでなく、組織としてどう活動するかを明確にする。
+                    それが、継続的な技術活動の土台になると考えています。
+                </p>
+            </div>
+
+            <div>
+                <div class="gov-table">
+                    <div class="gov-row">
+                        <div class="gov-key">Name</div>
+                        <div class="gov-value">神羅テクノロジー</div>
+                    </div>
+                    <div class="gov-row">
+                        <div class="gov-key">English Name</div>
+                        <div class="gov-value">SINNRA TECHNOLOGY</div>
+                    </div>
+                    <div class="gov-row">
+                        <div class="gov-key">Office</div>
+                        <div class="gov-value">栃木県宇都宮市（代表の指定する場所）</div>
+                    </div>
+                    <div class="gov-row">
+                        <div class="gov-key">Representative</div>
+                        <div class="gov-value">Nagisinnra</div>
+                    </div>
+                    <div class="gov-row">
+                        <div class="gov-key">Fiscal Year</div>
+                        <div class="gov-value">毎年4月1日から翌年3月31日</div>
+                    </div>
+                    <div class="gov-row">
+                        <div class="gov-key">Effective</div>
+                        <div class="gov-value">2026年9月4日</div>
+                    </div>
+                </div>
+
+                <div class="notice">
+                    本会の活動資金は、寄付金、企業からのスポンサーシップ支援金、
+                    その他事業に伴う収入をもって構成します。
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section reveal">
+    <div class="container">
+        <div class="section-header">
+            <div class="eyebrow">TRANSPARENCY</div>
+            <h2 class="section-title">活動を、<br>開いていく。</h2>
+            <p class="section-description">
+                開発成果だけではなく、その周辺にある知識や考え方も発信することで、
+                技術に触れる入口を広げます。
+            </p>
+        </div>
+
+        <div class="tech-grid">
+            <article class="tech-card">
+                <div class="tech-number">OPEN / 01</div>
+                <div class="tech-corner">A</div>
+                <h3>Technical Writing</h3>
+                <p>技術的な情報を整理し、公式ウェブサイトや技術メディアを通じて発信します。</p>
+            </article>
+            <article class="tech-card">
+                <div class="tech-number">OPEN / 02</div>
+                <div class="tech-corner">B</div>
+                <h3>Project Information</h3>
+                <p>NagisinnraLinuxの開発やアップデートに関する情報を、利用者に伝わる形で届けます。</p>
+            </article>
+            <article class="tech-card">
+                <div class="tech-number">OPEN / 03</div>
+                <div class="tech-corner">C</div>
+                <h3>Community</h3>
+                <p>オープンソースコミュニティへの貢献を通じて、技術の循環に参加します。</p>
+            </article>
+            <article class="tech-card">
+                <div class="tech-number">OPEN / 04</div>
+                <div class="tech-corner">D</div>
+                <h3>Collaboration</h3>
+                <p>企業・団体との技術連携を通じて、個人だけでは届きにくい技術領域にも挑戦します。</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="roadmap reveal">
+    <div class="container">
+        <div class="road-grid">
+            <div>
+                <div class="eyebrow">OUR JOURNEY</div>
+                <h2 class="road-title">ここから、<br>始まる。</h2>
+                <p class="road-copy">
+                    これまでの開発を土台に、今後も技術開発、情報発信、
+                    オープンソース活動、技術連携を継続していきます。
+                    以下は将来の活動領域を示すためのロードマップです。
+                </p>
+            </div>
+
+            <div class="road-items">
+                <div class="road-item">
+                    <div class="road-year">2026 / NOW</div>
+                    <div>
+                        <h3>SINNRA TECHNOLOGY</h3>
+                        <p>組織としての活動基盤を整え、会則に基づく活動を開始。</p>
+                    </div>
+                </div>
+                <div class="road-item">
+                    <div class="road-year">01 / BUILD</div>
+                    <div>
+                        <h3>NagisinnraLinux</h3>
+                        <p>独自開発・運営、ビルド、アップデート、配布を継続。</p>
+                    </div>
+                </div>
+                <div class="road-item">
+                    <div class="road-year">02 / SHARE</div>
+                    <div>
+                        <h3>Technical Communication</h3>
+                        <p>公式サイトや技術メディアを通じた情報発信を拡大。</p>
+                    </div>
+                </div>
+                <div class="road-item">
+                    <div class="road-year">03 / CONNECT</div>
+                    <div>
+                        <h3>Technology Partnership</h3>
+                        <p>国内外の企業・団体との技術連携を進める。</p>
+                    </div>
+                </div>
+                <div class="road-item">
+                    <div class="road-year">04 / BEYOND</div>
+                    <div>
+                        <h3>Next Technology</h3>
+                        <p>Linuxを軸に、コンピューティングの新しい可能性へ挑戦。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="articles reveal" id="articles">
+    <div class="container">
+        <div class="section-header">
+            <div class="eyebrow">ARTICLES OF SINNRA</div>
+            <h2 class="section-title">会則。</h2>
+            <p class="section-description">
+                神羅テクノロジーの組織運営に関する基本事項を定めています。
+                各条文を開くと内容を確認できます。
+            </p>
+        </div>
+
+        <div class="article-list">
+            <details>
+                <summary>
+                    <span class="article-no">01</span>
+                    <span class="article-title">第1条（名称）</span>
+                    <span class="article-plus">+</span>
+                </summary>
+                <div class="article-body">
+                    <p>本会は「神羅テクノロジー（英文名：SINNRA TECHNOLOGY）」と称する。</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>
+                    <span class="article-no">02</span>
+                    <span class="article-title">第2条（事務所）</span>
+                    <span class="article-plus">+</span>
+                </summary>
+                <div class="article-body">
+                    <p>本会の主たる事務所は、栃木県宇都宮市（代表の指定する場所）に置く。</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>
+                    <span class="article-no">03</span>
+                    <span class="article-title">第3条（目的）</span>
+                    <span class="article-plus">+</span>
+                </summary>
+                <div class="article-body">
+                    <p>
+                        本会は、超軽量Linuxディストリビューション「NagisinnraLinux」の独自開発・運営、
+                        およびこれに付随する技術発信、オープンソースコミュニティへの貢献、
+                        国内外のテック企業との技術連携を行うことを目的とする。
+                    </p>
+                </div>
+            </details>
+
+            <details>
+                <summary>
+                    <span class="article-no">04</span>
+                    <span class="article-title">第4条（活動・事業）</span>
+                    <span class="article-plus">+</span>
+                </summary>
+                <div class="article-body">
+                    <p class="article-sub">1.</p>
+                    <p>「NagisinnraLinux」のカーネル最適化、ビルド、およびアップデートファイルの配布</p>
+                    <p class="article-sub">2.</p>
+                    <p>公式ウェブサイトおよび各種ITメディア（Zenn等）を通じた技術的な情報発信</p>
+                    <p class="article-sub">3.</p>
+                    <p>国内外の企業・団体からのスポンサーシップ（資金・機材・環境等の提供）の受入と管理</p>
+                    <p class="article-sub">4.</p>
+                    <p>その他、本会の目的を達成するために必要な活動</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>
+                    <span class="article-no">05</span>
+                    <span class="article-title">第5条（会員・組織）</span>
+                    <span class="article-plus">+</span>
+                </summary>
+                <div class="article-body">
+                    <p class="article-sub">1.</p>
+                    <p>本会の会員は、本会の目的に賛同し、開発または運営に協力する者とする。</p>
+                    <p class="article-sub">2.</p>
+                    <p>
+                        本会に「代表」を置き、創設者であるNagisinnraがその任に就く。
+                        代表は本会を総理し、対外的に組織を代表する。
+                    </p>
+                </div>
+            </details>
+
+            <details>
+                <summary>
+                    <span class="article-no">06</span>
+                    <span class="article-title">第6条（資産・会計）</span>
+                    <span class="article-plus">+</span>
+                </summary>
+                <div class="article-body">
+                    <p class="article-sub">1.</p>
+                    <p>
+                        本会の活動資金（資産）は、寄付金、企業からのスポンサーシップ支援金、
+                        その他事業に伴う収入をもって構成する。
+                    </p>
+                    <p class="article-sub">2.</p>
+                    <p>本会の会計年度は、毎年4月1日に始まり、翌年3月31日に終わる。</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>
+                    <span class="article-no">07</span>
+                    <span class="article-title">第7条（未成年者保護に関する特約）</span>
+                    <span class="article-plus">+</span>
+                </summary>
+                <div class="article-body">
+                    <p>
+                        本会の代表が未成年者（15歳未満）である期間においては、
+                        法的な契約行為や重大な意思決定にあたり、あらかじめ代表の親権者（保護者）の同意、
+                        または法的アドバイスを得てこれを行うものとし、対外的な信用の担保に努める。
+                    </p>
+                </div>
+            </details>
+
+            <details>
+                <summary>
+                    <span class="article-no">APPENDIX</span>
+                    <span class="article-title">附則</span>
+                    <span class="article-plus">+</span>
+                </summary>
+                <div class="article-body">
+                    <p>本会則は、2026年9月4日より施行する。</p>
+                </div>
+            </details>
+        </div>
+    </div>
+</section>
+
+<section class="section reveal">
+    <div class="container">
+        <div class="section-header">
+            <div class="eyebrow">FAQ</div>
+            <h2 class="section-title">よくある質問。</h2>
+        </div>
+
+        <div class="faq">
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>神羅テクノロジーとは何ですか？</span>
+                    <span class="faq-plus">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>
+                            NagisinnraLinuxの独自開発・運営を中心に、Linux、オープンソース、
+                            技術情報発信、技術連携などの活動を行う技術組織です。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>NagisinnraLinuxとの関係は？</span>
+                    <span class="faq-plus">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>
+                            NagisinnraLinuxは、神羅テクノロジーが独自に開発・運営する主要プロジェクトです。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>企業との技術連携は可能ですか？</span>
+                    <span class="faq-plus">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>
+                            会則では、国内外の企業・団体との技術連携、および資金・機材・環境等の
+                            スポンサーシップ支援の受入と管理を活動として定めています。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>会員になるには？</span>
+                    <span class="faq-plus">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>
+                            会則では、本会の目的に賛同し、開発または運営に協力する者を会員としています。
+                            具体的な参加方法については、別途案内する形を想定しています。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>会則はいつから施行されていますか？</span>
+                    <span class="faq-plus">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>本会則は2026年9月4日より施行するものとされています。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>会計年度はどうなっていますか？</span>
+                    <span class="faq-plus">+</span>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>毎年4月1日に始まり、翌年3月31日に終わる会計年度としています。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="contact reveal" id="contact">
+    <div class="container">
+        <div class="contact-card">
+            <div class="contact-label">SINNRA TECHNOLOGY</div>
+            <h2 class="contact-title">
+                Let's build<br>
+                what's <span>next.</span>
+            </h2>
+            <p class="contact-description">
+                技術連携、NagisinnraLinuxに関するお問い合わせ、スポンサーシップなど、
+                神羅テクノロジーの活動目的に沿った連携についてご検討ください。
+            </p>
+            <div class="contact-actions">
+                <a href="#partnership" class="contact-button contact-primary">Partnership →</a>
+                <a href="#articles" class="contact-button contact-secondary">Read the Articles</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-brand">神羅テクノロジー</div>
+                <div class="footer-sub">SINNRA TECHNOLOGY</div>
+                <p class="footer-description">
+                    Linux、オープンソース、コンピューティング技術を通じて、
+                    次の技術をつくる。
+                </p>
+            </div>
+
+            <div class="footer-column">
+                <h4>Company</h4>
+                <a href="#about">About</a>
+                <a href="#mission">Mission</a>
+                <a href="#organization">Organization</a>
+                <a href="#governance">Governance</a>
+            </div>
+
+            <div class="footer-column">
+                <h4>Technology</h4>
+                <a href="#linux">NagisinnraLinux</a>
+                <a href="#technology">Technology</a>
+                <a href="#partnership">Partnership</a>
+                <a href="#articles">Articles</a>
+            </div>
+
+            <div class="footer-column">
+                <h4>Explore</h4>
+                <a href="#articles">会則</a>
+                <a href="#roadmap">Roadmap</a>
+                <a href="#contact">Contact</a>
+                <a href="#top">Back to top</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© <span id="year">2026</span> SINNRA TECHNOLOGY</span>
+            <span>Effective September 4, 2026</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+const nav = document.getElementById("nav");
+const navToggle = document.getElementById("navToggle");
+const progress = document.getElementById("progress");
+
+navToggle.addEventListener("click", () => {
+    const open = nav.classList.toggle("open");
+    navToggle.setAttribute("aria-expanded", String(open));
+});
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+        nav.classList.remove("open");
+        navToggle.setAttribute("aria-expanded","false");
+    });
+});
+
+window.addEventListener("scroll", () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const value = max > 0 ? (window.scrollY / max) * 100 : 0;
+    progress.style.width = value + "%";
+
+    nav.style.boxShadow = window.scrollY > 50
+        ? "0 18px 50px rgba(0,0,0,.09)"
+        : "0 12px 40px rgba(0,0,0,.055)";
+});
+
+const revealItems = document.querySelectorAll(".reveal");
+
+const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add("visible");
+            revealObserver.unobserve(entry.target);
+        }
+    });
+},{threshold:.12});
+
+revealItems.forEach(item => revealObserver.observe(item));
+
+const faqItems = document.querySelectorAll(".faq-item");
+
+faqItems.forEach(item => {
+    const button = item.querySelector(".faq-question");
+
+    button.addEventListener("click", () => {
+        const active = item.classList.contains("active");
+
+        faqItems.forEach(other => other.classList.remove("active"));
+
+        if(!active){
+            item.classList.add("active");
+        }
+    });
+});
+
+const hero = document.querySelector(".hero-content");
+
+window.addEventListener("mousemove", event => {
+    if(window.innerWidth < 900) return;
+
+    const x = (event.clientX / window.innerWidth - .5) * 2;
+    const y = (event.clientY / window.innerHeight - .5) * 2;
+
+    hero.style.transform =
+        `translate(${x * 2}px, ${y * 1.5}px)`;
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", event => {
+        const target = document.querySelector(anchor.getAttribute("href"));
+        if(target){
+            event.preventDefault();
+            target.scrollIntoView({behavior:"smooth",block:"start"});
+        }
+    });
+});
+</script>
+</body>
+</html>
