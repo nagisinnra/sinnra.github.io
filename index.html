@@ -510,6 +510,30 @@ details[open] .article-plus{transform:rotate(45deg)}
 }
 .contact-primary{background:var(--green);color:var(--ink)}
 .contact-secondary{border:1px solid rgba(255,255,255,.14);color:var(--white)}
+.contact-email{
+    position:relative;
+    margin-top:32px;
+    padding-top:20px;
+    border-top:1px solid rgba(255,255,255,.1);
+    display:flex;
+    align-items:center;
+    gap:18px;
+    flex-wrap:wrap;
+}
+.contact-email span{
+    font-size:8px;
+    letter-spacing:.18em;
+    color:#777b74;
+    font-weight:800;
+}
+.contact-email a{
+    color:#e9eee8;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.01em;
+    transition:.25s ease;
+}
+.contact-email a:hover{color:var(--green)}
 
 footer{padding:90px 0 30px;background:#171918;color:#e9eee8}
 .footer-grid{display:grid;grid-template-columns:1.6fr repeat(3,1fr);gap:60px}
@@ -1622,7 +1646,12 @@ footer{padding:90px 0 30px;background:#171918;color:#e9eee8}
             </p>
             <div class="contact-actions">
                 <a href="#partnership" class="contact-button contact-primary">Partnership →</a>
+                <a href="mailto:sinnra.technology@outlook.jp" class="contact-button contact-secondary">Email →</a>
                 <a href="#articles" class="contact-button contact-secondary">Read the Articles</a>
+            </div>
+            <div class="contact-email">
+                <span>CONTACT</span>
+                <a href="mailto:sinnra.technology@outlook.jp">sinnra.technology@outlook.jp</a>
             </div>
         </div>
     </div>
