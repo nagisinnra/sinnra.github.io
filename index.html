@@ -1,86 +1,82 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<title>NagisinnraLinux — Designed to be light.</title>
 
-<meta name="description"
-      content="Nagisinnra Technology — Nagisinnra Technology。Linux、オープンソース、コンピューティング技術を通じて、次の技術をつくる。">
+<meta
+    name="description"
+    content="NagisinnraLinux — 軽く、速く、美しく。毎日のためのLinux."
+>
 
-<meta name="theme-color"
-      content="#f4f4f1">
-
-<title>
-Nagisinnra Technology | Nagisinnra Technology
-</title>
-
+<meta name="theme-color" content="#f5f5f1">
 
 <style>
 
 /* =========================================================
-   Nagisinnra Technology
-   CORPORATE WEBSITE
-   2026
-========================================================= */
-
-
-/* =========================================================
-   FONT
+   NAGISINNRALINUX
+   Alternate Edition
+   Design System
 ========================================================= */
 
 @import url(
-'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;800;900&display=swap'
+    'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;800;900&display=swap'
 );
 
 
 /* =========================================================
-   ROOT
+   VARIABLES
 ========================================================= */
 
 :root {
 
-    --bg: #f5f5f2;
+    --background: #f5f5f1;
 
-    --bg-soft: #ededeb;
+    --background-soft: #eeeeea;
 
-    --white: #ffffff;
+    --surface: rgba(255,255,255,0.68);
 
-    --black: #171918;
+    --surface-solid: #ffffff;
 
-    --black-soft: #252725;
+    --surface-dark: #171817;
 
-    --gray: #72766f;
+    --text: #171817;
 
-    --gray-light: #969a92;
+    --text-soft: #555753;
 
-    --line: rgba(20,25,20,.09);
+    --text-muted: #858780;
 
-    --green: #708d75;
+    --line: rgba(30,32,29,0.09);
 
-    --green-dark: #4d6852;
+    --line-dark: rgba(255,255,255,0.12);
 
-    --green-light: #dce6dd;
+    --green: #78987d;
 
-    --cream: #e9e3d5;
+    --green-light: #dce7dd;
 
-    --blue: #899da8;
+    --green-dark: #48634d;
+
+    --cream: #e9e2d3;
+
+    --shadow-small:
+        0 8px 25px rgba(0,0,0,0.05);
+
+    --shadow:
+        0 25px 70px rgba(0,0,0,0.08);
+
+    --shadow-large:
+        0 50px 120px rgba(0,0,0,0.13);
+
+    --radius-small: 14px;
 
     --radius: 24px;
 
-    --radius-large: 38px;
+    --radius-large: 36px;
 
-    --shadow:
-        0 25px 80px rgba(0,0,0,.07);
-
-    --shadow-small:
-        0 10px 35px rgba(0,0,0,.055);
-
-    --max:
-        1200px;
+    --max-width: 1180px;
 
 }
 
@@ -109,16 +105,32 @@ html {
 
 body {
 
-    background: var(--bg);
+    min-height: 100vh;
 
-    color: var(--black);
+    background:
+
+        radial-gradient(
+            circle at 5% 10%,
+            rgba(151,177,153,0.14),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 95% 20%,
+            rgba(210,195,165,0.12),
+            transparent 30%
+        ),
+
+        var(--background);
+
+    color: var(--text);
 
     font-family:
         "Inter",
         "Noto Sans JP",
         sans-serif;
 
-    line-height: 1.7;
+    line-height: 1.6;
 
     overflow-x: hidden;
 
@@ -140,7 +152,7 @@ body::before {
     opacity: .025;
 
     background-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.3'/%3E%3C/svg%3E");
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
 
 }
 
@@ -156,17 +168,30 @@ a {
 
 button {
 
-    font-family: inherit;
+    font: inherit;
 
 }
 
+
+img {
+
+    max-width: 100%;
+
+    display: block;
+
+}
+
+
+/* =========================================================
+   GLOBAL CONTAINER
+========================================================= */
 
 .container {
 
     width:
         min(
-            var(--max),
-            calc(100% - 50px)
+            var(--max-width),
+            calc(100% - 48px)
         );
 
     margin-inline: auto;
@@ -178,7 +203,7 @@ button {
    NAVIGATION
 ========================================================= */
 
-.nav {
+.site-nav {
 
     position: fixed;
 
@@ -188,15 +213,15 @@ button {
 
     transform: translateX(-50%);
 
+    z-index: 1000;
+
     width:
         min(
-            1140px,
+            1120px,
             calc(100% - 32px)
         );
 
-    height: 70px;
-
-    z-index: 1000;
+    height: 68px;
 
     display: flex;
 
@@ -204,81 +229,39 @@ button {
 
     justify-content: space-between;
 
-    padding:
-        0 11px
-        0 22px;
+    padding: 0 10px 0 20px;
+
+    background:
+        rgba(255,255,255,.66);
+
+    backdrop-filter:
+        blur(24px)
+        saturate(150%);
+
+    -webkit-backdrop-filter:
+        blur(24px)
+        saturate(150%);
 
     border:
         1px solid
-        rgba(255,255,255,.8);
+        rgba(255,255,255,.82);
 
-    border-radius: 22px;
-
-    background:
-        rgba(255,255,255,.67);
-
-    backdrop-filter:
-        blur(25px)
-        saturate(140%);
+    border-radius: 21px;
 
     box-shadow:
         0 12px 40px
         rgba(0,0,0,.055);
 
-    transition: .3s;
-
 }
 
 
-.logo {
+.brand {
 
     display: flex;
 
     align-items: center;
 
-    gap: 12px;
-
-}
-
-
-.logo-symbol {
-
-    width: 37px;
-
-    height: 37px;
-
-    display: grid;
-
-    place-items: center;
-
-    border-radius: 12px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #afc6b2,
-            #66816c
-        );
-
-    color: white;
-
-    font-weight: 900;
-
-    font-size: 14px;
-
-    box-shadow:
-        inset 0 1px
-        rgba(255,255,255,.7),
-
-        0 8px 20px
-        rgba(80,110,85,.15);
-
-}
-
-
-.logo-text {
-
-    font-size: 14px;
+    gap: 11px;
 
     font-weight: 800;
 
@@ -287,44 +270,72 @@ button {
 }
 
 
-.logo-text small {
+.brand-symbol {
 
-    display: block;
+    width: 35px;
 
-    margin-top: -4px;
+    height: 35px;
 
-    color: #92958f;
+    border-radius: 12px;
 
-    font-size: 7px;
+    display: grid;
 
-    font-weight: 600;
+    place-items: center;
 
-    letter-spacing: .16em;
+    background:
+
+        linear-gradient(
+            145deg,
+            #b8ceb9,
+            #6f8f75
+        );
+
+    color: white;
+
+    font-size: 14px;
+
+    box-shadow:
+
+        inset 0 1px
+        rgba(255,255,255,.65),
+
+        0 7px 18px
+        rgba(80,110,85,.18);
 
 }
 
 
-.nav-links {
+.brand-name {
+
+    font-size: 15px;
+
+}
+
+
+.nav-center {
 
     position: absolute;
 
     left: 50%;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
     display: flex;
 
-    gap: 27px;
+    align-items: center;
+
+    gap: 30px;
 
 }
 
 
-.nav-links a {
+.nav-center a {
 
-    color: #747770;
+    position: relative;
 
-    font-size: 11px;
+    color: #72746f;
+
+    font-size: 12px;
 
     font-weight: 600;
 
@@ -333,26 +344,62 @@ button {
 }
 
 
-.nav-links a:hover {
+.nav-center a::after {
 
-    color: var(--black);
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: -6px;
+
+    width: 0;
+
+    height: 1px;
+
+    background: var(--text);
+
+    transition: .25s;
 
 }
 
 
-.nav-button {
+.nav-center a:hover {
 
-    padding:
-        11px 18px;
+    color: var(--text);
 
-    border-radius: 14px;
+}
 
-    background:
-        var(--black);
+
+.nav-center a:hover::after {
+
+    width: 100%;
+
+}
+
+.nav-right-group {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+
+.nav-action {
+
+    padding: 11px 18px;
+
+    background: var(--text);
 
     color: white;
 
-    font-size: 11px;
+    border-radius: 14px;
+
+    font-size: 12px;
 
     font-weight: 700;
 
@@ -361,14 +408,108 @@ button {
 }
 
 
-.nav-button:hover {
+.nav-action:hover {
 
-    transform:
-        translateY(-2px);
+    transform: translateY(-2px);
 
     box-shadow:
         0 10px 25px
-        rgba(0,0,0,.16);
+        rgba(0,0,0,.15);
+
+}
+
+
+/* =========================================================
+   LANGUAGE SWITCHER UI
+========================================================= */
+
+.lang-switch-container {
+
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    background: rgba(30, 32, 29, 0.05);
+
+    border: 1px solid rgba(30, 32, 29, 0.08);
+
+    border-radius: 999px;
+
+    padding: 3px;
+
+    user-select: none;
+
+}
+
+
+.lang-switch-bg {
+
+    position: absolute;
+
+    top: 3px;
+
+    left: 3px;
+
+    width: 32px;
+
+    height: 24px;
+
+    background: #ffffff;
+
+    border-radius: 999px;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+    pointer-events: none;
+
+}
+
+
+.lang-btn {
+
+    position: relative;
+
+    z-index: 2;
+
+    border: none;
+
+    background: transparent;
+
+    padding: 3px 9px;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: .05em;
+
+    color: var(--text-muted);
+
+    cursor: pointer;
+
+    transition: color 0.25s ease;
+
+    border-radius: 999px;
+
+}
+
+
+.lang-btn.active {
+
+    color: var(--text);
+
+}
+
+
+/* State: JP selected (Translate active pill to second button) */
+
+.lang-switch-container[data-lang="jp"] .lang-switch-bg {
+
+    transform: translateX(32px);
 
 }
 
@@ -384,8 +525,8 @@ button {
     min-height: 100vh;
 
     padding:
-        190px 0
-        100px;
+        170px 0
+        110px;
 
     display: flex;
 
@@ -396,53 +537,52 @@ button {
 }
 
 
-.hero::before {
-
-    content: "";
+.hero-orb {
 
     position: absolute;
 
-    width: 700px;
+    width: 480px;
 
-    height: 700px;
-
-    left: -300px;
-
-    top: 50px;
+    height: 480px;
 
     border-radius: 50%;
 
     background:
+
         radial-gradient(
             circle,
-            rgba(129,162,133,.16),
-            transparent 67%
+            rgba(139,170,143,.2),
+            rgba(139,170,143,0)
         );
+
+    filter: blur(10px);
+
+    pointer-events: none;
 
 }
 
 
-.hero::after {
+.orb-one {
 
-    content: "";
+    top: 5%;
 
-    position: absolute;
+    left: -200px;
 
-    width: 600px;
+}
 
-    height: 600px;
 
-    right: -250px;
+.orb-two {
 
-    bottom: -200px;
+    right: -240px;
 
-    border-radius: 50%;
+    bottom: -100px;
 
     background:
+
         radial-gradient(
             circle,
-            rgba(218,201,171,.18),
-            transparent 67%
+            rgba(218,197,164,.2),
+            rgba(218,197,164,0)
         );
 
 }
@@ -454,10 +594,12 @@ button {
 
     z-index: 2;
 
+    text-align: center;
+
 }
 
 
-.hero-label {
+.status {
 
     display: inline-flex;
 
@@ -465,35 +607,31 @@ button {
 
     gap: 9px;
 
-    padding:
-        8px 13px;
+    padding: 8px 13px;
 
-    border:
-        1px solid
-        var(--line);
+    border: 1px solid var(--line);
 
-    border-radius:
-        999px;
+    border-radius: 999px;
 
     background:
         rgba(255,255,255,.65);
 
-    color:
-        var(--gray);
+    box-shadow:
+        var(--shadow-small);
 
-    font-size: 10px;
+    color: var(--text-soft);
 
-    font-weight: 700;
+    font-size: 11px;
 
-    letter-spacing: .08em;
+    font-weight: 600;
 
     animation:
-        fadeUp .8s ease both;
+        appear .8s ease both;
 
 }
 
 
-.hero-dot {
+.status-dot {
 
     width: 6px;
 
@@ -501,31 +639,36 @@ button {
 
     border-radius: 50%;
 
-    background:
-        var(--green);
+    background: var(--green);
+
+    box-shadow:
+        0 0 0 5px
+        rgba(120,152,125,.12);
 
 }
 
 
 .hero-title {
 
-    max-width: 1080px;
+    max-width: 1050px;
 
-    margin-top: 27px;
+    margin:
+        28px auto
+        24px;
 
     font-size:
         clamp(
-            65px,
+            58px,
             10vw,
-            135px
+            128px
         );
 
-    line-height: .87;
+    font-weight: 900;
+
+    line-height: .88;
 
     letter-spacing:
-        -.095em;
-
-    font-weight: 900;
+        -.085em;
 
     animation:
         titleIn 1s .1s ease both;
@@ -533,66 +676,69 @@ button {
 }
 
 
-.hero-title .gray {
+.hero-title .light {
 
-    color:
-        #888c84;
+    display: block;
+
+    color: #8c8e88;
 
     font-weight: 500;
 
 }
 
 
-.hero-title .green {
+.hero-title .accent {
+
+    display: block;
 
     background:
+
         linear-gradient(
-            110deg,
-            #1c211d,
-            #69816e
+            115deg,
+            #1a1c1a 0%,
+            #658269 70%,
+            #8fa991 100%
         );
 
-    -webkit-background-clip:
-        text;
+    -webkit-background-clip: text;
 
-    background-clip:
-        text;
+    background-clip: text;
 
-    color:
-        transparent;
+    color: transparent;
 
 }
 
 
-.hero-description {
+.hero-copy {
 
-    max-width: 590px;
+    max-width: 580px;
 
-    margin-top: 31px;
+    margin: 0 auto;
 
-    color:
-        var(--gray);
+    color: var(--text-muted);
 
-    font-size: 14px;
+    font-size: 15px;
 
-    line-height: 2.05;
+    line-height: 2;
 
     animation:
-        fadeUp 1s .3s ease both;
+        appear 1s .3s ease both;
 
 }
 
 
-.hero-actions {
+.hero-buttons {
 
     display: flex;
 
-    gap: 11px;
+    justify-content: center;
 
-    margin-top: 33px;
+    gap: 12px;
+
+    margin-top: 34px;
 
     animation:
-        fadeUp 1s .45s ease both;
+        appear 1s .45s ease both;
 
 }
 
@@ -605,35 +751,35 @@ button {
 
     justify-content: center;
 
-    gap: 13px;
+    gap: 12px;
 
     min-width: 150px;
 
-    padding:
-        15px 22px;
+    padding: 15px 22px;
 
     border-radius: 15px;
 
-    font-size: 11px;
+    font-size: 13px;
 
     font-weight: 700;
 
-    transition: .3s;
+    transition:
+        transform .3s,
+        box-shadow .3s,
+        background .3s;
 
 }
 
 
 .button-dark {
 
-    background:
-        var(--black);
+    background: var(--text);
 
-    color:
-        white;
+    color: white;
 
     box-shadow:
         0 12px 30px
-        rgba(0,0,0,.11);
+        rgba(0,0,0,.12);
 
 }
 
@@ -656,8 +802,7 @@ button {
         rgba(255,255,255,.75);
 
     border:
-        1px solid
-        var(--line);
+        1px solid var(--line);
 
 }
 
@@ -667,111 +812,521 @@ button {
     transform:
         translateY(-3px);
 
-    background:
-        white;
+    background: white;
 
 }
 
 
 /* =========================================================
-   HERO INFO
+   HERO PRODUCT PREVIEW
 ========================================================= */
 
-.hero-info {
+.hero-preview {
+
+    position: relative;
+
+    width:
+        min(
+            1030px,
+            92vw
+        );
+
+    margin:
+        90px auto
+        0;
+
+    animation:
+        previewIn 1.2s .55s ease both;
+
+}
+
+
+.preview-shadow {
+
+    position: absolute;
+
+    left: 8%;
+
+    right: 8%;
+
+    bottom: -35px;
+
+    height: 100px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(0,0,0,.13);
+
+    filter: blur(35px);
+
+}
+
+
+.desktop {
+
+    position: relative;
+
+    aspect-ratio: 16 / 9;
+
+    overflow: hidden;
+
+    border:
+        7px solid
+        rgba(255,255,255,.9);
+
+    border-radius: 29px;
+
+    background:
+
+        radial-gradient(
+            circle at 72% 18%,
+            rgba(188,213,190,.85),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 18% 78%,
+            rgba(224,210,181,.75),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #e6e9e2,
+            #dfe2dc
+        );
+
+    box-shadow:
+        var(--shadow-large);
+
+}
+
+
+.desktop::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+
+        linear-gradient(
+            115deg,
+            transparent 30%,
+            rgba(255,255,255,.28) 45%,
+            transparent 60%
+        );
+
+    transform:
+        translateX(-100%);
+
+    animation:
+        screenShine 8s 2s infinite;
+
+}
+
+
+/* =========================================================
+   MOCK DESKTOP UI
+========================================================= */
+
+.desktop-top {
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    right: 0;
+
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 17px;
+
+    background:
+        rgba(255,255,255,.52);
+
+    backdrop-filter:
+        blur(15px);
+
+    border-bottom:
+        1px solid
+        rgba(0,0,0,.05);
+
+}
+
+
+.desktop-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+}
+
+
+.desktop-circle {
+
+    width: 9px;
+
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: #c9cbc6;
+
+}
+
+
+.desktop-time {
+
+    color: #74766f;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+}
+
+
+.app-window {
+
+    position: absolute;
+
+    left: 20%;
+
+    top: 17%;
+
+    width: 60%;
+
+    height: 65%;
+
+    overflow: hidden;
+
+    background:
+        rgba(255,255,255,.89);
+
+    border:
+        1px solid
+        rgba(255,255,255,.9);
+
+    border-radius: 19px;
+
+    box-shadow:
+        0 25px 55px
+        rgba(0,0,0,.12);
+
+}
+
+
+.app-header {
+
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 15px;
+
+    border-bottom:
+        1px solid #ecece8;
+
+}
+
+
+.app-header-title {
+
+    margin: auto;
+
+    color: #777a73;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+}
+
+
+.app-content {
+
+    padding: 28px;
+
+}
+
+
+.app-small {
+
+    color: #8b8e87;
+
+    font-size: 9px;
+
+}
+
+
+.app-heading {
+
+    margin-top: 6px;
+
+    font-size: 25px;
+
+    font-weight: 800;
+
+    letter-spacing: -.06em;
+
+}
+
+
+.app-line {
+
+    width: 65%;
+
+    height: 6px;
+
+    margin-top: 11px;
+
+    border-radius: 999px;
+
+    background: #e6e8e2;
+
+}
+
+
+.app-grid {
 
     display: grid;
 
     grid-template-columns:
-        repeat(4,1fr);
+        repeat(3,1fr);
 
-    margin-top: 90px;
+    gap: 9px;
 
-    border-top:
+    margin-top: 28px;
+
+}
+
+
+.app-card {
+
+    height: 85px;
+
+    padding: 12px;
+
+    border-radius: 13px;
+
+    background:
+        #f0f2ed;
+
+}
+
+
+.app-card-line {
+
+    width: 60%;
+
+    height: 5px;
+
+    border-radius: 999px;
+
+    background: #d9ddd5;
+
+}
+
+
+.app-card-line.small {
+
+    width: 38%;
+
+    margin-top: 8px;
+
+}
+
+
+.bottom-dock {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 17px;
+
+    transform:
+        translateX(-50%);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 7px 10px;
+
+    background:
+        rgba(255,255,255,.65);
+
+    backdrop-filter:
+        blur(20px);
+
+    border:
         1px solid
-        var(--line);
+        rgba(255,255,255,.9);
 
-    border-bottom:
-        1px solid
-        var(--line);
+    border-radius: 15px;
 
-}
-
-
-.hero-info-item {
-
-    padding:
-        22px 20px;
-
-    border-right:
-        1px solid
-        var(--line);
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.08);
 
 }
 
 
-.hero-info-item:last-child {
+.dock-item {
 
-    border-right: 0;
+    width: 27px;
 
-}
+    height: 27px;
 
+    border-radius: 8px;
 
-.hero-info-label {
-
-    color:
-        #9b9e98;
-
-    font-size: 9px;
-
-    font-weight: 700;
-
-    letter-spacing: .12em;
+    background:
+        #e5e8e1;
 
 }
 
 
-.hero-info-value {
+.dock-item.active {
 
-    margin-top: 5px;
-
-    font-size: 13px;
-
-    font-weight: 700;
+    background:
+        #a8bba9;
 
 }
 
 
 /* =========================================================
-   SECTION COMMON
+   FLOATING METRICS
+========================================================= */
+
+.metric {
+
+    position: absolute;
+
+    z-index: 5;
+
+    padding: 15px 18px;
+
+    background:
+        rgba(255,255,255,.72);
+
+    backdrop-filter:
+        blur(18px);
+
+    border:
+        1px solid
+        rgba(255,255,255,.9);
+
+    border-radius: 17px;
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.09);
+
+}
+
+
+.metric-one {
+
+    left: -35px;
+
+    bottom: 16%;
+
+    animation:
+        metricFloat 5s ease-in-out infinite;
+
+}
+
+
+.metric-two {
+
+    right: -30px;
+
+    top: 13%;
+
+    animation:
+        metricFloat 6s 1s ease-in-out infinite;
+
+}
+
+
+.metric-number {
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    letter-spacing: -.05em;
+
+}
+
+
+.metric-label {
+
+    margin-top: 2px;
+
+    color: #8a8c86;
+
+    font-size: 9px;
+
+}
+
+
+/* =========================================================
+   SECTION
 ========================================================= */
 
 .section {
 
+    position: relative;
+
     padding:
-        150px 0;
+        145px 0;
 
 }
 
 
-.section-header {
+.section-head {
 
-    max-width: 760px;
+    max-width: 720px;
 
 }
 
 
-.eyebrow {
+.kicker {
 
-    margin-bottom: 13px;
+    display: inline-block;
 
-    color:
-        var(--green-dark);
+    margin-bottom: 14px;
 
-    font-size: 10px;
+    color: var(--green-dark);
+
+    font-size: 11px;
 
     font-weight: 800;
 
-    letter-spacing: .18em;
+    letter-spacing: .16em;
+
+    text-transform: uppercase;
 
 }
 
@@ -780,15 +1335,14 @@ button {
 
     font-size:
         clamp(
-            45px,
+            42px,
             6vw,
-            78px
+            76px
         );
 
-    line-height: .98;
+    line-height: 1;
 
-    letter-spacing:
-        -.075em;
+    letter-spacing: -.075em;
 
     font-weight: 800;
 
@@ -797,14 +1351,13 @@ button {
 
 .section-description {
 
-    max-width: 590px;
+    max-width: 570px;
 
     margin-top: 24px;
 
-    color:
-        var(--gray);
+    color: var(--text-muted);
 
-    font-size: 13px;
+    font-size: 14px;
 
     line-height: 2;
 
@@ -812,96 +1365,35 @@ button {
 
 
 /* =========================================================
-   ABOUT
+   FEATURE GRID
 ========================================================= */
 
-.about-layout {
+.feature-grid {
 
     display: grid;
 
     grid-template-columns:
-        .9fr 1.1fr;
-
-    gap: 90px;
-
-    margin-top: 75px;
-
-}
-
-
-.about-large {
-
-    font-size:
-        clamp(
-            30px,
-            4vw,
-            48px
-        );
-
-    line-height: 1.17;
-
-    letter-spacing:
-        -.06em;
-
-    font-weight: 700;
-
-}
-
-
-.about-large span {
-
-    color:
-        var(--green);
-
-}
-
-
-.about-text {
-
-    color:
-        var(--gray);
-
-    font-size: 13px;
-
-    line-height: 2.1;
-
-}
-
-
-.about-text p + p {
-
-    margin-top: 22px;
-
-}
-
-
-/* =========================================================
-   MISSION CARDS
-========================================================= */
-
-.mission-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
+        repeat(12,1fr);
 
     gap: 16px;
 
-    margin-top: 75px;
+    margin-top: 60px;
 
 }
 
 
-.mission-card {
-
-    min-height: 330px;
-
-    padding: 30px;
+.feature-card {
 
     position: relative;
 
+    min-height: 330px;
+
+    padding: 31px;
+
     overflow: hidden;
+
+    background:
+        rgba(255,255,255,.64);
 
     border:
         1px solid
@@ -910,18 +1402,17 @@ button {
     border-radius:
         var(--radius);
 
-    background:
-        rgba(255,255,255,.62);
-
     box-shadow:
         var(--shadow-small);
 
-    transition: .4s;
+    transition:
+        transform .4s,
+        box-shadow .4s;
 
 }
 
 
-.mission-card:hover {
+.feature-card:hover {
 
     transform:
         translateY(-8px);
@@ -932,27 +1423,62 @@ button {
 }
 
 
-.mission-index {
+.feature-card:nth-child(1) {
 
-    color:
-        #a7aaa3;
+    grid-column:
+        span 7;
 
-    font-size: 10px;
+}
 
-    font-weight: 800;
+
+.feature-card:nth-child(2) {
+
+    grid-column:
+        span 5;
+
+}
+
+
+.feature-card:nth-child(3) {
+
+    grid-column:
+        span 5;
+
+}
+
+
+.feature-card:nth-child(4) {
+
+    grid-column:
+        span 7;
+
+}
+
+
+.feature-number {
+
+    position: absolute;
+
+    top: 24px;
+
+    right: 27px;
+
+    color: #c5c8c1;
+
+    font-size: 11px;
+
+    font-weight: 700;
 
     letter-spacing: .1em;
 
 }
 
 
-.mission-icon {
+.feature-mark {
 
     width: 46px;
 
     height: 46px;
-
-    margin-top: 43px;
 
     display: grid;
 
@@ -966,136 +1492,188 @@ button {
     color:
         var(--green-dark);
 
-    font-size: 9px;
+    font-size: 10px;
 
     font-weight: 800;
 
 }
 
 
-.mission-card h3 {
+.feature-card h3 {
 
-    margin-top: 28px;
+    margin-top: 52px;
 
-    font-size: 23px;
+    font-size: 24px;
 
-    letter-spacing:
-        -.05em;
+    letter-spacing: -.055em;
 
 }
 
 
-.mission-card p {
+.feature-card p {
 
-    margin-top: 9px;
+    max-width: 450px;
 
-    color:
-        var(--gray);
+    margin-top: 10px;
 
-    font-size: 12px;
+    color: var(--text-muted);
+
+    font-size: 13px;
 
     line-height: 1.9;
 
 }
 
 
+.feature-decoration {
+
+    position: absolute;
+
+    right: -50px;
+
+    bottom: -70px;
+
+    width: 230px;
+
+    height: 230px;
+
+    border:
+        1px solid
+        rgba(100,130,105,.13);
+
+    border-radius: 50%;
+
+}
+
+
+.feature-decoration::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 35px;
+
+    border:
+        1px solid
+        rgba(100,130,105,.11);
+
+    border-radius: 50%;
+
+}
+
+
+.feature-decoration::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 70px;
+
+    border:
+        1px solid
+        rgba(100,130,105,.1);
+
+    border-radius: 50%;
+
+}
+
+
 /* =========================================================
-   LARGE DARK SECTION
+   DARK PHILOSOPHY SECTION
 ========================================================= */
 
 .dark-section {
 
     padding:
-        80px 0
-        150px;
+        150px 0;
 
 }
 
 
-.dark-card {
+.dark-panel {
 
     position: relative;
 
     overflow: hidden;
 
     padding:
-        105px 70px;
+        100px 70px;
+
+    background:
+        #191b19;
+
+    color: white;
 
     border-radius:
         var(--radius-large);
 
-    background:
-        var(--black);
-
-    color:
-        white;
-
     box-shadow:
-        var(--shadow);
+        var(--shadow-large);
 
 }
 
 
-.dark-card::before {
+.dark-panel::before {
 
     content: "";
 
     position: absolute;
 
-    width: 700px;
+    width: 550px;
 
-    height: 700px;
+    height: 550px;
 
-    right: -330px;
-
-    top: -350px;
-
-    border:
-        1px solid
-        rgba(155,185,160,.16);
-
-    border-radius: 50%;
-
-}
-
-
-.dark-card::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 450px;
-
-    height: 450px;
-
-    right: -190px;
+    right: -180px;
 
     top: -220px;
 
     border:
         1px solid
-        rgba(155,185,160,.1);
+        rgba(160,190,165,.14);
 
     border-radius: 50%;
 
 }
 
 
-.dark-label {
+.dark-panel::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 390px;
+
+    height: 390px;
+
+    right: -100px;
+
+    top: -140px;
+
+    border:
+        1px solid
+        rgba(160,190,165,.1);
+
+    border-radius: 50%;
+
+}
+
+
+.dark-kicker {
 
     position: relative;
 
     z-index: 2;
 
-    color:
-        #9bb39e;
+    color: #9db49f;
 
-    font-size: 10px;
+    font-size: 11px;
 
     font-weight: 800;
 
-    letter-spacing: .18em;
+    letter-spacing: .16em;
 
 }
 
@@ -1106,47 +1684,44 @@ button {
 
     z-index: 2;
 
-    max-width: 900px;
+    max-width: 850px;
 
-    margin-top: 18px;
+    margin-top: 20px;
 
     font-size:
         clamp(
-            48px,
+            44px,
             7vw,
-            90px
+            86px
         );
 
-    line-height: .94;
+    line-height: .98;
 
-    letter-spacing:
-        -.08em;
+    letter-spacing: -.075em;
 
 }
 
 
 .dark-title span {
 
-    color:
-        #78967d;
+    color: #849d88;
 
 }
 
 
-.dark-description {
+.dark-text {
 
     position: relative;
 
     z-index: 2;
 
-    max-width: 580px;
+    max-width: 550px;
 
     margin-top: 30px;
 
-    color:
-        #a6aaa4;
+    color: #a7aaa5;
 
-    font-size: 13px;
+    font-size: 14px;
 
     line-height: 2;
 
@@ -1154,758 +1729,240 @@ button {
 
 
 /* =========================================================
-   NAGISINNRALINUX
+   MEMORY SECTION
 ========================================================= */
 
-.product {
-
-    padding:
-        150px 0;
-
-}
-
-
-.product-layout {
+.memory-layout {
 
     display: grid;
 
     grid-template-columns:
         1fr 1fr;
 
-    gap: 75px;
+    gap: 80px;
 
     align-items: center;
-
-    margin-top: 75px;
-
-}
-
-
-.product-screen {
-
-    position: relative;
-
-    aspect-ratio:
-        16 / 11;
-
-    padding: 6px;
-
-    border-radius:
-        28px;
-
-    background:
-        #ffffff;
-
-    box-shadow:
-        0 35px 90px
-        rgba(0,0,0,.11);
-
-}
-
-
-.screen-inner {
-
-    position: relative;
-
-    height: 100%;
-
-    overflow: hidden;
-
-    border-radius:
-        23px;
-
-    background:
-
-        radial-gradient(
-            circle at 75% 20%,
-            rgba(165,192,169,.7),
-            transparent 25%
-        ),
-
-        radial-gradient(
-            circle at 15% 80%,
-            rgba(220,204,171,.7),
-            transparent 30%
-        ),
-
-        linear-gradient(
-            140deg,
-            #e7eae4,
-            #dfe2dc
-        );
-
-}
-
-
-.screen-bar {
-
-    height: 36px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    padding:
-        0 13px;
-
-    background:
-        rgba(255,255,255,.55);
-
-    border-bottom:
-        1px solid
-        rgba(0,0,0,.04);
-
-}
-
-
-.screen-dots {
-
-    display: flex;
-
-    gap: 5px;
-
-}
-
-
-.screen-dots i {
-
-    width: 7px;
-
-    height: 7px;
-
-    border-radius: 50%;
-
-    background:
-        #bfc3bc;
-
-}
-
-
-.screen-title {
-
-    color:
-        #7e827a;
-
-    font-size: 8px;
-
-    font-weight: 600;
-
-}
-
-
-.screen-window {
-
-    position: absolute;
-
-    width: 58%;
-
-    height: 61%;
-
-    left: 21%;
-
-    top: 18%;
-
-    background:
-        rgba(255,255,255,.9);
-
-    border:
-        1px solid
-        rgba(255,255,255,.95);
-
-    border-radius: 17px;
-
-    box-shadow:
-        0 25px 45px
-        rgba(0,0,0,.1);
-
-}
-
-
-.window-header {
-
-    height: 32px;
-
-    border-bottom:
-        1px solid
-        #ebebe8;
-
-}
-
-
-.window-body {
-
-    padding: 24px;
-
-}
-
-
-.fake-small {
-
-    color:
-        #969a93;
-
-    font-size: 7px;
-
-}
-
-
-.fake-title {
-
-    margin-top: 5px;
-
-    font-size: 21px;
-
-    font-weight: 800;
-
-    letter-spacing:
-        -.07em;
-
-}
-
-
-.fake-line {
-
-    height: 5px;
-
-    width: 65%;
-
-    margin-top: 10px;
-
-    border-radius:
-        999px;
-
-    background:
-        #e2e4df;
-
-}
-
-
-.fake-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap: 7px;
-
-    margin-top: 22px;
-
-}
-
-
-.fake-box {
-
-    height: 55px;
-
-    border-radius: 9px;
-
-    background:
-        #eef0ec;
-
-}
-
-
-.product-copy h3 {
-
-    font-size:
-        clamp(
-            34px,
-            4vw,
-            54px
-        );
-
-    line-height: 1;
-
-    letter-spacing:
-        -.065em;
-
-}
-
-
-.product-copy p {
-
-    margin-top: 22px;
-
-    color:
-        var(--gray);
-
-    font-size: 13px;
-
-    line-height: 2;
-
-}
-
-
-.product-tags {
-
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 8px;
-
-    margin-top: 28px;
-
-}
-
-
-.product-tag {
-
-    padding:
-        8px 12px;
-
-    border:
-        1px solid
-        var(--line);
-
-    border-radius:
-        999px;
-
-    color:
-        #72766f;
-
-    background:
-        rgba(255,255,255,.6);
-
-    font-size: 9px;
-
-    font-weight: 700;
-
-}
-
-
-/* =========================================================
-   TECHNOLOGY
-========================================================= */
-
-.tech-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap: 15px;
 
     margin-top: 70px;
 
 }
 
 
-.tech-card {
+.memory-display {
+
+    position: relative;
 
     padding:
-        31px;
+        70px 50px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #e8eee7,
+            #f7f7f3
+        );
 
     border:
         1px solid
-        var(--line);
+        #dde3dc;
 
     border-radius:
-        var(--radius);
+        var(--radius-large);
 
-    background:
-        rgba(255,255,255,.6);
+    overflow: hidden;
 
 }
 
 
-.tech-number {
+.memory-display::before {
 
-    color:
-        #a1a59e;
+    content: "";
 
-    font-size: 9px;
+    position: absolute;
+
+    width: 300px;
+
+    height: 300px;
+
+    left: -100px;
+
+    bottom: -160px;
+
+    border:
+        1px solid
+        rgba(80,110,85,.12);
+
+    border-radius: 50%;
+
+}
+
+
+.memory-number {
+
+    position: relative;
+
+    font-size:
+        clamp(
+            100px,
+            14vw,
+            180px
+        );
+
+    font-weight: 900;
+
+    line-height: .75;
+
+    letter-spacing: -.1em;
+
+}
+
+
+.memory-unit {
+
+    position: relative;
+
+    margin-top: 30px;
+
+    color: var(--green-dark);
+
+    font-size: 12px;
 
     font-weight: 800;
 
-    letter-spacing: .1em;
+    letter-spacing: .12em;
+
+    text-transform: uppercase;
 
 }
 
 
-.tech-card h3 {
+.memory-caption {
 
-    margin-top: 42px;
+    position: relative;
 
-    font-size: 23px;
+    margin-top: 15px;
 
-    letter-spacing:
-        -.05em;
+    max-width: 400px;
 
-}
+    color: #777b74;
 
-
-.tech-card p {
-
-    margin-top: 10px;
-
-    color:
-        var(--gray);
-
-    font-size: 12px;
+    font-size: 13px;
 
     line-height: 1.9;
 
 }
 
 
-/* =========================================================
-   ACTIVITIES
-========================================================= */
+.memory-info h3 {
 
-.activities {
+    font-size: 30px;
 
-    margin-top: 70px;
+    line-height: 1.1;
 
-    border-top:
-        1px solid
-        var(--line);
+    letter-spacing: -.055em;
 
 }
 
 
-.activity {
-
-    display: grid;
-
-    grid-template-columns:
-        150px 1fr 100px;
-
-    gap: 30px;
-
-    align-items: center;
-
-    padding:
-        25px 5px;
-
-    border-bottom:
-        1px solid
-        var(--line);
-
-}
-
-
-.activity-type {
-
-    color:
-        var(--green-dark);
-
-    font-size: 9px;
-
-    font-weight: 800;
-
-    letter-spacing: .12em;
-
-}
-
-
-.activity-title {
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-}
-
-
-.activity-text {
-
-    margin-top: 3px;
-
-    color:
-        var(--gray);
-
-    font-size: 11px;
-
-}
-
-
-.activity-arrow {
-
-    text-align: right;
-
-    color:
-        #999d96;
-
-    font-size: 18px;
-
-}
-
-
-/* =========================================================
-   ORGANIZATION
-========================================================= */
-
-.organization {
-
-    display: grid;
-
-    grid-template-columns:
-        .8fr 1.2fr;
-
-    gap: 100px;
-
-    margin-top: 75px;
-
-}
-
-
-.organization-box {
-
-    padding:
-        35px;
-
-    border-radius:
-        var(--radius);
-
-    background:
-        #ebece8;
-
-}
-
-
-.organization-box-label {
-
-    color:
-        #888d85;
-
-    font-size: 9px;
-
-    font-weight: 800;
-
-    letter-spacing: .13em;
-
-}
-
-
-.organization-name {
-
-    margin-top: 16px;
-
-    font-size: 28px;
-
-    font-weight: 800;
-
-    letter-spacing:
-        -.06em;
-
-}
-
-
-.organization-name small {
-
-    display: block;
-
-    margin-top: 4px;
-
-    color:
-        var(--gray);
-
-    font-size: 10px;
-
-    letter-spacing: .08em;
-
-}
-
-
-.organization-info {
-
-    margin-top: 28px;
-
-    border-top:
-        1px solid
-        rgba(0,0,0,.07);
-
-}
-
-
-.organization-row {
-
-    display: grid;
-
-    grid-template-columns:
-        120px 1fr;
-
-    padding:
-        14px 0;
-
-    border-bottom:
-        1px solid
-        rgba(0,0,0,.07);
-
-}
-
-
-.organization-key {
-
-    color:
-        #8d9189;
-
-    font-size: 10px;
-
-}
-
-
-.organization-value {
-
-    font-size: 11px;
-
-    font-weight: 600;
-
-}
-
-
-.organization-text {
-
-    color:
-        var(--gray);
-
-    font-size: 13px;
-
-    line-height: 2;
-
-}
-
-
-/* =========================================================
-   SPONSORSHIP
-========================================================= */
-
-.sponsor-panel {
-
-    margin-top: 70px;
-
-    padding:
-        65px;
-
-    border-radius:
-        var(--radius-large);
-
-    background:
-        linear-gradient(
-            135deg,
-            #e2e9e1,
-            #f1eee6
-        );
-
-    border:
-        1px solid
-        #dce2d9;
-
-}
-
-
-.sponsor-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap: 80px;
-
-    align-items: center;
-
-}
-
-
-.sponsor-title {
-
-    font-size:
-        clamp(
-            35px,
-            4vw,
-            54px
-        );
-
-    line-height: 1;
-
-    letter-spacing:
-        -.065em;
-
-}
-
-
-.sponsor-text {
+.memory-info p {
 
     margin-top: 18px;
 
-    color:
-        #777b74;
+    color: var(--text-muted);
 
-    font-size: 12px;
+    font-size: 14px;
 
-    line-height: 1.95;
-
-}
-
-
-.sponsor-list {
-
-    display: grid;
-
-    gap: 10px;
+    line-height: 2;
 
 }
 
 
-.sponsor-item {
+.progress-list {
+
+    margin-top: 38px;
+
+}
+
+
+.progress-item {
+
+    margin-top: 21px;
+
+}
+
+
+.progress-top {
 
     display: flex;
 
-    align-items: center;
-
     justify-content: space-between;
 
-    padding:
-        16px 18px;
-
-    border:
-        1px solid
-        rgba(60,80,60,.1);
-
-    border-radius:
-        14px;
-
-    background:
-        rgba(255,255,255,.55);
-
-}
-
-
-.sponsor-item span:first-child {
+    color: #777a73;
 
     font-size: 11px;
 
-    font-weight: 700;
+}
+
+
+.progress-bar {
+
+    height: 5px;
+
+    margin-top: 8px;
+
+    overflow: hidden;
+
+    background:
+        #e3e4df;
+
+    border-radius: 999px;
 
 }
 
 
-.sponsor-item span:last-child {
+.progress-fill {
 
-    color:
-        #8a9189;
+    height: 100%;
 
-    font-size: 10px;
+    border-radius: inherit;
+
+    background:
+        var(--green);
+
+}
+
+
+.fill-one {
+
+    width: 84%;
+
+}
+
+
+.fill-two {
+
+    width: 72%;
+
+}
+
+
+.fill-three {
+
+    width: 91%;
 
 }
 
 
 /* =========================================================
-   GOVERNANCE
+   TECH SPECIFICATION
 ========================================================= */
 
-.governance-layout {
+.spec-layout {
 
     display: grid;
 
     grid-template-columns:
-        1fr 1fr;
+        .7fr 1.3fr;
 
     gap: 80px;
 
@@ -1914,10 +1971,33 @@ button {
 }
 
 
-.governance-text {
+.spec-intro {
 
-    color:
-        var(--gray);
+    position: sticky;
+
+    top: 120px;
+
+    align-self: start;
+
+}
+
+
+.spec-intro h3 {
+
+    font-size: 32px;
+
+    line-height: 1.1;
+
+    letter-spacing: -.06em;
+
+}
+
+
+.spec-intro p {
+
+    margin-top: 18px;
+
+    color: var(--text-muted);
 
     font-size: 13px;
 
@@ -1926,7 +2006,7 @@ button {
 }
 
 
-.governance-table {
+.spec-table {
 
     border-top:
         1px solid
@@ -1935,15 +2015,17 @@ button {
 }
 
 
-.governance-row {
+.spec-row {
 
     display: grid;
 
     grid-template-columns:
-        130px 1fr;
+        1fr 1fr;
+
+    gap: 20px;
 
     padding:
-        18px 5px;
+        22px 5px;
 
     border-bottom:
         1px solid
@@ -1952,19 +2034,20 @@ button {
 }
 
 
-.governance-key {
+.spec-key {
 
-    color:
-        #969a92;
+    color: #999c95;
 
-    font-size: 10px;
+    font-size: 12px;
 
 }
 
 
-.governance-value {
+.spec-value {
 
-    font-size: 11px;
+    text-align: right;
+
+    font-size: 13px;
 
     font-weight: 700;
 
@@ -1979,7 +2062,7 @@ button {
 
     position: relative;
 
-    margin-top: 70px;
+    margin-top: 75px;
 
     padding-left: 30px;
 
@@ -1992,11 +2075,11 @@ button {
 
     position: absolute;
 
-    left: 5px;
-
     top: 0;
 
     bottom: 0;
+
+    left: 4px;
 
     width: 1px;
 
@@ -2011,7 +2094,14 @@ button {
     position: relative;
 
     padding:
-        0 0 60px 45px;
+        0 0 65px 40px;
+
+}
+
+
+.timeline-item:last-child {
+
+    padding-bottom: 0;
 
 }
 
@@ -2020,9 +2110,9 @@ button {
 
     position: absolute;
 
-    left: 0;
+    left: -1px;
 
-    top: 6px;
+    top: 5px;
 
     width: 11px;
 
@@ -2031,7 +2121,7 @@ button {
     border-radius: 50%;
 
     background:
-        var(--bg);
+        var(--background);
 
     border:
         2px solid
@@ -2040,44 +2130,290 @@ button {
 }
 
 
-.timeline-phase {
+.timeline-year {
 
-    color:
-        var(--green-dark);
+    color: var(--green-dark);
 
-    font-size: 9px;
+    font-size: 11px;
 
     font-weight: 800;
 
-    letter-spacing: .15em;
+    letter-spacing: .12em;
 
 }
 
 
 .timeline-item h3 {
 
-    margin-top: 7px;
+    margin-top: 8px;
 
     font-size: 25px;
 
-    letter-spacing:
-        -.05em;
+    letter-spacing: -.05em;
 
 }
 
 
 .timeline-item p {
 
-    max-width: 620px;
+    max-width: 580px;
 
     margin-top: 8px;
 
-    color:
-        var(--gray);
+    color: var(--text-muted);
 
-    font-size: 12px;
+    font-size: 13px;
 
     line-height: 1.9;
+
+}
+
+
+/* =========================================================
+   QUOTE
+========================================================= */
+
+.quote-section {
+
+    padding:
+        130px 0;
+
+}
+
+
+.quote {
+
+    max-width: 920px;
+
+    margin: auto;
+
+    text-align: center;
+
+}
+
+
+.quote-mark {
+
+    color: #b9c9bb;
+
+    font-size: 50px;
+
+    line-height: 1;
+
+}
+
+
+.quote-text {
+
+    margin-top: 20px;
+
+    font-size:
+        clamp(
+            34px,
+            5vw,
+            60px
+        );
+
+    line-height: 1.08;
+
+    letter-spacing: -.07em;
+
+    font-weight: 700;
+
+}
+
+
+.quote-small {
+
+    margin-top: 30px;
+
+    color: #969891;
+
+    font-size: 11px;
+
+    letter-spacing: .08em;
+
+}
+
+
+/* =========================================================
+   DOWNLOAD
+========================================================= */
+
+.download-section {
+
+    padding:
+        100px 0 150px;
+
+}
+
+
+.download-panel {
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding:
+        100px 50px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #dfe9df,
+            #f5f3ec
+        );
+
+    border:
+        1px solid
+        #d9e0d8;
+
+    border-radius:
+        var(--radius-large);
+
+}
+
+
+.download-panel::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+
+    height: 500px;
+
+    top: -350px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    border:
+        1px solid
+        rgba(75,105,80,.1);
+
+    border-radius: 50%;
+
+}
+
+
+.download-panel::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 700px;
+
+    height: 700px;
+
+    top: -450px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    border:
+        1px solid
+        rgba(75,105,80,.06);
+
+    border-radius: 50%;
+
+}
+
+
+.download-label {
+
+    position: relative;
+
+    z-index: 2;
+
+    color: var(--green-dark);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: .16em;
+
+}
+
+
+.download-title {
+
+    position: relative;
+
+    z-index: 2;
+
+    margin-top: 15px;
+
+    font-size:
+        clamp(
+            45px,
+            7vw,
+            80px
+        );
+
+    line-height: .95;
+
+    letter-spacing: -.08em;
+
+}
+
+
+.download-description {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 520px;
+
+    margin: 20px auto 0;
+
+    color: #777b74;
+
+    font-size: 13px;
+
+    line-height: 1.9;
+
+}
+
+
+.download-actions {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 32px;
+
+}
+
+
+.version {
+
+    position: relative;
+
+    z-index: 2;
+
+    margin-top: 22px;
+
+    color: #92968e;
+
+    font-size: 10px;
 
 }
 
@@ -2088,7 +2424,7 @@ button {
 
 .faq {
 
-    margin-top: 65px;
+    margin-top: 60px;
 
     border-top:
         1px solid
@@ -2110,38 +2446,37 @@ button {
 
     width: 100%;
 
+    padding:
+        24px 5px;
+
     display: flex;
 
     align-items: center;
 
     justify-content: space-between;
 
-    padding:
-        24px 5px;
-
     border: 0;
 
-    background: transparent;
+    background: none;
 
-    color:
-        var(--black);
+    color: var(--text);
 
     text-align: left;
 
     cursor: pointer;
 
-    font-size: 13px;
+    font-size: 14px;
 
     font-weight: 700;
 
 }
 
 
-.faq-plus {
+.faq-symbol {
 
-    width: 27px;
+    width: 28px;
 
-    height: 27px;
+    height: 28px;
 
     display: grid;
 
@@ -2153,10 +2488,10 @@ button {
 
     border-radius: 50%;
 
-    color:
-        #777;
+    color: #777;
 
-    transition: .3s;
+    transition:
+        transform .3s;
 
 }
 
@@ -2175,24 +2510,21 @@ button {
 
 .faq-answer p {
 
-    max-width: 700px;
+    max-width: 720px;
 
     padding:
-        0 5px
-        25px;
+        0 5px 25px;
 
-    color:
-        var(--gray);
+    color: var(--text-muted);
 
-    font-size: 12px;
+    font-size: 13px;
 
-    line-height: 2;
+    line-height: 1.9;
 
 }
 
 
-.faq-item.active
-.faq-plus {
+.faq-item.active .faq-symbol {
 
     transform:
         rotate(45deg);
@@ -2200,191 +2532,9 @@ button {
 }
 
 
-.faq-item.active
-.faq-answer {
+.faq-item.active .faq-answer {
 
-    max-height:
-        250px;
-
-}
-
-
-/* =========================================================
-   CONTACT CTA
-========================================================= */
-
-.contact {
-
-    padding:
-        80px 0
-        150px;
-
-}
-
-
-.contact-card {
-
-    position: relative;
-
-    overflow: hidden;
-
-    padding:
-        100px 60px;
-
-    text-align: center;
-
-    border-radius:
-        var(--radius-large);
-
-    background:
-        var(--black);
-
-    color:
-        white;
-
-}
-
-
-.contact-card::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 600px;
-
-    height: 600px;
-
-    left: 50%;
-
-    top: -450px;
-
-    transform:
-        translateX(-50%);
-
-    border:
-        1px solid
-        rgba(150,180,155,.15);
-
-    border-radius: 50%;
-
-}
-
-
-.contact-label {
-
-    position: relative;
-
-    color:
-        #96ad99;
-
-    font-size: 10px;
-
-    font-weight: 800;
-
-    letter-spacing: .18em;
-
-}
-
-
-.contact-title {
-
-    position: relative;
-
-    margin-top: 15px;
-
-    font-size:
-        clamp(
-            48px,
-            7vw,
-            85px
-        );
-
-    line-height: .95;
-
-    letter-spacing:
-        -.08em;
-
-}
-
-
-.contact-description {
-
-    position: relative;
-
-    max-width: 500px;
-
-    margin:
-        22px auto 0;
-
-    color:
-        #a4a9a3;
-
-    font-size: 12px;
-
-    line-height: 1.9;
-
-}
-
-
-.contact-actions {
-
-    position: relative;
-
-    display: flex;
-
-    justify-content: center;
-
-    gap: 10px;
-
-    margin-top: 31px;
-
-}
-
-
-.contact-button {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    min-width: 155px;
-
-    padding:
-        14px 21px;
-
-    border-radius: 14px;
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-    transition: .3s;
-
-}
-
-
-.contact-primary {
-
-    background:
-        white;
-
-    color:
-        var(--black);
-
-}
-
-
-.contact-secondary {
-
-    border:
-        1px solid
-        rgba(255,255,255,.15);
-
-    color:
-        #d5d8d3;
+    max-height: 300px;
 
 }
 
@@ -2396,8 +2546,7 @@ button {
 footer {
 
     padding:
-        60px 0
-        75px;
+        55px 0 70px;
 
     border-top:
         1px solid
@@ -2406,58 +2555,38 @@ footer {
 }
 
 
-.footer-grid {
+.footer-inner {
 
     display: grid;
 
     grid-template-columns:
-        1.5fr
-        1fr
-        1fr
-        1fr;
+        1.5fr 1fr 1fr 1fr;
 
-    gap: 45px;
+    gap: 40px;
 
 }
 
 
 .footer-brand {
 
-    font-size: 17px;
+    font-size: 16px;
 
     font-weight: 800;
 
-    letter-spacing:
-        -.05em;
-
-}
-
-
-.footer-sub {
-
-    margin-top: 3px;
-
-    color:
-        #969a93;
-
-    font-size: 8px;
-
-    letter-spacing:
-        .17em;
+    letter-spacing: -.04em;
 
 }
 
 
 .footer-description {
 
-    max-width: 260px;
+    max-width: 250px;
 
-    margin-top: 15px;
+    margin-top: 12px;
 
-    color:
-        #999c96;
+    color: #92948e;
 
-    font-size: 10px;
+    font-size: 11px;
 
     line-height: 1.8;
 
@@ -2466,17 +2595,17 @@ footer {
 
 .footer-column h4 {
 
-    margin-bottom: 13px;
+    margin-bottom: 15px;
 
-    color:
-        #777b74;
+    color: #777a73;
 
-    font-size: 9px;
+    font-size: 10px;
 
-    letter-spacing: .12em;
+    font-weight: 800;
 
-    text-transform:
-        uppercase;
+    letter-spacing: .1em;
+
+    text-transform: uppercase;
 
 }
 
@@ -2485,12 +2614,11 @@ footer {
 
     display: block;
 
-    margin-top: 7px;
+    margin-top: 8px;
 
-    color:
-        #989c95;
+    color: #92948e;
 
-    font-size: 10px;
+    font-size: 11px;
 
     transition: .2s;
 
@@ -2499,8 +2627,7 @@ footer {
 
 .footer-column a:hover {
 
-    color:
-        var(--black);
+    color: var(--text);
 
 }
 
@@ -2519,16 +2646,15 @@ footer {
         1px solid
         var(--line);
 
-    color:
-        #a2a59f;
+    color: #aaa;
 
-    font-size: 9px;
+    font-size: 10px;
 
 }
 
 
 /* =========================================================
-   SCROLL REVEAL
+   REVEAL
 ========================================================= */
 
 .reveal {
@@ -2556,17 +2682,17 @@ footer {
 
 
 /* =========================================================
-   ANIMATION
+   KEYFRAMES
 ========================================================= */
 
-@keyframes fadeUp {
+@keyframes appear {
 
     from {
 
         opacity: 0;
 
         transform:
-            translateY(18px);
+            translateY(12px);
 
     }
 
@@ -2589,7 +2715,7 @@ footer {
         opacity: 0;
 
         transform:
-            translateY(35px)
+            translateY(30px)
             scale(.97);
 
     }
@@ -2607,51 +2733,106 @@ footer {
 }
 
 
+@keyframes previewIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(50px)
+            scale(.96);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+@keyframes screenShine {
+
+    0% {
+
+        transform:
+            translateX(-110%);
+
+    }
+
+    45%,
+    100% {
+
+        transform:
+            translateX(110%);
+
+    }
+
+}
+
+
+@keyframes metricFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-9px);
+
+    }
+
+}
+
+
 /* =========================================================
-   TABLET
+   RESPONSIVE
 ========================================================= */
 
-@media(max-width:900px) {
+@media (max-width: 900px) {
 
-    .nav-links {
+    .nav-center {
 
         display: none;
 
     }
 
 
-    .hero-info {
+    .feature-card:nth-child(1),
+    .feature-card:nth-child(2),
+    .feature-card:nth-child(3),
+    .feature-card:nth-child(4) {
 
-        grid-template-columns:
-            repeat(2,1fr);
-
-    }
-
-
-    .hero-info-item:nth-child(2) {
-
-        border-right: 0;
+        grid-column:
+            span 12;
 
     }
 
 
-    .mission-grid {
+    .memory-layout {
 
         grid-template-columns:
             1fr;
 
+        gap: 40px;
+
     }
 
 
-    .about-layout,
-
-    .product-layout,
-
-    .organization,
-
-    .governance-layout,
-
-    .sponsor-grid {
+    .spec-layout {
 
         grid-template-columns:
             1fr;
@@ -2661,15 +2842,14 @@ footer {
     }
 
 
-    .tech-grid {
+    .spec-intro {
 
-        grid-template-columns:
-            1fr;
+        position: static;
 
     }
 
 
-    .footer-grid {
+    .footer-inner {
 
         grid-template-columns:
             1fr 1fr;
@@ -2679,11 +2859,7 @@ footer {
 }
 
 
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:600px) {
+@media (max-width: 650px) {
 
     .container {
 
@@ -2693,26 +2869,26 @@ footer {
     }
 
 
-    .nav {
+    .site-nav {
 
-        height: 61px;
-
-    }
-
-
-    .logo-text {
-
-        font-size: 12px;
+        height: 60px;
 
     }
 
 
-    .nav-button {
+    .brand-name {
+
+        font-size: 13px;
+
+    }
+
+
+    .nav-action {
 
         padding:
             9px 13px;
 
-        font-size: 9px;
+        font-size: 10px;
 
     }
 
@@ -2720,8 +2896,8 @@ footer {
     .hero {
 
         padding:
-            145px 0
-            75px;
+            135px 0
+            70px;
 
     }
 
@@ -2730,53 +2906,104 @@ footer {
 
         font-size:
             clamp(
-                57px,
-                17vw,
-                86px
+                55px,
+                16vw,
+                82px
             );
 
     }
 
 
-    .hero-description {
+    .hero-copy {
 
-        font-size: 12px;
+        font-size: 13px;
 
     }
 
 
-    .hero-actions {
+    .hero-buttons {
 
         flex-direction:
             column;
 
         width:
-            280px;
+            min(
+                280px,
+                100%
+            );
 
-        max-width:
+        margin-inline:
+            auto;
+
+    }
+
+
+    .hero-preview {
+
+        width:
             100%;
 
-    }
-
-
-    .button {
-
-        width: 100%;
+        margin-top:
+            65px;
 
     }
 
 
-    .hero-info {
+    .desktop {
 
-        margin-top: 65px;
+        border-width:
+            4px;
+
+        border-radius:
+            18px;
 
     }
 
 
-    .hero-info-item {
+    .metric {
 
-        padding:
-            18px 10px;
+        display: none;
+
+    }
+
+
+    .app-window {
+
+        left: 15%;
+
+        top: 18%;
+
+        width: 70%;
+
+        height: 62%;
+
+    }
+
+
+    .app-content {
+
+        padding: 16px;
+
+    }
+
+
+    .app-heading {
+
+        font-size: 15px;
+
+    }
+
+
+    .app-grid {
+
+        margin-top: 15px;
+
+    }
+
+
+    .app-card {
+
+        height: 42px;
 
     }
 
@@ -2784,7 +3011,7 @@ footer {
     .section {
 
         padding:
-            95px 0;
+            90px 0;
 
     }
 
@@ -2797,27 +3024,21 @@ footer {
     }
 
 
-    .about-large {
+    .feature-card {
 
-        font-size:
-            32px;
+        min-height:
+            270px;
+
+        padding:
+            25px;
 
     }
 
 
-    .dark-section {
+    .dark-panel {
 
         padding:
-            40px 0
-            95px;
-
-    }
-
-
-    .dark-card {
-
-        padding:
-            70px 25px;
+            65px 25px;
 
         border-radius:
             27px;
@@ -2828,125 +3049,46 @@ footer {
     .dark-title {
 
         font-size:
-            48px;
+            46px;
 
     }
 
 
-    .product {
+    .memory-display {
 
         padding:
-            95px 0;
+            60px 25px;
 
     }
 
 
-    .product-screen {
-
-        border-radius:
-            19px;
-
-    }
-
-
-    .screen-inner {
-
-        border-radius:
-            15px;
-
-    }
-
-
-    .window-body {
-
-        padding:
-            14px;
-
-    }
-
-
-    .fake-title {
+    .memory-number {
 
         font-size:
-            14px;
+            100px;
 
     }
 
 
-    .fake-grid {
-
-        margin-top:
-            12px;
-
-    }
-
-
-    .fake-box {
-
-        height:
-            35px;
-
-    }
-
-
-    .activity {
+    .spec-row {
 
         grid-template-columns:
-            85px 1fr 20px;
+            1fr;
 
-        gap:
-            12px;
-
-    }
-
-
-    .activity-title {
-
-        font-size:
-            12px;
+        gap: 5px;
 
     }
 
 
-    .activity-text {
+    .spec-value {
 
-        font-size:
-            9px;
-
-    }
-
-
-    .sponsor-panel {
-
-        padding:
-            40px 23px;
-
-        border-radius:
-            27px;
+        text-align:
+            left;
 
     }
 
 
-    .organization-row,
-
-    .governance-row {
-
-        grid-template-columns:
-            90px 1fr;
-
-    }
-
-
-    .contact {
-
-        padding:
-            40px 0
-            95px;
-
-    }
-
-
-    .contact-card {
+    .download-panel {
 
         padding:
             70px 22px;
@@ -2957,24 +3099,16 @@ footer {
     }
 
 
-    .contact-title {
-
-        font-size:
-            48px;
-
-    }
-
-
-    .contact-actions {
+    .download-actions {
 
         flex-direction:
             column;
 
         width:
-            280px;
-
-        max-width:
-            100%;
+            min(
+                280px,
+                100%
+            );
 
         margin-inline:
             auto;
@@ -2982,14 +3116,7 @@ footer {
     }
 
 
-    .contact-button {
-
-        width: 100%;
-
-    }
-
-
-    .footer-grid {
+    .footer-inner {
 
         grid-template-columns:
             1fr;
@@ -3010,15 +3137,18 @@ footer {
 
 
 /* =========================================================
-   REDUCED MOTION
+   ACCESSIBILITY
 ========================================================= */
 
-@media(prefers-reduced-motion:reduce) {
+@media (prefers-reduced-motion: reduce) {
 
     * {
 
         animation-duration:
             .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
 
         transition-duration:
             .01ms !important;
@@ -3028,6 +3158,363 @@ footer {
 
     }
 
+}
+
+</style>
+
+
+<style id="related-links-added">
+.related-links-list{
+    margin-top:60px;
+    border-top:1px solid var(--line);
+}
+
+.related-link-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:30px;
+    padding:28px 5px;
+    border-bottom:1px solid var(--line);
+    color:var(--text);
+    text-decoration:none;
+    transition:
+        padding .3s ease,
+        background .3s ease;
+}
+
+.related-link-item:hover{
+    padding-left:18px;
+    padding-right:18px;
+    background:rgba(120,152,125,.045);
+}
+
+.related-link-text{
+    min-width:0;
+}
+
+.related-link-kicker{
+    display:block;
+    margin-bottom:7px;
+    color:var(--green-dark);
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:.15em;
+}
+
+.related-link-item h3{
+    margin:0;
+    font-size:22px;
+    line-height:1.3;
+    letter-spacing:-.045em;
+}
+
+.related-link-item p{
+    margin-top:7px;
+    color:var(--text-muted);
+    font-size:12px;
+    line-height:1.8;
+}
+
+.related-link-arrow{
+    width:36px;
+    height:36px;
+    flex:none;
+    display:grid;
+    place-items:center;
+    border:1px solid var(--line);
+    border-radius:50%;
+    color:var(--text);
+    font-size:17px;
+    transition:
+        transform .3s ease,
+        background .3s ease,
+        color .3s ease;
+}
+
+.related-link-item:hover .related-link-arrow{
+    transform:translate(3px,-3px);
+    background:var(--text);
+    color:white;
+    border-color:var(--text);
+}
+
+@media (max-width:650px){
+    .related-links-list{
+        margin-top:45px;
+    }
+
+    .related-link-item{
+        padding:24px 3px;
+    }
+
+    .related-link-item:hover{
+        padding-left:9px;
+        padding-right:9px;
+    }
+
+    .related-link-item h3{
+        font-size:18px;
+    }
+
+    .related-link-item p{
+        font-size:11px;
+    }
+}
+</style>
+
+
+<style id="partnership-sections">
+.partnership-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-top:58px;
+}
+.partnership-card{
+    position:relative;
+    overflow:hidden;
+    padding:38px;
+    min-height:100%;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:rgba(255,255,255,.72);
+    box-shadow:var(--shadow-small);
+    transition:transform .35s ease,box-shadow .35s ease;
+}
+.partnership-card:hover{
+    transform:translateY(-6px);
+    box-shadow:var(--shadow);
+}
+.partnership-card.dark{
+    color:#fff;
+    background:#191b19;
+    border-color:#191b19;
+}
+.partnership-eyebrow{
+    color:var(--green-dark);
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:.16em;
+}
+.partnership-card.dark .partnership-eyebrow{color:#a8c0aa}
+.partnership-card h3{
+    margin-top:18px;
+    font-size:clamp(27px,3vw,38px);
+    line-height:1.08;
+    letter-spacing:-.06em;
+}
+.partnership-card > p{
+    margin-top:15px;
+    color:var(--text-muted);
+    font-size:13px;
+    line-height:1.95;
+}
+.partnership-card.dark > p{color:#b2b5af}
+.partner-list{
+    display:grid;
+    gap:12px;
+    margin-top:26px;
+    list-style:none;
+}
+.partner-list li{
+    display:flex;
+    align-items:flex-start;
+    gap:11px;
+    color:var(--text-soft);
+    font-size:13px;
+    line-height:1.7;
+}
+.partnership-card.dark .partner-list li{color:#d0d3cd}
+.partner-list li::before{
+    content:"";
+    flex:none;
+    width:6px;
+    height:6px;
+    margin-top:8px;
+    border-radius:50%;
+    background:var(--green);
+}
+.partner-note{
+    margin-top:24px;
+    padding:14px 16px;
+    border-radius:13px;
+    background:rgba(120,152,125,.10);
+    color:var(--green-dark);
+    font-size:11px;
+    line-height:1.8;
+}
+.partnership-card.dark .partner-note{
+    background:rgba(160,190,165,.12);
+    color:#c3d5c5;
+}
+.partnership-cta{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    margin-top:27px;
+    padding:13px 18px;
+    border-radius:13px;
+    background:var(--text);
+    color:#fff;
+    font-size:12px;
+    font-weight:700;
+    transition:transform .25s ease,opacity .25s ease;
+}
+.partnership-cta:hover{transform:translateY(-2px);opacity:.88}
+.partnership-card.dark .partnership-cta{
+    background:#fff;
+    color:#191b19;
+}
+.deployment-panel{
+    margin-top:75px;
+    padding:44px;
+    border:1px solid var(--line);
+    border-radius:var(--radius-large);
+    background:rgba(255,255,255,.56);
+}
+.deployment-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+}
+.deployment-head h3{
+    margin-top:10px;
+    font-size:clamp(27px,4vw,42px);
+    letter-spacing:-.06em;
+}
+.deployment-head p{
+    max-width:430px;
+    color:var(--text-muted);
+    font-size:12px;
+    line-height:1.9;
+}
+.deployment-empty{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+    margin-top:30px;
+    padding:25px 0 4px;
+    border-top:1px solid var(--line);
+}
+.deployment-empty strong{
+    display:block;
+    font-size:14px;
+}
+.deployment-empty span{
+    display:block;
+    margin-top:6px;
+    color:var(--text-muted);
+    font-size:12px;
+    line-height:1.8;
+}
+.deployment-status{
+    flex:none;
+    padding:8px 12px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    color:var(--green-dark);
+    background:var(--green-light);
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:.06em;
+}
+.deployment-footnote{
+    margin-top:20px;
+    color:#92948e;
+    font-size:10px;
+    line-height:1.8;
+}
+@media(max-width:750px){
+    .partnership-grid{grid-template-columns:1fr}
+    .partnership-card{padding:29px}
+    .deployment-panel{padding:28px 23px}
+    .deployment-head,.deployment-empty{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+}
+
+/* =========================================================
+   DEPLOYMENT LOGO MARQUEE
+   Add each approved logo as one .deployment-logo-link item.
+========================================================= */
+.deployment-logo-area{
+    margin-top:34px;
+    padding:25px 0 18px;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+}
+.deployment-logo-label{
+    margin-bottom:18px;
+    color:var(--text-muted);
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:.16em;
+}
+.deployment-logo-viewport{
+    position:relative;
+    overflow:hidden;
+    width:100%;
+    -webkit-mask-image:linear-gradient(to right,transparent, #000 7%, #000 93%, transparent);
+    mask-image:linear-gradient(to right,transparent, #000 7%, #000 93%, transparent);
+}
+.deployment-logo-track{
+    display:flex;
+    width:max-content;
+    align-items:center;
+    gap:56px;
+    animation:deployment-logo-scroll 34s linear infinite;
+}
+.deployment-logo-viewport:hover .deployment-logo-track{
+    animation-play-state:paused;
+}
+.deployment-logo-link{
+    display:flex;
+    flex:0 0 auto;
+    width:170px;
+    height:72px;
+    align-items:center;
+    justify-content:center;
+    opacity:.72;
+    transition:opacity .2s ease, transform .2s ease;
+}
+.deployment-logo-link:hover{
+    opacity:1;
+    transform:translateY(-2px);
+}
+.deployment-logo-link img{
+    display:block;
+    max-width:100%;
+    max-height:54px;
+    width:auto;
+    height:auto;
+    object-fit:contain;
+}
+.deployment-logo-empty{
+    padding:22px 18px;
+    border:1px dashed var(--line);
+    border-radius:14px;
+    color:var(--text-muted);
+    font-size:12px;
+    line-height:1.9;
+    text-align:center;
+}
+@keyframes deployment-logo-scroll{
+    from{transform:translateX(0)}
+    to{transform:translateX(-50%)}
+}
+@media(prefers-reduced-motion:reduce){
+    .deployment-logo-track{animation:none}
+    .deployment-logo-viewport{overflow-x:auto}
+}
+@media(max-width:750px){
+    .deployment-logo-track{gap:34px;animation-duration:26s}
+    .deployment-logo-link{width:135px;height:62px}
+    .deployment-logo-link img{max-height:44px}
 }
 
 </style>
@@ -3042,56 +3529,84 @@ footer {
      NAVIGATION
 ======================================================= -->
 
-<nav class="nav">
+<nav class="site-nav">
 
+    <a href="#" class="brand">
 
-    <a href="#" class="logo">
-
-        <span class="logo-symbol">
-            S
+        <span class="brand-symbol">
+            N
         </span>
 
-        <span class="logo-text">
-
-            Nagisinnra Technology
-
-            <small>
-                Nagisinnra Technology
-            </small>
-
+        <span class="brand-name">
+            NagisinnraLinux
         </span>
 
     </a>
 
 
-    <div class="nav-links">
+    <div class="nav-center">
 
-        <a href="#about">
+        <a href="#about" data-i18n
+           data-jp="About"
+           data-en="About">
             About
         </a>
 
-        <a href="#technology">
+        <a href="#features" data-i18n
+           data-jp="Features"
+           data-en="Features">
+            Features
+        </a>
+
+        <a href="#technology" data-i18n
+           data-jp="Technology"
+           data-en="Technology">
             Technology
         </a>
 
-        <a href="#organization">
-            Organization
+        <a href="#faq" data-i18n
+           data-jp="FAQ"
+           data-en="FAQ">
+            FAQ
         </a>
 
-        <a href="#governance">
-            Governance
+        <a href="#partnership" data-i18n
+           data-jp="Partnership"
+           data-en="Partnership">
+            Partnership
         </a>
 
+    
+
+        <a href="#related-links" data-i18n
+           data-jp="Related Links"
+           data-en="Related Links">
+            Related Links
+        </a>
     </div>
 
 
-    <a
-        href="#contact"
-        class="nav-button">
+    <div class="nav-right-group">
 
-        Contact
+        <!-- Language Switcher -->
+        <div class="lang-switch-container" data-lang="jp">
+            <div class="lang-switch-bg"></div>
+            <button class="lang-btn" data-lang-btn="en">EN</button>
+            <button class="lang-btn active" data-lang-btn="jp">JP</button>
+        </div>
 
-    </a>
+        <a
+            href="#download"
+            class="nav-action"
+            data-i18n
+            data-jp="Download"
+            data-en="Download">
+
+            Download
+
+        </a>
+
+    </div>
 
 </nav>
 
@@ -3103,63 +3618,68 @@ footer {
 
 <header class="hero">
 
+    <div class="hero-orb orb-one"></div>
+
+    <div class="hero-orb orb-two"></div>
+
 
     <div class="container">
 
         <div class="hero-content">
 
 
-            <div class="hero-label">
+            <div class="status">
 
-                <span class="hero-dot"></span>
+                <span class="status-dot"></span>
 
-                Nagisinnra Technology
-                · EST. 2026
+                NagisinnraLinux
+                v1.1.1 · Stable
 
             </div>
 
 
             <h1 class="hero-title">
 
-                <span class="gray">
-                    Technology,
+                <span class="light" data-i18n
+                      data-jp="Small by nature."
+                      data-en="Small by nature.">
+                    Small by nature.
                 </span>
 
-                <br>
-
-                <span>
-                    made
-                </span>
-
-                <span class="green">
-                    human.
+                <span class="accent" data-i18n
+                      data-jp="Beautiful by design."
+                      data-en="Beautiful by design.">
+                    Beautiful by design.
                 </span>
 
             </h1>
 
 
-            <p class="hero-description">
+            <p class="hero-copy" data-i18n
+               data-jp="NagisinnraLinuxは、必要なものを丁寧にまとめた軽量Linuxディストリビューション。<br>軽さだけではなく、毎日使いたくなる体験を目指しています。"
+               data-en="NagisinnraLinux is a lightweight Linux distribution thoughtfully crafted with essentials.<br>Beyond lightness, we aim for an experience you'll love using every day.">
 
-                Nagisinnra Technologyは、
-                オープンソースとコンピューティング技術を軸に、
-                新しいソフトウェア体験をつくる技術組織です。
+                NagisinnraLinuxは、
+                必要なものを丁寧にまとめた
+                軽量Linuxディストリビューション。
 
-                <br><br>
+                <br>
 
-                超軽量Linuxディストリビューション
-                「NagisinnraLinux」を中心として、
-                技術開発と情報発信を行っています。
+                軽さだけではなく、
+                毎日使いたくなる体験を目指しています。
 
             </p>
 
 
-            <div class="hero-actions">
+            <div class="hero-buttons">
 
                 <a
-                    href="#about"
+                    href="#download"
                     class="button button-dark">
 
-                    私たちについて
+                    <span data-i18n
+                          data-jp="Download"
+                          data-en="Download">Download</span>
 
                     <span>
                         →
@@ -3169,70 +3689,165 @@ footer {
 
 
                 <a
-                    href="#technology"
-                    class="button button-light">
+                    href="#about"
+                    class="button button-light"
+                    data-i18n
+                    data-jp="Explore NagisinnraLinux"
+                    data-en="Explore NagisinnraLinux">
 
-                    Technology
+                    Explore NagisinnraLinux
 
                 </a>
 
             </div>
 
 
-            <div class="hero-info">
+            <!-- PRODUCT PREVIEW -->
+
+            <div class="hero-preview">
+
+                <div class="preview-shadow"></div>
 
 
-                <div class="hero-info-item">
+                <div class="desktop">
 
-                    <div class="hero-info-label">
-                        ORGANIZATION
+
+                    <div class="desktop-top">
+
+                        <div class="desktop-left">
+
+                            <span class="desktop-circle"></span>
+
+                            <span class="desktop-circle"></span>
+
+                            <span class="desktop-circle"></span>
+
+                        </div>
+
+
+                        <span class="desktop-time">
+
+                            NagisinnraLinux
+
+                        </span>
+
                     </div>
 
-                    <div class="hero-info-value">
-                        Nagisinnra Technology
+
+
+                    <div class="app-window">
+
+
+                        <div class="app-header">
+
+                            <span class="desktop-circle"></span>
+
+                            <span class="app-header-title">
+                                NagisinnraLinux
+                            </span>
+
+                        </div>
+
+
+                        <div class="app-content">
+
+                            <div class="app-small" data-i18n
+                                 data-jp="Welcome to"
+                                 data-en="Welcome to">
+                                Welcome to
+                            </div>
+
+
+                            <div class="app-heading">
+                                NagisinnraLinux
+                            </div>
+
+
+                            <div class="app-line"></div>
+
+
+                            <div class="app-grid">
+
+                                <div class="app-card">
+
+                                    <div class="app-card-line"></div>
+
+                                    <div class="app-card-line small"></div>
+
+                                </div>
+
+
+                                <div class="app-card">
+
+                                    <div class="app-card-line"></div>
+
+                                    <div class="app-card-line small"></div>
+
+                                </div>
+
+
+                                <div class="app-card">
+
+                                    <div class="app-card-line"></div>
+
+                                    <div class="app-card-line small"></div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="bottom-dock">
+
+                        <div class="dock-item active"></div>
+
+                        <div class="dock-item"></div>
+
+                        <div class="dock-item"></div>
+
+                        <div class="dock-item"></div>
+
+                        <div class="dock-item"></div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="metric metric-one">
+
+                    <div class="metric-number">
+                        476 MB
+                    </div>
+
+                    <div class="metric-label" data-i18n
+                         data-jp="Lightweight"
+                         data-en="Lightweight">
+                        Lightweight
                     </div>
 
                 </div>
 
 
-                <div class="hero-info-item">
+                <div class="metric metric-two">
 
-                    <div class="hero-info-label">
-                        PROJECT
+                    <div class="metric-number">
+                        Debian,Arch,Gentoo
                     </div>
 
-                    <div class="hero-info-value">
-                        NagisinnraLinux
-                    </div>
-
-                </div>
-
-
-                <div class="hero-info-item">
-
-                    <div class="hero-info-label">
-                        FIELD
-                    </div>
-
-                    <div class="hero-info-value">
-                        Linux / Open Source
+                    <div class="metric-label" data-i18n
+                         data-jp="Base system"
+                         data-en="Base system">
+                        Base system
                     </div>
 
                 </div>
-
-
-                <div class="hero-info-item">
-
-                    <div class="hero-info-label">
-                        ESTABLISHED
-                    </div>
-
-                    <div class="hero-info-value">
-                        2026
-                    </div>
-
-                </div>
-
 
             </div>
 
@@ -3254,216 +3869,188 @@ footer {
 
     <div class="container">
 
+        <div class="section-head">
 
-        <div class="section-header">
-
-            <div class="eyebrow">
-                ABOUT SINNRA
+            <div class="kicker" data-i18n
+                 data-jp="The idea"
+                 data-en="The idea">
+                The idea
             </div>
 
+            <h2 class="section-title" data-i18n
+                data-jp="Linuxを、<br>もっと自然に。"
+                data-en="Linux,<br>made seamless.">
 
-            <h2 class="section-title">
-
-                技術を、
+                Linuxを、
                 <br>
-                もっと自由に。
+                もっと自然に。
 
             </h2>
 
 
-            <p class="section-description">
+            <p class="section-description" data-i18n
+               data-jp="OSは、目立つためにあるものではありません。<br>使っていることを意識しないほど自然で、必要なときにはしっかり応えてくれる。<br>NagisinnraLinuxは、そんなコンピューティング体験を目指しています。"
+               data-en="An OS shouldn't get in your way.<br>It should feel so natural you barely notice it, while reliably responding when you need it.<br>NagisinnraLinux strives for that effortless computing experience.">
 
-                Nagisinnra Technologyは、
-                小さなアイデアを技術として形にし、
-                それを世界へ届けることを目指しています。
+                OSは、目立つためにあるものではありません。
+
+                <br>
+
+                使っていることを意識しないほど自然で、
+                必要なときにはしっかり応えてくれる。
+
+                <br>
+
+                NagisinnraLinuxは、
+                そんなコンピューティング体験を目指しています。
 
             </p>
 
         </div>
 
 
-        <div class="about-layout">
+        <div class="feature-grid" id="features">
 
 
-            <div class="about-large">
+            <article class="feature-card">
 
-                私たちは
-                <span>
-                    「使う人」
+                <span class="feature-number">
+                    01
                 </span>
-                の視点から、
-                技術を考えます。
-
-            </div>
 
 
-            <div class="about-text">
-
-                <p>
-
-                    高性能であること。
-                    新しいこと。
-                    複雑であること。
-
-                    それだけが、
-                    良い技術ではありません。
-
-                </p>
-
-
-                <p>
-
-                    必要なものを必要なだけ。
-                    わかりやすく、
-                    軽く、
-                    美しく。
-
-                    Nagisinnra Technologyでは、
-                    コンピューターを使う人が
-                    技術そのものに振り回されるのではなく、
-                    技術によって自由になれる環境を
-                    目指しています。
-
-                </p>
-
-
-                <p>
-
-                    その思想を形にしたものが、
-                    私たちの主要プロジェクト
-                    「NagisinnraLinux」です。
-
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =======================================================
-     MISSION
-======================================================= -->
-
-<section
-    class="section reveal">
-
-    <div class="container">
-
-
-        <div class="section-header">
-
-            <div class="eyebrow">
-                OUR MISSION
-            </div>
-
-
-            <h2 class="section-title">
-
-                三つの
-                <br>
-                基本思想。
-
-            </h2>
-
-        </div>
-
-
-        <div class="mission-grid">
-
-
-            <article class="mission-card">
-
-                <div class="mission-index">
-                    01 / OPEN
+                <div class="feature-mark">
+                    FAST
                 </div>
 
 
-                <div class="mission-icon">
+                <h3 data-i18n
+                    data-jp="軽快に動く。"
+                    data-en="Blazing Fast.">
+                    軽快に動く。
+                </h3>
+
+
+                <p data-i18n
+                   data-jp="システムを必要以上に大きくせず、PCのリソースをできるだけユーザーのために残します。"
+                   data-en="Keeping system footprint minimal to reserve maximum resources for your work.">
+
+                    システムを必要以上に大きくせず、
+                    PCのリソースをできるだけ
+                    ユーザーのために残します。
+
+                </p>
+
+
+                <div class="feature-decoration"></div>
+
+            </article>
+
+
+
+            <article class="feature-card">
+
+                <span class="feature-number">
+                    02
+                </span>
+
+
+                <div class="feature-mark">
+                    CLEAN
+                </div>
+
+
+                <h3 data-i18n
+                    data-jp="余計なものを減らす。"
+                    data-en="Pure & Minimal.">
+                    余計なものを減らす。
+                </h3>
+
+
+                <p data-i18n
+                   data-jp="シンプルな構成だからこそ、OSの動作や仕組みをより理解しやすく。"
+                   data-en="A straightforward design makes it easy to understand how your OS operates.">
+
+                    シンプルな構成だからこそ、
+                    OSの動作や仕組みを
+                    より理解しやすく。
+
+                </p>
+
+
+                <div class="feature-decoration"></div>
+
+            </article>
+
+
+
+            <article class="feature-card">
+
+                <span class="feature-number">
+                    03
+                </span>
+
+
+                <div class="feature-mark">
+                    JP
+                </div>
+
+
+                <h3 data-i18n
+                    data-jp="日本語を、最初から。"
+                    data-en="Japanese Ready.">
+                    日本語を、最初から。
+                </h3>
+
+
+                <p data-i18n
+                   data-jp="日本語入力環境を整え、インストール直後から普段使いへ移れる構成を目指します。"
+                   data-en="Pre-configured Japanese input environment for immediate everyday use out of the box.">
+
+                    日本語入力環境を整え、
+                    インストール直後から
+                    普段使いへ移れる構成を目指します。
+
+                </p>
+
+
+                <div class="feature-decoration"></div>
+
+            </article>
+
+
+
+            <article class="feature-card">
+
+                <span class="feature-number">
+                    04
+                </span>
+
+
+                <div class="feature-mark">
                     OPEN
                 </div>
 
 
-                <h3>
-                    オープンであること。
+                <h3 data-i18n
+                    data-jp="オープンな世界へ。"
+                    data-en="Truly Open.">
+                    オープンな世界へ。
                 </h3>
 
 
-                <p>
+                <p data-i18n
+                   data-jp="Linuxという自由な基盤を使い、自分のPCを自分で選び、自分で育てられる環境を。"
+                   data-en="Built on the free Linux foundation, empowering you to shape and nurture your computing environment.">
 
-                    オープンソースの思想を尊重し、
-                    技術を一部の人だけのものにせず、
-                    学び、改良し、共有できる環境を
-                    つくります。
-
-                </p>
-
-            </article>
-
-
-
-            <article class="mission-card">
-
-                <div class="mission-index">
-                    02 / LIGHT
-                </div>
-
-
-                <div class="mission-icon">
-                    LIGHT
-                </div>
-
-
-                <h3>
-                    軽くあること。
-                </h3>
-
-
-                <p>
-
-                    ハードウェアの性能を
-                    OS自身が使い切るのではなく、
-                    ユーザーのために残す。
-
-                    軽量で効率的な
-                    コンピューティングを追求します。
+                    Linuxという自由な基盤を使い、
+                    自分のPCを自分で選び、
+                    自分で育てられる環境を。
 
                 </p>
 
-            </article>
 
-
-
-            <article class="mission-card">
-
-                <div class="mission-index">
-                    03 / HUMAN
-                </div>
-
-
-                <div class="mission-icon">
-                    HUMAN
-                </div>
-
-
-                <h3>
-                    人を中心にすること。
-                </h3>
-
-
-                <p>
-
-                    技術仕様だけではなく、
-                    実際に使う人の感覚、
-                    わかりやすさ、
-                    美しさまで含めて
-                    プロダクトを設計します。
-
-                </p>
+                <div class="feature-decoration"></div>
 
             </article>
 
@@ -3478,48 +4065,47 @@ footer {
 
 <!-- =======================================================
      PHILOSOPHY
-======================================================= -->
+========================================================= -->
 
 <section class="dark-section reveal">
 
     <div class="container">
 
+        <div class="dark-panel">
 
-        <div class="dark-card">
 
-
-            <div class="dark-label">
-                THE SINNRA APPROACH
+            <div class="dark-kicker" data-i18n
+                 data-jp="OUR PHILOSOPHY"
+                 data-en="OUR PHILOSOPHY">
+                OUR PHILOSOPHY
             </div>
 
 
-            <h2 class="dark-title">
+            <h2 class="dark-title" data-i18n
+                data-jp="Less system.<br>More <span>you.</span>"
+                data-en="Less system.<br>More <span>you.</span>">
 
-                Small teams.
+                Less system.
                 <br>
 
-                <span>
-                    Serious technology.
-                </span>
+                More <span>you.</span>
 
             </h2>
 
 
-            <p class="dark-description">
+            <p class="dark-text" data-i18n
+               data-jp="高機能であることだけを目標にするのではなく、必要なものを必要なだけ。<br><br>NagisinnraLinuxは、PCそのものの性能を引き出し、ユーザーが本当にやりたいことへリソースを使えるOSを目指します。"
+               data-en="Rather than chasing feature bloat, we focus on providing just what you need.<br><br>NagisinnraLinux unleashes your hardware's full potential so your resources stay dedicated to what truly matters.">
 
-                私たちは大規模な組織ではありません。
-
-                <br><br>
-
-                だからこそ、
-                一つひとつの技術について考え、
-                実際に手を動かし、
-                必要であれば何度でも作り直す。
+                高機能であることだけを目標にするのではなく、
+                必要なものを必要なだけ。
 
                 <br><br>
 
-                小さな組織だからできる
-                技術への向き合い方を大切にしています。
+                NagisinnraLinuxは、
+                PCそのものの性能を引き出し、
+                ユーザーが本当にやりたいことへ
+                リソースを使えるOSを目指します。
 
             </p>
 
@@ -3533,176 +4119,393 @@ footer {
 
 
 <!-- =======================================================
-     NAGISINNRALINUX
+     MEMORY
+========================================================= -->
+
+<section class="section reveal">
+
+    <div class="container">
+
+
+        <div class="section-head">
+
+            <div class="kicker" data-i18n
+                 data-jp="Lightweight"
+                 data-en="Lightweight">
+                Lightweight
+            </div>
+
+            <h2 class="section-title" data-i18n
+                data-jp="軽さを、<br>数字に。"
+                data-en="Lightness,<br>measured.">
+
+                軽さを、
+                <br>
+                数字に。
+
+            </h2>
+
+        </div>
+
+
+        <div class="memory-layout">
+
+
+            <div class="memory-display">
+
+
+                <div class="memory-number">
+                    476
+                </div>
+
+
+                <div class="memory-unit" data-i18n
+                     data-jp="MB approximately"
+                     data-en="MB approximately">
+                    MB approximately
+                </div>
+
+
+                <p class="memory-caption" data-i18n
+                   data-jp="軽量な構成を目指したNagisinnraLinux。<br>小さなシステムだからこそ、古いPCでも新しいPCでも軽快な環境を目指せます。"
+                   data-en="NagisinnraLinux is built with minimal footprint in mind.<br>A lightweight system that feels smooth on both legacy hardware and modern PCs.">
+
+                    軽量な構成を目指した
+                    NagisinnraLinux。
+
+                    <br>
+
+                    小さなシステムだからこそ、
+                    古いPCでも新しいPCでも
+                    軽快な環境を目指せます。
+
+                </p>
+
+
+            </div>
+
+
+
+            <div class="memory-info">
+
+
+                <h3 data-i18n
+                    data-jp="リソースを、<br>OSだけのものにしない。"
+                    data-en="Resources belong to you,<br>not the OS.">
+
+                    リソースを、
+                    <br>
+                    OSだけのものにしない。
+
+                </h3>
+
+
+                <p data-i18n
+                   data-jp="PCのメモリやCPUは、OSを動かすためだけに存在するわけではありません。<br><br>アプリケーション、ブラウザ、開発環境、そしてユーザー自身の作業へ。"
+                   data-en="Your RAM and CPU exist for your work, not just to power the OS.<br><br>Freeing resources for your applications, web browsing, development, and creativity.">
+
+                    PCのメモリやCPUは、
+                    OSを動かすためだけに
+                    存在するわけではありません。
+
+                    <br><br>
+
+                    アプリケーション、
+                    ブラウザ、
+                    開発環境、
+                    そしてユーザー自身の作業へ。
+
+                </p>
+
+
+                <div class="progress-list">
+
+
+                    <div class="progress-item">
+
+                        <div class="progress-top">
+
+                            <span data-i18n
+                                  data-jp="Lightweight design"
+                                  data-en="Lightweight design">
+                                Lightweight design
+                            </span>
+
+                            <span data-i18n
+                                  data-jp="optimized"
+                                  data-en="optimized">
+                                optimized
+                            </span>
+
+                        </div>
+
+
+                        <div class="progress-bar">
+
+                            <div class="progress-fill fill-one"></div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="progress-item">
+
+                        <div class="progress-top">
+
+                            <span data-i18n
+                                  data-jp="Japanese environment"
+                                  data-en="Japanese environment">
+                                Japanese environment
+                            </span>
+
+                            <span data-i18n
+                                  data-jp="ready"
+                                  data-en="ready">
+                                ready
+                            </span>
+
+                        </div>
+
+
+                        <div class="progress-bar">
+
+                            <div class="progress-fill fill-two"></div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="progress-item">
+
+                        <div class="progress-top">
+
+                            <span data-i18n
+                                  data-jp="Everyday usability"
+                                  data-en="Everyday usability">
+                                Everyday usability
+                            </span>
+
+                            <span data-i18n
+                                  data-jp="balanced"
+                                  data-en="balanced">
+                                balanced
+                            </span>
+
+                        </div>
+
+
+                        <div class="progress-bar">
+
+                            <div class="progress-fill fill-three"></div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     TECHNOLOGY
 ======================================================= -->
 
 <section
-    class="product reveal"
+    class="section reveal"
     id="technology">
 
     <div class="container">
 
 
-        <div class="section-header">
+        <div class="section-head">
 
-            <div class="eyebrow">
-                FLAGSHIP PROJECT
+            <div class="kicker" data-i18n
+                 data-jp="Technology"
+                 data-en="Technology">
+                Technology
             </div>
 
+            <h2 class="section-title" data-i18n
+                data-jp="中身は、<br>ちゃんとLinux。"
+                data-en="Under the hood,<br>pure Linux.">
 
-            <h2 class="section-title">
-
-                NagisinnraLinux
+                中身は、
+                <br>
+                ちゃんとLinux。
 
             </h2>
 
 
-            <p class="section-description">
+            <p class="section-description" data-i18n
+               data-jp="見た目だけではありません。<br>NagisinnraLinuxは、Linuxの柔軟性を活かしながら、日常利用に必要な環境をまとめています。"
+               data-en="More than just aesthetics.<br>NagisinnraLinux leverages Linux flexibility while delivering a seamless out-of-the-box daily experience.">
 
-                Nagisinnra Technologyが独自に開発・運営する
-                超軽量Linuxディストリビューション。
+                見た目だけではありません。
+
+                <br>
+
+                NagisinnraLinuxは、
+                Linuxの柔軟性を活かしながら、
+                日常利用に必要な環境をまとめています。
 
             </p>
 
         </div>
 
 
-        <div class="product-layout">
+        <div class="spec-layout">
 
 
-            <div class="product-screen">
+            <div class="spec-intro">
 
-
-                <div class="screen-inner">
-
-
-                    <div class="screen-bar">
-
-
-                        <div class="screen-dots">
-
-                            <i></i>
-                            <i></i>
-                            <i></i>
-
-                        </div>
-
-
-                        <div class="screen-title">
-                            NagisinnraLinux
-                        </div>
-
-
-                    </div>
-
-
-                    <div class="screen-window">
-
-
-                        <div class="window-header"></div>
-
-
-                        <div class="window-body">
-
-                            <div class="fake-small">
-                                Welcome to
-                            </div>
-
-
-                            <div class="fake-title">
-                                NagisinnraLinux
-                            </div>
-
-
-                            <div class="fake-line"></div>
-
-
-                            <div class="fake-grid">
-
-                                <div class="fake-box"></div>
-
-                                <div class="fake-box"></div>
-
-                                <div class="fake-box"></div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-
-
-            <div class="product-copy">
-
-
-                <h3>
-
-                    軽く。
+                <h3 data-i18n
+                    data-jp="Technical<br>specification."
+                    data-en="Technical<br>specification.">
+                    Technical
                     <br>
-
-                    速く。
-                    <br>
-
-                    美しく。
-
+                    specification.
                 </h3>
 
 
-                <p>
+                <p data-i18n
+                   data-jp="システムの基本構成。<br><br>実際のリリース内容に合わせてこのセクションを更新できます。"
+                   data-en="Core system architecture specifications.<br><br>Updated according to the latest release details.">
 
-                    NagisinnraLinuxは、
-                    「Linuxだから難しい」という
-                    固定観念を変えることを目指した
-                    Linuxディストリビューションです。
+                    システムの基本構成。
 
-                </p>
+                    <br><br>
 
-
-                <p>
-
-                    カーネルを基盤としながら、
-                    システム構成を見直し、
-                    必要な環境をコンパクトにまとめる。
-
-                    そして、技術的な中身だけではなく、
-                    デスクトップの体験まで
-                    一つのプロダクトとして考えます。
+                    実際のリリース内容に合わせて
+                    このセクションを更新できます。
 
                 </p>
 
+            </div>
 
-                <div class="product-tags">
 
-                    <span class="product-tag">
-                        Lightweight
+
+            <div class="spec-table">
+
+
+                <div class="spec-row">
+
+                    <span class="spec-key" data-i18n
+                          data-jp="Distribution"
+                          data-en="Distribution">
+                        Distribution
                     </span>
 
-                    <span class="product-tag">
-                        Linux
-                    </span>
-
-                    <span class="product-tag">
-                        Debian
-                    </span>
-
-                    <span class="product-tag">
-                        Japanese
-                    </span>
-
-                    <span class="product-tag">
-                        Open Source
+                    <span class="spec-value">
+                        NagisinnraLinux
                     </span>
 
                 </div>
 
-            </div>
 
+                <div class="spec-row">
+
+                    <span class="spec-key" data-i18n
+                          data-jp="Version"
+                          data-en="Version">
+                        Version
+                    </span>
+
+                    <span class="spec-value">
+                        1.1.1 Stable
+                    </span>
+
+                </div>
+
+
+                <div class="spec-row">
+
+                    <span class="spec-key" data-i18n
+                          data-jp="Base"
+                          data-en="Base">
+                        Base
+                    </span>
+
+                    <span class="spec-value">
+                        Debian GNU/Linux,Arch Linux,Gentoo Linux
+                    </span>
+
+                </div>
+
+
+                <div class="spec-row">
+
+                    <span class="spec-key" data-i18n
+                          data-jp="Architecture"
+                          data-en="Architecture">
+                        Architecture
+                    </span>
+
+                    <span class="spec-value">
+                        x86_64
+                    </span>
+
+                </div>
+
+
+                <div class="spec-row">
+
+                    <span class="spec-key" data-i18n
+                          data-jp="Compression"
+                          data-en="Compression">
+                        Compression
+                    </span>
+
+                    <span class="spec-value">
+                        zram
+                    </span>
+
+                </div>
+
+
+                <div class="spec-row">
+
+                    <span class="spec-key" data-i18n
+                          data-jp="Input Method"
+                          data-en="Input Method">
+                        Input Method
+                    </span>
+
+                    <span class="spec-value">
+                        fcitx5 + Mozc
+                    </span>
+
+                </div>
+
+
+                <div class="spec-row">
+
+                    <span class="spec-key" data-i18n
+                          data-jp="Release type"
+                          data-en="Release type">
+                        Release type
+                    </span>
+
+                    <span class="spec-value">
+                        Stable
+                    </span>
+
+                </div>
+
+
+            </div>
 
         </div>
 
@@ -3713,756 +4516,29 @@ footer {
 
 
 <!-- =======================================================
-     TECHNOLOGY AREAS
+     DEVELOPMENT
 ======================================================= -->
 
-<section
-    class="section reveal">
+<section class="section reveal">
 
     <div class="container">
 
 
-        <div class="section-header">
+        <div class="section-head">
 
-            <div class="eyebrow">
-                TECHNOLOGY
+            <div class="kicker" data-i18n
+                 data-jp="Development"
+                 data-en="Development">
+                Development
             </div>
 
-
-            <h2 class="section-title">
-
-                技術領域。
-
-            </h2>
-
-
-            <p class="section-description">
-
-                Nagisinnra Technologyでは、
-                Linuxを中心に複数の技術領域へ
-                継続的に取り組みます。
-
-            </p>
-
-        </div>
-
-
-        <div class="tech-grid">
-
-
-            <article class="tech-card">
-
-                <div class="tech-number">
-                    TECHNOLOGY / 01
-                </div>
-
-                <h3>
-                    Linux Engineering
-                </h3>
-
-                <p>
-
-                    Linuxカーネル、
-                    システム構成、
-                    パッケージング、
-                    起動プロセスなどを含めた
-                    OSレベルの技術研究。
-
-                </p>
-
-            </article>
-
-
-
-            <article class="tech-card">
-
-                <div class="tech-number">
-                    TECHNOLOGY / 02
-                </div>
-
-                <h3>
-                    System Optimization
-                </h3>
-
-                <p>
-
-                    CPU、メモリ、ストレージなどの
-                    ハードウェア資源を効率的に利用するための
-                    システム最適化。
-
-                </p>
-
-            </article>
-
-
-
-            <article class="tech-card">
-
-                <div class="tech-number">
-                    TECHNOLOGY / 03
-                </div>
-
-                <h3>
-                    Open Source
-                </h3>
-
-                <p>
-
-                    オープンソースコミュニティへの参加、
-                    技術情報の公開、
-                    開発成果の共有を通じて
-                    OSSエコシステムへ貢献します。
-
-                </p>
-
-            </article>
-
-
-
-            <article class="tech-card">
-
-                <div class="tech-number">
-                    TECHNOLOGY / 04
-                </div>
-
-                <h3>
-                    Computing Experience
-                </h3>
-
-                <p>
-
-                    技術仕様だけではなく、
-                    UI、UX、デザイン、
-                    インストール体験まで含めた
-                    コンピューティング体験の設計。
-
-                </p>
-
-            </article>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =======================================================
-     ACTIVITIES
-======================================================= -->
-
-<section
-    class="section reveal">
-
-    <div class="container">
-
-
-        <div class="section-header">
-
-            <div class="eyebrow">
-                ACTIVITIES
-            </div>
-
-
-            <h2 class="section-title">
-
-                活動内容。
-
-            </h2>
-
-        </div>
-
-
-        <div class="activities">
-
-
-            <div class="activity">
-
-                <div class="activity-type">
-                    DEVELOPMENT
-                </div>
-
-                <div>
-
-                    <div class="activity-title">
-                        NagisinnraLinux 開発
-                    </div>
-
-                    <div class="activity-text">
-                        カーネル最適化、ビルド、アップデートなど
-                    </div>
-
-                </div>
-
-                <div class="activity-arrow">
-                    →
-                </div>
-
-            </div>
-
-
-
-            <div class="activity">
-
-                <div class="activity-type">
-                    MEDIA
-                </div>
-
-                <div>
-
-                    <div class="activity-title">
-                        技術情報発信
-                    </div>
-
-                    <div class="activity-text">
-                        公式ウェブサイト、Zenn等を通じた技術発信
-                    </div>
-
-                </div>
-
-                <div class="activity-arrow">
-                    →
-                </div>
-
-            </div>
-
-
-
-            <div class="activity">
-
-                <div class="activity-type">
-                    COMMUNITY
-                </div>
-
-                <div>
-
-                    <div class="activity-title">
-                        オープンソース活動
-                    </div>
-
-                    <div class="activity-text">
-                        OSSコミュニティへの技術的貢献
-                    </div>
-
-                </div>
-
-                <div class="activity-arrow">
-                    →
-                </div>
-
-            </div>
-
-
-
-            <div class="activity">
-
-                <div class="activity-type">
-                    PARTNERSHIP
-                </div>
-
-                <div>
-
-                    <div class="activity-title">
-                        技術連携
-                    </div>
-
-                    <div class="activity-text">
-                        国内外の企業・団体との技術的な連携
-                    </div>
-
-                </div>
-
-                <div class="activity-arrow">
-                    →
-                </div>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =======================================================
-     ORGANIZATION
-======================================================= -->
-
-<section
-    class="section reveal"
-    id="organization">
-
-    <div class="container">
-
-
-        <div class="section-header">
-
-            <div class="eyebrow">
-                ORGANIZATION
-            </div>
-
-
-            <h2 class="section-title">
-
-                組織について。
-
-            </h2>
-
-        </div>
-
-
-        <div class="organization">
-
-
-            <div class="organization-box">
-
-
-                <div class="organization-box-label">
-                    ORGANIZATION
-                </div>
-
-
-                <div class="organization-name">
-
-                    Nagisinnra Technology
-
-                    <small>
-                        Nagisinnra Technology
-                    </small>
-
-                </div>
-
-
-                <div class="organization-info">
-
-
-                    <div class="organization-row">
-
-                        <div class="organization-key">
-                            Organization
-                        </div>
-
-                        <div class="organization-value">
-                            Nagisinnra Technology
-                        </div>
-
-                    </div>
-
-
-                    <div class="organization-row">
-
-                        <div class="organization-key">
-                            Location
-                        </div>
-
-                        <div class="organization-value">
-                            栃木県宇都宮市
-                        </div>
-
-                    </div>
-
-
-                    <div class="organization-row">
-
-                        <div class="organization-key">
-                            Founder
-                        </div>
-
-                        <div class="organization-value">
-                            Nagisinnra
-                        </div>
-
-                    </div>
-
-
-                    <div class="organization-row">
-
-                        <div class="organization-key">
-                            Main Project
-                        </div>
-
-                        <div class="organization-value">
-                            NagisinnraLinux
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-
-
-            <div class="organization-text">
-
-                <p>
-
-                    Nagisinnra Technologyは、
-                    NagisinnraLinuxの独自開発・運営を中心として
-                    活動する技術組織です。
-
-                </p>
-
-
-                <p>
-
-                    会員は本会の目的に賛同し、
-                    開発または運営に協力する者によって構成されます。
-
-                </p>
-
-
-                <p>
-
-                    組織としての意思決定、
-                    技術開発、
-                    情報発信、
-                    外部との連携を通じて、
-                    長期的に活動できる
-                    技術コミュニティを目指します。
-
-                </p>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =======================================================
-     SPONSORSHIP
-======================================================= -->
-
-<section
-    class="section reveal">
-
-    <div class="container">
-
-
-        <div class="section-header">
-
-            <div class="eyebrow">
-                PARTNERSHIP
-            </div>
-
-
-            <h2 class="section-title">
-
-                技術を、
+            <h2 class="section-title" data-i18n
+                data-jp="少しずつ、<br>進化する。"
+                data-en="Evolving,<br>step by step.">
+
+                少しずつ、
                 <br>
-                一緒につくる。
-
-            </h2>
-
-        </div>
-
-
-        <div class="sponsor-panel">
-
-
-            <div class="sponsor-grid">
-
-
-                <div>
-
-                    <h3 class="sponsor-title">
-
-                        Support
-                        <br>
-                        the project.
-
-                    </h3>
-
-
-                    <p class="sponsor-text">
-
-                        Nagisinnra Technologyでは、
-                        NagisinnraLinuxをはじめとする
-                        技術活動を支援していただける
-                        企業・団体との連携を歓迎しています。
-
-                        <br><br>
-
-                        資金だけではなく、
-                        機材、開発環境、
-                        技術的な協力など、
-                        さまざまな形での支援を想定しています。
-
-                    </p>
-
-                </div>
-
-
-
-                <div class="sponsor-list">
-
-
-                    <div class="sponsor-item">
-
-                        <span>
-                            Financial Support
-                        </span>
-
-                        <span>
-                            資金支援
-                        </span>
-
-                    </div>
-
-
-                    <div class="sponsor-item">
-
-                        <span>
-                            Hardware
-                        </span>
-
-                        <span>
-                            機材提供
-                        </span>
-
-                    </div>
-
-
-                    <div class="sponsor-item">
-
-                        <span>
-                            Infrastructure
-                        </span>
-
-                        <span>
-                            開発環境
-                        </span>
-
-                    </div>
-
-
-                    <div class="sponsor-item">
-
-                        <span>
-                            Technical Partnership
-                        </span>
-
-                        <span>
-                            技術連携
-                        </span>
-
-                    </div>
-
-
-                </div>
-
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =======================================================
-     GOVERNANCE
-======================================================= -->
-
-<section
-    class="section reveal"
-    id="governance">
-
-    <div class="container">
-
-
-        <div class="section-header">
-
-            <div class="eyebrow">
-                GOVERNANCE
-            </div>
-
-
-            <h2 class="section-title">
-
-                透明性と、
-                <br>
-                責任。
-
-            </h2>
-
-
-            <p class="section-description">
-
-                Nagisinnra Technologyは、
-                技術組織としての自由さと、
-                対外的な責任の両立を目指します。
-
-            </p>
-
-        </div>
-
-
-        <div class="governance-layout">
-
-
-            <div class="governance-text">
-
-                <p>
-
-                    組織の活動内容、
-                    資産、
-                    会計年度、
-                    会員、
-                    代表などについて
-                    会則を定めています。
-
-                </p>
-
-
-                <p style="margin-top:25px;">
-
-                    また、代表が未成年者である期間については、
-                    法的な契約行為や重大な意思決定に際して
-                    保護者の同意または法的アドバイスを得ることを
-                    会則上の特約として定めています。
-
-                </p>
-
-
-                <p style="margin-top:25px;">
-
-                    技術活動だけではなく、
-                    組織としての信頼性についても
-                    継続的に改善していきます。
-
-                </p>
-
-            </div>
-
-
-
-            <div class="governance-table">
-
-
-                <div class="governance-row">
-
-                    <div class="governance-key">
-                        Name
-                    </div>
-
-                    <div class="governance-value">
-                        Nagisinnra Technology
-                    </div>
-
-                </div>
-
-
-                <div class="governance-row">
-
-                    <div class="governance-key">
-                        English
-                    </div>
-
-                    <div class="governance-value">
-                        Nagisinnra Technology
-                    </div>
-
-                </div>
-
-
-                <div class="governance-row">
-
-                    <div class="governance-key">
-                        Office
-                    </div>
-
-                    <div class="governance-value">
-                        栃木県宇都宮市
-                    </div>
-
-                </div>
-
-
-                <div class="governance-row">
-
-                    <div class="governance-key">
-                        Representative
-                    </div>
-
-                    <div class="governance-value">
-                        Nagisinnra
-                    </div>
-
-                </div>
-
-
-                <div class="governance-row">
-
-                    <div class="governance-key">
-                        Fiscal Year
-                    </div>
-
-                    <div class="governance-value">
-                        4月1日 — 3月31日
-                    </div>
-
-                </div>
-
-
-                <div class="governance-row">
-
-                    <div class="governance-key">
-                        Effective
-                    </div>
-
-                    <div class="governance-value">
-                        2026年9月4日
-                    </div>
-
-                </div>
-
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =======================================================
-     TIMELINE
-======================================================= -->
-
-<section
-    class="section reveal">
-
-    <div class="container">
-
-
-        <div class="section-header">
-
-            <div class="eyebrow">
-                OUR JOURNEY
-            </div>
-
-
-            <h2 class="section-title">
-
-                ここから、
-                <br>
-                始まる。
+                進化する。
 
             </h2>
 
@@ -4476,22 +4552,27 @@ footer {
 
                 <span class="timeline-dot"></span>
 
-
-                <div class="timeline-phase">
-                    ORIGIN
+                <div class="timeline-year">
+                    PHASE 01
                 </div>
 
-
-                <h3>
-                    NagisinnraLinux
+                <h3 data-i18n
+                    data-jp="The beginning"
+                    data-en="The beginning">
+                    The beginning
                 </h3>
 
+                <p data-i18n
+                   data-jp="NagisinnraLinuxの最初のアイデア。<br>「軽くて、自分が使いたいLinuxを作る」というシンプルな考えから始まりました。"
+                   data-en="The initial concept of NagisinnraLinux.<br>It started with a simple vision: 'Build a lightweight Linux OS I want to use every day.'">
 
-                <p>
+                    NagisinnraLinuxの
+                    最初のアイデア。
 
-                    軽量で、自分が使いたいと思える
-                    Linuxをつくるというアイデアから
-                    プロジェクトが始まりました。
+                    <br>
+
+                    「軽くて、自分が使いたいLinuxを作る」
+                    というシンプルな考えから始まりました。
 
                 </p>
 
@@ -4503,23 +4584,23 @@ footer {
 
                 <span class="timeline-dot"></span>
 
-
-                <div class="timeline-phase">
-                    DEVELOPMENT
+                <div class="timeline-year">
+                    PHASE 02
                 </div>
 
-
-                <h3>
-                    軽量化への挑戦
+                <h3 data-i18n
+                    data-jp="Lightweight"
+                    data-en="Lightweight">
+                    Lightweight
                 </h3>
 
+                <p data-i18n
+                   data-jp="不要な構成を見直し、より小さく、より扱いやすいシステムへ。"
+                   data-en="Streamlining configurations to create a smaller, more nimble system.">
 
-                <p>
-
-                    システム構成を見直し、
+                    不要な構成を見直し、
                     より小さく、
-                    より高速なLinux環境を目指して
-                    開発を進めました。
+                    より扱いやすいシステムへ。
 
                 </p>
 
@@ -4531,23 +4612,23 @@ footer {
 
                 <span class="timeline-dot"></span>
 
-
-                <div class="timeline-phase">
-                    SINNRA
+                <div class="timeline-year">
+                    PHASE 03
                 </div>
 
-
-                <h3>
-                    Nagisinnra Technology
+                <h3 data-i18n
+                    data-jp="Everyday Linux"
+                    data-en="Everyday Linux">
+                    Everyday Linux
                 </h3>
 
+                <p data-i18n
+                   data-jp="軽量さだけではなく、日本語環境や普段使いまで含めて「ちゃんと使えるOS」を目指します。"
+                   data-en="Beyond lightness—aiming for a practical OS ready for daily computing and Japanese input.">
 
-                <p>
-
-                    NagisinnraLinuxだけではなく、
-                    技術発信やオープンソース活動、
-                    外部との連携までを含めた
-                    組織としての活動へ。
+                    軽量さだけではなく、
+                    日本語環境や普段使いまで含めて
+                    「ちゃんと使えるOS」を目指します。
 
                 </p>
 
@@ -4559,23 +4640,26 @@ footer {
 
                 <span class="timeline-dot"></span>
 
-
-                <div class="timeline-phase">
-                    FUTURE
+                <div class="timeline-year">
+                    NEXT
                 </div>
 
-
-                <h3>
-                    次の技術へ。
+                <h3 data-i18n
+                    data-jp="What's next?"
+                    data-en="What's next?">
+                    What's next?
                 </h3>
 
+                <p data-i18n
+                   data-jp="まだ完成ではありません。<br>NagisinnraLinuxは、これからも少しずつ進化していきます。"
+                   data-en="The journey continues.<br>NagisinnraLinux will keep growing and improving continuously.">
 
-                <p>
+                    まだ完成ではありません。
 
-                    Linuxに限らず、
-                    コンピューティングの未来につながる
-                    技術を研究し、
-                    新しいプロジェクトへ挑戦していきます。
+                    <br>
+
+                    NagisinnraLinuxは、
+                    これからも少しずつ進化していきます。
 
                 </p>
 
@@ -4583,6 +4667,51 @@ footer {
 
 
         </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     QUOTE
+======================================================= -->
+
+<section class="quote-section reveal">
+
+    <div class="container">
+
+
+        <div class="quote">
+
+            <div class="quote-mark">
+                “
+            </div>
+
+
+            <div class="quote-text" data-i18n
+                 data-jp="Linuxは、難しくなくていい。<br>自由であればいい。"
+                 data-en="Linux doesn't need to be complex.<br>It just needs to be free.">
+
+                Linuxは、
+                難しくなくていい。
+
+                <br>
+
+                自由であればいい。
+
+            </div>
+
+
+            <div class="quote-small">
+
+                NAGISINNRALINUX
+
+            </div>
+
+        </div>
+
 
     </div>
 
@@ -4595,19 +4724,23 @@ footer {
 ======================================================= -->
 
 <section
-    class="section reveal">
+    class="section reveal"
+    id="faq">
 
     <div class="container">
 
 
-        <div class="section-header">
+        <div class="section-head">
 
-            <div class="eyebrow">
-                FAQ
+            <div class="kicker" data-i18n
+                 data-jp="Questions"
+                 data-en="Questions">
+                Questions
             </div>
 
-
-            <h2 class="section-title">
+            <h2 class="section-title" data-i18n
+                data-jp="よくある質問。"
+                data-en="Frequently Asked Questions.">
                 よくある質問。
             </h2>
 
@@ -4619,15 +4752,16 @@ footer {
 
             <div class="faq-item">
 
-
                 <button
                     class="faq-question">
 
-                    <span>
-                        Nagisinnra Technologyとは何ですか？
+                    <span data-i18n
+                          data-jp="NagisinnraLinuxとは？"
+                          data-en="What is NagisinnraLinux?">
+                        NagisinnraLinuxとは？
                     </span>
 
-                    <span class="faq-plus">
+                    <span class="faq-symbol">
                         +
                     </span>
 
@@ -4636,51 +4770,18 @@ footer {
 
                 <div class="faq-answer">
 
-                    <p>
-
-                        NagisinnraLinuxの独自開発・運営を中心に、
-                        Linux、オープンソース、
-                        システム最適化などの技術活動を行う
-                        技術組織です。
-
-                    </p>
-
-                </div>
-
-
-            </div>
-
-
-
-            <div class="faq-item">
-
-
-                <button
-                    class="faq-question">
-
-                    <span>
-                        NagisinnraLinuxとの関係は？
-                    </span>
-
-                    <span class="faq-plus">
-                        +
-                    </span>
-
-                </button>
-
-
-                <div class="faq-answer">
-
-                    <p>
+                    <p data-i18n
+                       data-jp="NagisinnraLinuxは、軽量さと普段使いやすい環境のバランスを目指して開発しているLinuxディストリビューションです。"
+                       data-en="NagisinnraLinux is a Linux distribution developed with a balance of lightweight speed and everyday usability in mind.">
 
                         NagisinnraLinuxは、
-                        Nagisinnra Technologyが独自に開発・運営する
-                        主要プロジェクトです。
+                        軽量さと普段使いやすい環境の
+                        バランスを目指して開発している
+                        Linuxディストリビューションです。
 
                     </p>
 
                 </div>
-
 
             </div>
 
@@ -4688,15 +4789,16 @@ footer {
 
             <div class="faq-item">
 
-
                 <button
                     class="faq-question">
 
-                    <span>
-                        企業との技術連携は可能ですか？
+                    <span data-i18n
+                          data-jp="どのPCで使えますか？"
+                          data-en="What hardware is supported?">
+                        どのPCで使えますか？
                     </span>
 
-                    <span class="faq-plus">
+                    <span class="faq-symbol">
                         +
                     </span>
 
@@ -4705,18 +4807,21 @@ footer {
 
                 <div class="faq-answer">
 
-                    <p>
+                    <p data-i18n
+                       data-jp="現在の構成ではx86_64環境を対象としています。<br>実際の対応ハードウェアについては、各リリースの仕様をご確認ください。"
+                       data-en="The current configuration targets the x86_64 architecture.<br>Please check release specifications for specific hardware details.">
 
-                        技術連携、機材提供、
-                        開発環境の提供、
-                        スポンサーシップなど、
-                        活動目的に沿ったさまざまな形の連携を
-                        想定しています。
+                        現在の構成では
+                        x86_64環境を対象としています。
+
+                        <br>
+
+                        実際の対応ハードウェアについては、
+                        各リリースの仕様をご確認ください。
 
                     </p>
 
                 </div>
-
 
             </div>
 
@@ -4724,15 +4829,16 @@ footer {
 
             <div class="faq-item">
 
-
                 <button
                     class="faq-question">
 
-                    <span>
-                        会員になるには？
+                    <span data-i18n
+                          data-jp="日本語入力は使えますか？"
+                          data-en="Is Japanese input available?">
+                        日本語入力は使えますか？
                     </span>
 
-                    <span class="faq-plus">
+                    <span class="faq-symbol">
                         +
                     </span>
 
@@ -4741,19 +4847,17 @@ footer {
 
                 <div class="faq-answer">
 
-                    <p>
+                    <p data-i18n
+                       data-jp="日本語環境としてfcitx5とMozcを使用する構成を採用しています。"
+                       data-en="It uses fcitx5 + Mozc for seamless Japanese input support right out of the box.">
 
-                        本会の目的に賛同し、
-                        開発または運営に協力する方を
-                        会員としています。
-
-                        詳細については
-                        今後の案内をご確認ください。
+                        日本語環境として
+                        fcitx5とMozcを使用する構成を
+                        採用しています。
 
                     </p>
 
                 </div>
-
 
             </div>
 
@@ -4761,15 +4865,16 @@ footer {
 
             <div class="faq-item">
 
-
                 <button
                     class="faq-question">
 
-                    <span>
-                        会則は公開されていますか？
+                    <span data-i18n
+                          data-jp="無料で使えますか？"
+                          data-en="Is it free to use?">
+                        無料で使えますか？
                     </span>
 
-                    <span class="faq-plus">
+                    <span class="faq-symbol">
                         +
                     </span>
 
@@ -4778,18 +4883,23 @@ footer {
 
                 <div class="faq-answer">
 
-                    <p>
+                    <p data-i18n
+                       data-jp="NagisinnraLinuxはLinuxをベースとしたオープンなプロジェクトです。<br>配布条件については各リリースのライセンス情報をご確認ください。"
+                       data-en="NagisinnraLinux is an open project based on Linux.<br>Please refer to the license information in each release for terms of distribution.">
 
-                        Nagisinnra Technologyでは、
-                        組織の名称、目的、活動、
-                        会員、会計、
-                        未成年者保護に関する特約などを
-                        会則として定めています。
+                        NagisinnraLinuxは
+                        Linuxをベースとした
+                        オープンなプロジェクトです。
+
+                        <br>
+
+                        配布条件については
+                        各リリースのライセンス情報を
+                        ご確認ください。
 
                     </p>
 
                 </div>
-
 
             </div>
 
@@ -4803,62 +4913,92 @@ footer {
 
 
 <!-- =======================================================
-     CONTACT
+     DOWNLOAD
 ======================================================= -->
 
 <section
-    class="contact reveal"
-    id="contact">
+    class="download-section reveal"
+    id="download">
 
     <div class="container">
 
 
-        <div class="contact-card">
+        <div class="download-panel">
 
 
-            <div class="contact-label">
-                Nagisinnra Technology
+            <div class="download-label" data-i18n
+                 data-jp="GET NAGISINNRALINUX"
+                 data-en="GET NAGISINNRALINUX">
+                GET NAGISINNRALINUX
             </div>
 
 
-            <h2 class="contact-title">
+            <h2 class="download-title" data-i18n
+                data-jp="Ready<br>when you are."
+                data-en="Ready<br>when you are.">
 
-                Let's build
+                Ready
                 <br>
-                what's next.
+                when you are.
 
             </h2>
 
 
-            <p class="contact-description">
+            <p class="download-description" data-i18n
+               data-jp="NagisinnraLinuxをあなたのPCで試してみませんか。<br>小さくて、速くて、ちゃんと使えるLinuxを。"
+               data-en="Experience NagisinnraLinux on your computer.<br>A small, fast, and highly reliable Linux system.">
 
-                技術連携、
-                NagisinnraLinuxに関するお問い合わせ、
-                スポンサーシップなどについては
-                Nagisinnra Technologyまでご連絡ください。
+                NagisinnraLinuxを
+                あなたのPCで試してみませんか。
+
+                <br>
+
+                小さくて、速くて、
+                ちゃんと使えるLinuxを。
 
             </p>
 
 
-            <div class="contact-actions">
+            <div class="download-actions">
 
 
-                <a href="/cdn-cgi/l/email-protection#65060a0b1104061125001d04081509004b060a08" class="contact-button contact-primary">
+                <!--
+                    実際のISOのURLへ変更してください
+                -->
 
-                    Contact us
-                    →
-                    
+                <a
+                    href="https://sourceforge.net/projects/nagisinnralinux/files/NagisinnraLinux-v1.1.1.iso/download"
+                    class="button button-dark">
+
+                    <span data-i18n
+                          data-jp="Download ISO"
+                          data-en="Download ISO">Download ISO</span>
+
+                    <span>
+                        →
+                    </span>
+
                 </a>
 
 
                 <a
                     href="#technology"
-                    class="contact-button contact-secondary">
+                    class="button button-light"
+                    data-i18n
+                    data-jp="Specifications"
+                    data-en="Specifications">
 
-                    Explore technology
+                    Specifications
 
                 </a>
 
+
+            </div>
+
+
+            <div class="version">
+
+                NagisinnraLinux v1.1.1 · Stable
 
             </div>
 
@@ -4870,6 +5010,505 @@ footer {
 </section>
 
 
+
+
+<!-- =======================================================
+     PARTNERSHIP / SPONSORSHIP / DEPLOYMENT
+======================================================= -->
+
+<section class="section reveal" id="partnership">
+    <div class="container">
+        <div class="section-head">
+            <div class="kicker" data-i18n
+                 data-jp="Partnership & Sponsorship"
+                 data-en="Partnership & Sponsorship">
+                Partnership & Sponsorship
+            </div>
+            <h2 class="section-title" data-i18n
+                data-jp="ともに、<br>Linuxの未来を。"
+                data-en="Build the future<br>of Linux together.">
+                ともに、<br>Linuxの未来を。
+            </h2>
+            <p class="section-description" data-i18n
+               data-jp="NagisinnraLinuxでは、プロジェクトの成長を支えてくださるパートナー、導入先、スポンサーを募集しています。技術や地域の力をつなぎ、Linuxをもっと身近な選択肢にしていきます。"
+               data-en="NagisinnraLinux welcomes partners, deployment opportunities, and sponsors who want to support the project. Together, we aim to make Linux a more accessible choice.">
+                NagisinnraLinuxでは、プロジェクトの成長を支えてくださるパートナー、導入先、スポンサーを募集しています。技術や地域の力をつなぎ、Linuxをもっと身近な選択肢にしていきます。
+            </p>
+        </div>
+
+        <div class="partnership-grid">
+            <article class="partnership-card">
+                <div class="partnership-eyebrow">01 / PARTNER PROGRAM</div>
+                <h3 data-i18n
+                    data-jp="地域と技術をつなぐ、パートナーへ。"
+                    data-en="Become a local technology partner.">
+                    地域と技術をつなぐ、パートナーへ。
+                </h3>
+                <p data-i18n
+                   data-jp="NagisinnraLinuxの導入支援やPCサポートに協力いただける方を募集しています。案件が発生した際は、対応地域や内容、条件を確認したうえでパートナーをご紹介します。"
+                   data-en="We are looking for people who can assist with NagisinnraLinux deployment and PC support. When an opportunity arises, we may introduce a partner based on location, scope, and agreed conditions.">
+                    NagisinnraLinuxの導入支援やPCサポートに協力いただける方を募集しています。案件が発生した際は、対応地域や内容、条件を確認したうえでパートナーをご紹介します。
+                </p>
+                <ul class="partner-list">
+                    <li data-i18n data-jp="Linuxの運用・構築経験者歓迎" data-en="Linux administrators and system builders">Linuxの運用・構築経験者歓迎</li>
+                    <li data-i18n data-jp="PC修理・保守経験者歓迎" data-en="PC repair and maintenance experience">PC修理・保守経験者歓迎</li>
+                    <li data-i18n data-jp="個人事業主・IT事業者歓迎" data-en="Freelancers and IT businesses">個人事業主・IT事業者歓迎</li>
+                    <li data-i18n data-jp="現地でのサポートが可能な方歓迎" data-en="People able to provide on-site support">現地でのサポートが可能な方歓迎</li>
+                </ul>
+                <div class="partner-note" data-i18n
+                     data-jp="※案件の紹介や発注を保証するものではありません。報酬・作業範囲・責任範囲は案件ごとに事前協議します。"
+                     data-en="Introductions and paid work are not guaranteed. Compensation, scope, and responsibilities will be discussed for each opportunity.">
+                    ※案件の紹介や発注を保証するものではありません。報酬・作業範囲・責任範囲は案件ごとに事前協議します。
+                </div>
+                <a class="partnership-cta" href="mailto:sinnra.technology@outlook.jp?subject=NagisinnraLinux%20Partner%20Program">
+                    <span data-i18n data-jp="パートナーとして応募" data-en="Apply as a partner">パートナーとして応募</span>
+                    <span>→</span>
+                </a>
+            </article>
+
+            <article class="partnership-card dark">
+                <div class="partnership-eyebrow">02 / SPONSORSHIP</div>
+                <h3 data-i18n
+                    data-jp="開発を支える、スポンサーを募集。"
+                    data-en="Support the next chapter of development.">
+                    開発を支える、スポンサーを募集。
+                </h3>
+                <p data-i18n
+                   data-jp="NagisinnraLinuxの継続的な開発、配布環境の維持、検証体制の充実を支援してくださる企業・団体・個人スポンサーを募集しています。"
+                   data-en="We welcome companies, organizations, and individuals interested in supporting development, distribution infrastructure, and hardware testing.">
+                    NagisinnraLinuxの継続的な開発、配布環境の維持、検証体制の充実を支援してくださる企業・団体・個人スポンサーを募集しています。
+                </p>
+                <ul class="partner-list">
+                    <li data-i18n data-jp="開発・運営費の支援" data-en="Financial support for development and operations">開発・運営費の支援</li>
+                    <li data-i18n data-jp="検証用PC・周辺機器の提供" data-en="Hardware and peripherals for testing">検証用PC・周辺機器の提供</li>
+                    <li data-i18n data-jp="技術協力・共同検証" data-en="Technical collaboration and joint testing">技術協力・共同検証</li>
+                    <li data-i18n data-jp="広報・認知向上への協力" data-en="Promotion and awareness support">広報・認知向上への協力</li>
+                </ul>
+                <div class="partner-note" data-i18n
+                     data-jp="スポンサー特典やロゴ掲載、協力内容は個別に相談し、合意した内容を明確にします。"
+                     data-en="Sponsor benefits, logo placement, and collaboration terms will be discussed and agreed individually.">
+                    スポンサー特典やロゴ掲載、協力内容は個別に相談し、合意した内容を明確にします。
+                </div>
+                <a class="partnership-cta" href="mailto:sinnra.technology@outlook.jp?subject=NagisinnraLinux%20Sponsorship">
+                    <span data-i18n data-jp="スポンサーについて相談" data-en="Discuss sponsorship">スポンサーについて相談</span>
+                    <span>→</span>
+                </a>
+            </article>
+        </div>
+
+        <div class="deployment-panel" id="deployment">
+            <div class="deployment-head">
+                <div>
+                    <div class="partnership-eyebrow">03 / DEPLOYMENT & ADOPTION</div>
+                    <h3 data-i18n
+                        data-jp="導入実績"
+                        data-en="Deployment & Adoption">
+                        導入実績
+                    </h3>
+                </div>
+                <p data-i18n
+                   data-jp="企業・個人事業主・団体などでの導入事例を掲載していく予定です。実際の利用環境や導入目的、検証結果を確認できる形で紹介します。"
+                   data-en="We plan to publish real-world adoption stories from businesses, freelancers, and organizations, including their use cases and verified results.">
+                    企業・個人事業主・団体などでの導入事例を掲載していく予定です。実際の利用環境や導入目的、検証結果を確認できる形で紹介します。
+                </p>
+            </div>
+
+            <!--
+              =====================================================
+              導入実績ロゴの追加方法
+              1. ロゴ画像を assets/partners/ にアップロード
+              2. 下の deployment-logo-list に aタグを1つ追加
+              3. src は画像パス、alt は企業・団体名にする
+              4. GitHub Pagesへ push すれば反映される
+              ※掲載許可を得た実在の導入先ロゴだけを掲載してください。
+              =====================================================
+            -->
+            <div class="deployment-logo-area">
+                <div class="deployment-logo-label" data-i18n
+                     data-jp="導入企業・団体"
+                     data-en="DEPLOYMENT PARTNERS">
+                    導入企業・団体
+                </div>
+
+                <!-- ロゴを増やすときは、このリスト内に aタグを追加 -->
+                <div class="deployment-logo-viewport" id="deployment-logo-viewport">
+                    <div class="deployment-logo-track" id="deployment-logo-list">
+                        <!--
+                        ロゴ追加テンプレート（コメントを外して編集）：
+                        <a class="deployment-logo-link" href="https://example.com/"
+                           target="_blank" rel="noopener noreferrer">
+                            <img src="assets/partners/company-name.svg"
+                                 alt="企業・団体名">
+                        </a>
+                        -->
+                    </div>
+                </div>
+
+                <div class="deployment-logo-empty" id="deployment-logo-empty"
+                     data-i18n
+                     data-jp="導入実績ロゴはまだありません。掲載許可をいただいた導入先から順次追加します。"
+                     data-en="No deployment logos yet. Approved organizations will be added here as adoption cases are confirmed.">
+                    導入実績ロゴはまだありません。掲載許可をいただいた導入先から順次追加します。
+                </div>
+            </div>
+
+            <div class="deployment-empty">
+                <div>
+                    <strong data-i18n data-jp="導入事例を募集中" data-en="Now welcoming deployment case studies">導入事例を募集中</strong>
+                    <span data-i18n
+                          data-jp="NagisinnraLinuxを業務・施設・複数台のPCなどで試していただける企業・団体を募集しています。小規模な検証からご相談いただけます。"
+                          data-en="We welcome businesses and organizations interested in testing NagisinnraLinux on workstations or multiple PCs. Small-scale trials are welcome.">
+                        NagisinnraLinuxを業務・施設・複数台のPCなどで試していただける企業・団体を募集しています。小規模な検証からご相談いただけます。
+                    </span>
+                </div>
+                <div class="deployment-status" data-i18n data-jp="CASE STUDIES WANTED" data-en="CASE STUDIES WANTED">CASE STUDIES WANTED</div>
+            </div>
+            <div class="deployment-footnote" data-i18n
+                 data-jp="※掲載する導入実績は、導入先の許可を得たうえで、事実確認できた内容のみ掲載します。"
+                 data-en="Only verified deployment information will be published, with the permission of the organization involved.">
+                ※掲載する導入実績は、導入先の許可を得たうえで、事実確認できた内容のみ掲載します。
+            </div>
+            <a class="partnership-cta" href="mailto:sinnra.technology@outlook.jp?subject=NagisinnraLinux%20Deployment%20Inquiry">
+                <span data-i18n data-jp="導入・検証について問い合わせる" data-en="Discuss a deployment or trial">導入・検証について問い合わせる</span>
+                <span>→</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- =======================================================
+     RELATED LINKS
+======================================================= -->
+
+<section class="section reveal" id="related-links">
+
+    <div class="container">
+
+        <div class="section-head">
+
+            <div class="kicker" data-i18n
+                 data-jp="Related Links"
+                 data-en="Related Links">
+                Related Links
+            </div>
+
+            <h2 class="section-title" data-i18n
+                data-jp="もっと、<br>Nagisinnraへ。"
+                data-en="Discover more<br>Nagisinnra.">
+                もっと、<br>
+                Nagisinnraへ。
+            </h2>
+
+            <p class="section-description" data-i18n
+               data-jp="NagisinnraLinuxの開発、技術発信、配布、お問い合わせなどの関連ページをまとめています。"
+               data-en="Links to development repositories, technical articles, downloads, and contact channels.">
+                NagisinnraLinuxの開発、技術発信、配布、
+                お問い合わせなどの関連ページをまとめています。
+            </p>
+
+        </div>
+
+        <div class="related-links-list">
+
+            <a class="related-link-item"
+               href="https://github.com/nagisinnra/NagisinnraLinux"
+               target="_blank"
+               rel="noopener noreferrer">
+
+                <div class="related-link-text">
+
+                    <span class="related-link-kicker">
+                        DEVELOPMENT
+                    </span>
+
+                    <h3>
+                        GitHub
+                    </h3>
+
+                    <p data-i18n
+                       data-jp="ソースコード・開発情報・リポジトリ"
+                       data-en="Source code, development updates, and repositories">
+                        ソースコード・開発情報・リポジトリ
+                    </p>
+
+                </div>
+
+                <span class="related-link-arrow">
+                    ↗
+                </span>
+
+            </a>
+
+
+            <a class="related-link-item"
+               href="https://zenn.dev/nagisinnra"
+               target="_blank"
+               rel="noopener noreferrer">
+
+                <div class="related-link-text">
+
+                    <span class="related-link-kicker">
+                        TECHNICAL MEDIA
+                    </span>
+
+                    <h3>
+                        Zenn
+                    </h3>
+
+                    <p data-i18n
+                       data-jp="技術記事・開発記録・ナレッジ"
+                       data-en="Technical articles, devlogs, and knowledge base">
+                        技術記事・開発記録・ナレッジ
+                    </p>
+
+                </div>
+
+                <span class="related-link-arrow">
+                    ↗
+                </span>
+
+            </a>
+
+            <a class="related-link-item"
+               href="https://discord.gg/ADMp5druNT"
+               target="_blank"
+               rel="noopener noreferrer">
+
+                <div class="related-link-text">
+
+                    <span class="related-link-kicker">
+                        COMMUNITY
+                    </span>
+
+                    <h3>
+                        Discord
+                    </h3>
+
+                    <p data-i18n
+                       data-jp="コミュニティー"
+                       data-en="Community server">
+                        コミュニティー
+                    </p>
+
+                </div>
+
+                <span class="related-link-arrow">
+                    ↗
+                </span>
+
+            </a>
+
+            <a class="related-link-item"
+               href="https://qiita.com/nagi-sinnra"
+               target="_blank"
+               rel="noopener noreferrer">
+
+                <div class="related-link-text">
+
+                    <span class="related-link-kicker">
+                        TECHNICAL MEDIA
+                    </span>
+
+                    <h3>
+                        Qiita
+                    </h3>
+
+                    <p data-i18n
+                       data-jp="技術記事・実装メモ・開発ノート"
+                       data-en="Technical posts, implementation notes, and dev notes">
+                        技術記事・実装メモ・開発ノート
+                    </p>
+
+                </div>
+
+                <span class="related-link-arrow">
+                    ↗
+                </span>
+
+            </a>
+
+
+            <a class="related-link-item"
+               href="https://sourceforge.net/projects/nagisinnralinux/files/"
+               target="_blank"
+               rel="noopener noreferrer">
+
+                <div class="related-link-text">
+
+                    <span class="related-link-kicker">
+                        DISTRIBUTION
+                    </span>
+
+                    <h3>
+                        NagisinnraLinux Releases
+                    </h3>
+
+                    <p data-i18n
+                       data-jp="NagisinnraLinuxの配布・リリースページ"
+                       data-en="NagisinnraLinux file distribution & releases">
+                        NagisinnraLinuxの配布・リリースページ
+                    </p>
+
+                </div>
+
+                <span class="related-link-arrow">
+                    ↗
+                </span>
+
+            </a>
+
+
+            <a class="related-link-item"
+               href="mailto:sinnra.technology@outlook.jp">
+
+                <div class="related-link-text">
+
+                    <span class="related-link-kicker">
+                        CONTACT
+                    </span>
+
+                    <h3 data-i18n
+                        data-jp="お問い合わせ"
+                        data-en="Contact Us">
+                        お問い合わせ
+                    </h3>
+
+                    <p>
+                        sinnra.technology@outlook.jp
+                    </p>
+
+                </div>
+
+                <span class="related-link-arrow">
+                    ↗
+                </span>
+
+            </a>
+
+            <a class="related-link-item"
+               href="https://nagisinnralinux.booth.pm/"
+               target="_blank"
+               rel="noopener noreferrer">
+
+                <div class="related-link-text">
+
+                    <span class="related-link-kicker">
+                        DONATE
+                    </span>
+
+                    <h3 data-i18n
+                        data-jp="寄付、グッズ販売"
+                        data-en="Donations & Merchandise">
+                        寄付、グッズ販売
+                    </h3>
+
+                    <p data-i18n
+                       data-jp="寄付していただいたお金はnagisinnralinuxのサーバー維持、ドメイン維持などのお金に使わせていただきます。アマゾンギフトのコード形式でお送りいただけるとありがたいです。BOOTHにてグッズと寄付も受け付けています。"
+                       data-en="Donations are used to support server maintenance and domain fees for NagisinnraLinux. Amazon Gift codes are appreciated. Official merchandise and donations are also accepted on BOOTH.">
+                        寄付していただいたお金はnagisinnralinuxのサーバー維持、ドメイン維持などのお金に使わせていただきます。
+                        アマゾンギフトのコード形式でお送りいただけるとありがたいです。BOOTHにてグッズと寄付も受け付けています。
+                    </p>
+
+                </div>
+
+                <span class="related-link-arrow">
+                    ↗
+                </span>
+
+            </a>
+
+            <a class="related-link-item"
+               href="https://hamanet.org/"
+               target="_blank"
+               rel="noopener noreferrer">
+
+                <div class="related-link-text">
+
+                    <span class="related-link-kicker">
+                        WEBSITE
+                    </span>
+
+                    <h3>
+                        hamanet
+                    </h3>
+
+                    <p data-i18n
+                       data-jp="私の友人のサイトです。あわせてどうぞ。(NagisinnraLinuxとは無関係です。)"
+                       data-en="A friend's website. Feel free to visit! (Not affiliated with NagisinnraLinux.)">
+                        私の友人のサイトです。あわせてどうぞ。(NagisinnraLinuxとは無関係です。)
+                    </p>
+
+                </div>
+
+                <span class="related-link-arrow">
+                    ↗
+                </span>
+
+            </a>
+
+             <a class="related-link-item"
+               href="https://www.youtube.com/@nagisinnralinux"
+               target="_blank"
+               rel="noopener noreferrer">
+
+                <div class="related-link-text">
+
+                    <span class="related-link-kicker">
+                    YOUTUBE
+                    </span>
+
+                    <h3>
+                     YouTube
+                    </h3>
+
+                    <p data-i18n
+                       data-jp="Nagisinnralinux公式youtubeです。"
+                       data-en="Official NagisinnraLinux YouTube channel.">
+                        Nagisinnralinux公式youtubeです。
+                    </p>
+
+                </div>
+
+                <span class="related-link-arrow">
+                    ↗
+                </span>
+
+            </a>
+
+            <a class="related-link-item"
+               href="https://"
+               target="_blank"
+               rel="noopener noreferrer">
+
+                <div class="related-link-text">
+
+                    <span class="related-link-kicker">
+                    FAMILY
+                    </span>
+
+                    <h3>
+                     Nagisinnra-create(仮)かつ工事中
+                    </h3>
+
+                    <p data-i18n
+                       data-jp="Nagisinnralinux公式がおすすめするNagisinnraLinuxの派生です。"
+                       data-en="This is a derivative of NagisinnraLinux recommended by the official Nagisinnralinux.">
+                        Nagisinnralinux公式がおすすめするNagisinnraLinuxの派生です。
+                    </p>
+
+                </div>
+
+                <span class="related-link-arrow">
+                    ↗
+                </span>
+
+            </a>
+
+　　　</div>
+
+    </div>
+
+</section>
 
 <!-- =======================================================
      FOOTER
@@ -4877,36 +5516,26 @@ footer {
 
 <footer>
 
-
     <div class="container">
 
 
-        <div class="footer-grid">
+        <div class="footer-inner">
 
 
             <div>
 
-
                 <div class="footer-brand">
-                    Nagisinnra Technology
-                </div>
-
-
-                <div class="footer-sub">
-                    Nagisinnra Technology
+                    NagisinnraLinux
                 </div>
 
 
                 <p class="footer-description">
 
-                    Linux、
-                    オープンソース、
-                    コンピューティング技術を通じて、
-                    次の技術をつくる。
+                    Small by nature.
+                    Beautiful by design.
 
                 </p>
 
-
             </div>
 
 
@@ -4914,41 +5543,19 @@ footer {
             <div class="footer-column">
 
                 <h4>
-                    Company
+                    Explore
                 </h4>
 
-                <a href="#about">
+                <a href="#about" data-i18n data-jp="About" data-en="About">
                     About
                 </a>
 
-                <a href="#organization">
-                    Organization
+                <a href="#features" data-i18n data-jp="Features" data-en="Features">
+                    Features
                 </a>
 
-                <a href="#governance">
-                    Governance
-                </a>
-
-            </div>
-
-
-
-            <div class="footer-column">
-
-                <h4>
+                <a href="#technology" data-i18n data-jp="Technology" data-en="Technology">
                     Technology
-                </h4>
-
-                <a href="#technology">
-                    NagisinnraLinux
-                </a>
-
-                <a href="#technology">
-                    Linux Engineering
-                </a>
-
-                <a href="#technology">
-                    Open Source
                 </a>
 
             </div>
@@ -4958,19 +5565,41 @@ footer {
             <div class="footer-column">
 
                 <h4>
-                    Connect
+                    Project
                 </h4>
 
-                <a href="#contact">
-                    Contact
+                <a href="#download" data-i18n data-jp="Download" data-en="Download">
+                    Download
                 </a>
+
+                <a href="#faq" data-i18n data-jp="FAQ" data-en="FAQ">
+                    FAQ
+                </a>
+
+                <a href="#" data-i18n data-jp="Releases" data-en="Releases">
+                    Releases
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Links
+                </h4>
 
                 <a href="#">
                     GitHub
                 </a>
 
                 <a href="#">
-                    Zenn
+                    Documentation
+                </a>
+
+                <a href="#">
+                    Community
                 </a>
 
             </div>
@@ -4983,12 +5612,11 @@ footer {
         <div class="footer-bottom">
 
             <span>
-                © 2026 Nagisinnra Technology
+                © 2026 NagisinnraLinux
             </span>
 
-
             <span>
-                Effective September 4, 2026
+                Linux for everyone.
             </span>
 
         </div>
@@ -5004,26 +5632,58 @@ footer {
      JAVASCRIPT
 ======================================================= -->
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
+
+/* =========================================================
+   LANGUAGE SWITCHER LOGIC
+========================================================= */
+
+const langButtons = document.querySelectorAll('[data-lang-btn]');
+const langContainer = document.querySelector('.lang-switch-container');
+const i18nElements = document.querySelectorAll('[data-i18n]');
+
+function setLanguage(lang) {
+    langContainer.setAttribute('data-lang', lang);
+    document.documentElement.setAttribute('lang', lang === 'jp' ? 'ja' : 'en');
+
+    langButtons.forEach(btn => {
+        if (btn.getAttribute('data-lang-btn') === lang) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
+    i18nElements.forEach(el => {
+        const text = el.getAttribute(`data-${lang}`);
+        if (text) {
+            el.innerHTML = text;
+        }
+    });
+}
+
+langButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const targetLang = btn.getAttribute('data-lang-btn');
+        setLanguage(targetLang);
+    });
+});
 
 
 /* =========================================================
    SCROLL REVEAL
 ========================================================= */
 
-const reveal =
-    document.querySelectorAll(
-        ".reveal"
-    );
+const revealElements =
+    document.querySelectorAll(".reveal");
 
 
-const observer =
+const revealObserver =
     new IntersectionObserver(
-
-        entries => {
+        (entries) => {
 
             entries.forEach(
-                entry => {
+                (entry) => {
 
                     if (
                         entry.isIntersecting
@@ -5033,7 +5693,7 @@ const observer =
                             "visible"
                         );
 
-                        observer.unobserve(
+                        revealObserver.unobserve(
                             entry.target
                         );
 
@@ -5043,18 +5703,16 @@ const observer =
             );
 
         },
-
         {
-            threshold: .12
+            threshold: 0.12
         }
-
     );
 
 
-reveal.forEach(
-    element => {
+revealElements.forEach(
+    (element) => {
 
-        observer.observe(
+        revealObserver.observe(
             element
         );
 
@@ -5066,33 +5724,33 @@ reveal.forEach(
    FAQ
 ========================================================= */
 
-const faq =
+const faqItems =
     document.querySelectorAll(
         ".faq-item"
     );
 
 
-faq.forEach(
-    item => {
+faqItems.forEach(
+    (item) => {
 
-        const question =
+        const button =
             item.querySelector(
                 ".faq-question"
             );
 
 
-        question.addEventListener(
+        button.addEventListener(
             "click",
             () => {
 
-                const active =
+                const wasActive =
                     item.classList.contains(
                         "active"
                     );
 
 
-                faq.forEach(
-                    other => {
+                faqItems.forEach(
+                    (other) => {
 
                         other.classList.remove(
                             "active"
@@ -5102,7 +5760,7 @@ faq.forEach(
                 );
 
 
-                if (!active) {
+                if (!wasActive) {
 
                     item.classList.add(
                         "active"
@@ -5118,12 +5776,112 @@ faq.forEach(
 
 
 /* =========================================================
-   NAV SHADOW
+   SMOOTH NAVIGATION
+========================================================= */
+
+document
+    .querySelectorAll(
+        'a[href^="#"]'
+    )
+    .forEach(
+        (link) => {
+
+            link.addEventListener(
+                "click",
+                (event) => {
+
+                    const targetId =
+                        link.getAttribute(
+                            "href"
+                        );
+
+
+                    if (
+                        targetId === "#"
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    const target =
+                        document.querySelector(
+                            targetId
+                        );
+
+
+                    if (!target) {
+
+                        return;
+
+                    }
+
+
+                    event.preventDefault();
+
+
+                    target.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   SMALL PARALLAX EFFECT
+========================================================= */
+
+const preview =
+    document.querySelector(
+        ".hero-preview"
+    );
+
+
+window.addEventListener(
+    "mousemove",
+    (event) => {
+
+        if (
+            window.innerWidth < 800
+        ) {
+
+            return;
+
+        }
+
+
+        const x =
+            (event.clientX /
+                window.innerWidth -
+                .5) * 2;
+
+
+        const y =
+            (event.clientY /
+                window.innerHeight -
+                .5) * 2;
+
+
+        preview.style.transform =
+            `translate(${x * 4}px, ${y * 3}px)`;
+
+    }
+);
+
+
+/* =========================================================
+   NAV SCROLL STATE
 ========================================================= */
 
 const nav =
     document.querySelector(
-        ".nav"
+        ".site-nav"
     );
 
 
@@ -5132,11 +5890,11 @@ window.addEventListener(
     () => {
 
         if (
-            window.scrollY > 40
+            window.scrollY > 30
         ) {
 
             nav.style.boxShadow =
-                "0 18px 50px rgba(0,0,0,.09)";
+                "0 16px 45px rgba(0,0,0,.09)";
 
         } else {
 
@@ -5148,85 +5906,35 @@ window.addEventListener(
     }
 );
 
-
-/* =========================================================
-   SMALL HERO PARALLAX
-========================================================= */
-
-const hero =
-    document.querySelector(
-        ".hero-content"
-    );
-
-
-window.addEventListener(
-    "mousemove",
-    event => {
-
-        if (
-            window.innerWidth < 900
-        ) {
-
-            return;
-
-        }
-
-
-        const x =
-            (
-                event.clientX /
-                window.innerWidth -
-                .5
-            ) * 2;
-
-
-        const y =
-            (
-                event.clientY /
-                window.innerHeight -
-                .5
-            ) * 2;
-
-
-        hero.style.transform =
-            `translate(${x * 2}px, ${y * 1.5}px)`;
-
-    }
-);
-
-
-/* =========================================================
-   CURRENT YEAR
-========================================================= */
-
-const year =
-    new Date().getFullYear();
-
-
-document
-    .querySelectorAll(
-        ".footer-bottom span:first-child"
-    )
-    .forEach(
-        element => {
-
-            element.textContent =
-                `© ${year} Nagisinnra Technology`;
-
-        }
-    );
-
-
 </script>
 
 
-<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"94c79d4d951745d085049dd7f2bbd8f8","r":1,"spa":2}' crossorigin="anonymous"></script>
+
+<script id="deployment-logo-marquee-script">
+document.addEventListener("DOMContentLoaded", function () {
+    const track = document.getElementById("deployment-logo-list");
+    const empty = document.getElementById("deployment-logo-empty");
+    if (!track || !empty) return;
+
+    const originals = Array.from(track.children).filter(function (item) {
+        return item.classList && item.classList.contains("deployment-logo-link");
+    });
+
+    if (originals.length === 0) return;
+
+    empty.hidden = true;
+
+    // Duplicate the logo set for a seamless loop. Edit only the original items above.
+    originals.forEach(function (item) {
+        const clone = item.cloneNode(true);
+        clone.setAttribute("aria-hidden", "true");
+        clone.querySelectorAll("a").forEach(function (link) {
+            link.setAttribute("tabindex", "-1");
+        });
+        track.appendChild(clone);
+    });
+});
+</script>
+
 </body>
-
 </html>
-```
-
-
-<script defer data-domain="html.cafe" src="https://milkymouse.com/js/script.js"></script>
-
-   
