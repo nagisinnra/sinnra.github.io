@@ -1,0 +1,5232 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<meta name="description"
+      content="Nagisinnra Technology — Nagisinnra Technology。Linux、オープンソース、コンピューティング技術を通じて、次の技術をつくる。">
+
+<meta name="theme-color"
+      content="#f4f4f1">
+
+<title>
+Nagisinnra Technology | Nagisinnra Technology
+</title>
+
+
+<style>
+
+/* =========================================================
+   Nagisinnra Technology
+   CORPORATE WEBSITE
+   2026
+========================================================= */
+
+
+/* =========================================================
+   FONT
+========================================================= */
+
+@import url(
+'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;800;900&display=swap'
+);
+
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root {
+
+    --bg: #f5f5f2;
+
+    --bg-soft: #ededeb;
+
+    --white: #ffffff;
+
+    --black: #171918;
+
+    --black-soft: #252725;
+
+    --gray: #72766f;
+
+    --gray-light: #969a92;
+
+    --line: rgba(20,25,20,.09);
+
+    --green: #708d75;
+
+    --green-dark: #4d6852;
+
+    --green-light: #dce6dd;
+
+    --cream: #e9e3d5;
+
+    --blue: #899da8;
+
+    --radius: 24px;
+
+    --radius-large: 38px;
+
+    --shadow:
+        0 25px 80px rgba(0,0,0,.07);
+
+    --shadow-small:
+        0 10px 35px rgba(0,0,0,.055);
+
+    --max:
+        1200px;
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+html {
+
+    scroll-behavior: smooth;
+
+}
+
+
+body {
+
+    background: var(--bg);
+
+    color: var(--black);
+
+    font-family:
+        "Inter",
+        "Noto Sans JP",
+        sans-serif;
+
+    line-height: 1.7;
+
+    overflow-x: hidden;
+
+}
+
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 9999;
+
+    opacity: .025;
+
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.3'/%3E%3C/svg%3E");
+
+}
+
+
+a {
+
+    color: inherit;
+
+    text-decoration: none;
+
+}
+
+
+button {
+
+    font-family: inherit;
+
+}
+
+
+.container {
+
+    width:
+        min(
+            var(--max),
+            calc(100% - 50px)
+        );
+
+    margin-inline: auto;
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.nav {
+
+    position: fixed;
+
+    top: 18px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width:
+        min(
+            1140px,
+            calc(100% - 32px)
+        );
+
+    height: 70px;
+
+    z-index: 1000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        0 11px
+        0 22px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.8);
+
+    border-radius: 22px;
+
+    background:
+        rgba(255,255,255,.67);
+
+    backdrop-filter:
+        blur(25px)
+        saturate(140%);
+
+    box-shadow:
+        0 12px 40px
+        rgba(0,0,0,.055);
+
+    transition: .3s;
+
+}
+
+
+.logo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.logo-symbol {
+
+    width: 37px;
+
+    height: 37px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #afc6b2,
+            #66816c
+        );
+
+    color: white;
+
+    font-weight: 900;
+
+    font-size: 14px;
+
+    box-shadow:
+        inset 0 1px
+        rgba(255,255,255,.7),
+
+        0 8px 20px
+        rgba(80,110,85,.15);
+
+}
+
+
+.logo-text {
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    letter-spacing: -.045em;
+
+}
+
+
+.logo-text small {
+
+    display: block;
+
+    margin-top: -4px;
+
+    color: #92958f;
+
+    font-size: 7px;
+
+    font-weight: 600;
+
+    letter-spacing: .16em;
+
+}
+
+
+.nav-links {
+
+    position: absolute;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    display: flex;
+
+    gap: 27px;
+
+}
+
+
+.nav-links a {
+
+    color: #747770;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    transition: .25s;
+
+}
+
+
+.nav-links a:hover {
+
+    color: var(--black);
+
+}
+
+
+.nav-button {
+
+    padding:
+        11px 18px;
+
+    border-radius: 14px;
+
+    background:
+        var(--black);
+
+    color: white;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    transition: .3s;
+
+}
+
+
+.nav-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,.16);
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+
+    position: relative;
+
+    min-height: 100vh;
+
+    padding:
+        190px 0
+        100px;
+
+    display: flex;
+
+    align-items: center;
+
+    overflow: hidden;
+
+}
+
+
+.hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 700px;
+
+    height: 700px;
+
+    left: -300px;
+
+    top: 50px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(129,162,133,.16),
+            transparent 67%
+        );
+
+}
+
+
+.hero::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 600px;
+
+    height: 600px;
+
+    right: -250px;
+
+    bottom: -200px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(218,201,171,.18),
+            transparent 67%
+        );
+
+}
+
+
+.hero-content {
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+.hero-label {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding:
+        8px 13px;
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius:
+        999px;
+
+    background:
+        rgba(255,255,255,.65);
+
+    color:
+        var(--gray);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: .08em;
+
+    animation:
+        fadeUp .8s ease both;
+
+}
+
+
+.hero-dot {
+
+    width: 6px;
+
+    height: 6px;
+
+    border-radius: 50%;
+
+    background:
+        var(--green);
+
+}
+
+
+.hero-title {
+
+    max-width: 1080px;
+
+    margin-top: 27px;
+
+    font-size:
+        clamp(
+            65px,
+            10vw,
+            135px
+        );
+
+    line-height: .87;
+
+    letter-spacing:
+        -.095em;
+
+    font-weight: 900;
+
+    animation:
+        titleIn 1s .1s ease both;
+
+}
+
+
+.hero-title .gray {
+
+    color:
+        #888c84;
+
+    font-weight: 500;
+
+}
+
+
+.hero-title .green {
+
+    background:
+        linear-gradient(
+            110deg,
+            #1c211d,
+            #69816e
+        );
+
+    -webkit-background-clip:
+        text;
+
+    background-clip:
+        text;
+
+    color:
+        transparent;
+
+}
+
+
+.hero-description {
+
+    max-width: 590px;
+
+    margin-top: 31px;
+
+    color:
+        var(--gray);
+
+    font-size: 14px;
+
+    line-height: 2.05;
+
+    animation:
+        fadeUp 1s .3s ease both;
+
+}
+
+
+.hero-actions {
+
+    display: flex;
+
+    gap: 11px;
+
+    margin-top: 33px;
+
+    animation:
+        fadeUp 1s .45s ease both;
+
+}
+
+
+.button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 13px;
+
+    min-width: 150px;
+
+    padding:
+        15px 22px;
+
+    border-radius: 15px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    transition: .3s;
+
+}
+
+
+.button-dark {
+
+    background:
+        var(--black);
+
+    color:
+        white;
+
+    box-shadow:
+        0 12px 30px
+        rgba(0,0,0,.11);
+
+}
+
+
+.button-dark:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 20px 40px
+        rgba(0,0,0,.16);
+
+}
+
+
+.button-light {
+
+    background:
+        rgba(255,255,255,.75);
+
+    border:
+        1px solid
+        var(--line);
+
+}
+
+
+.button-light:hover {
+
+    transform:
+        translateY(-3px);
+
+    background:
+        white;
+
+}
+
+
+/* =========================================================
+   HERO INFO
+========================================================= */
+
+.hero-info {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    margin-top: 90px;
+
+    border-top:
+        1px solid
+        var(--line);
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+}
+
+
+.hero-info-item {
+
+    padding:
+        22px 20px;
+
+    border-right:
+        1px solid
+        var(--line);
+
+}
+
+
+.hero-info-item:last-child {
+
+    border-right: 0;
+
+}
+
+
+.hero-info-label {
+
+    color:
+        #9b9e98;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: .12em;
+
+}
+
+
+.hero-info-value {
+
+    margin-top: 5px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================================
+   SECTION COMMON
+========================================================= */
+
+.section {
+
+    padding:
+        150px 0;
+
+}
+
+
+.section-header {
+
+    max-width: 760px;
+
+}
+
+
+.eyebrow {
+
+    margin-bottom: 13px;
+
+    color:
+        var(--green-dark);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: .18em;
+
+}
+
+
+.section-title {
+
+    font-size:
+        clamp(
+            45px,
+            6vw,
+            78px
+        );
+
+    line-height: .98;
+
+    letter-spacing:
+        -.075em;
+
+    font-weight: 800;
+
+}
+
+
+.section-description {
+
+    max-width: 590px;
+
+    margin-top: 24px;
+
+    color:
+        var(--gray);
+
+    font-size: 13px;
+
+    line-height: 2;
+
+}
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about-layout {
+
+    display: grid;
+
+    grid-template-columns:
+        .9fr 1.1fr;
+
+    gap: 90px;
+
+    margin-top: 75px;
+
+}
+
+
+.about-large {
+
+    font-size:
+        clamp(
+            30px,
+            4vw,
+            48px
+        );
+
+    line-height: 1.17;
+
+    letter-spacing:
+        -.06em;
+
+    font-weight: 700;
+
+}
+
+
+.about-large span {
+
+    color:
+        var(--green);
+
+}
+
+
+.about-text {
+
+    color:
+        var(--gray);
+
+    font-size: 13px;
+
+    line-height: 2.1;
+
+}
+
+
+.about-text p + p {
+
+    margin-top: 22px;
+
+}
+
+
+/* =========================================================
+   MISSION CARDS
+========================================================= */
+
+.mission-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 16px;
+
+    margin-top: 75px;
+
+}
+
+
+.mission-card {
+
+    min-height: 330px;
+
+    padding: 30px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius:
+        var(--radius);
+
+    background:
+        rgba(255,255,255,.62);
+
+    box-shadow:
+        var(--shadow-small);
+
+    transition: .4s;
+
+}
+
+
+.mission-card:hover {
+
+    transform:
+        translateY(-8px);
+
+    box-shadow:
+        var(--shadow);
+
+}
+
+
+.mission-index {
+
+    color:
+        #a7aaa3;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: .1em;
+
+}
+
+
+.mission-icon {
+
+    width: 46px;
+
+    height: 46px;
+
+    margin-top: 43px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 15px;
+
+    background:
+        var(--green-light);
+
+    color:
+        var(--green-dark);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+}
+
+
+.mission-card h3 {
+
+    margin-top: 28px;
+
+    font-size: 23px;
+
+    letter-spacing:
+        -.05em;
+
+}
+
+
+.mission-card p {
+
+    margin-top: 9px;
+
+    color:
+        var(--gray);
+
+    font-size: 12px;
+
+    line-height: 1.9;
+
+}
+
+
+/* =========================================================
+   LARGE DARK SECTION
+========================================================= */
+
+.dark-section {
+
+    padding:
+        80px 0
+        150px;
+
+}
+
+
+.dark-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding:
+        105px 70px;
+
+    border-radius:
+        var(--radius-large);
+
+    background:
+        var(--black);
+
+    color:
+        white;
+
+    box-shadow:
+        var(--shadow);
+
+}
+
+
+.dark-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 700px;
+
+    height: 700px;
+
+    right: -330px;
+
+    top: -350px;
+
+    border:
+        1px solid
+        rgba(155,185,160,.16);
+
+    border-radius: 50%;
+
+}
+
+
+.dark-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 450px;
+
+    height: 450px;
+
+    right: -190px;
+
+    top: -220px;
+
+    border:
+        1px solid
+        rgba(155,185,160,.1);
+
+    border-radius: 50%;
+
+}
+
+
+.dark-label {
+
+    position: relative;
+
+    z-index: 2;
+
+    color:
+        #9bb39e;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: .18em;
+
+}
+
+
+.dark-title {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 900px;
+
+    margin-top: 18px;
+
+    font-size:
+        clamp(
+            48px,
+            7vw,
+            90px
+        );
+
+    line-height: .94;
+
+    letter-spacing:
+        -.08em;
+
+}
+
+
+.dark-title span {
+
+    color:
+        #78967d;
+
+}
+
+
+.dark-description {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 580px;
+
+    margin-top: 30px;
+
+    color:
+        #a6aaa4;
+
+    font-size: 13px;
+
+    line-height: 2;
+
+}
+
+
+/* =========================================================
+   NAGISINNRALINUX
+========================================================= */
+
+.product {
+
+    padding:
+        150px 0;
+
+}
+
+
+.product-layout {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 75px;
+
+    align-items: center;
+
+    margin-top: 75px;
+
+}
+
+
+.product-screen {
+
+    position: relative;
+
+    aspect-ratio:
+        16 / 11;
+
+    padding: 6px;
+
+    border-radius:
+        28px;
+
+    background:
+        #ffffff;
+
+    box-shadow:
+        0 35px 90px
+        rgba(0,0,0,.11);
+
+}
+
+
+.screen-inner {
+
+    position: relative;
+
+    height: 100%;
+
+    overflow: hidden;
+
+    border-radius:
+        23px;
+
+    background:
+
+        radial-gradient(
+            circle at 75% 20%,
+            rgba(165,192,169,.7),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 15% 80%,
+            rgba(220,204,171,.7),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            140deg,
+            #e7eae4,
+            #dfe2dc
+        );
+
+}
+
+
+.screen-bar {
+
+    height: 36px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        0 13px;
+
+    background:
+        rgba(255,255,255,.55);
+
+    border-bottom:
+        1px solid
+        rgba(0,0,0,.04);
+
+}
+
+
+.screen-dots {
+
+    display: flex;
+
+    gap: 5px;
+
+}
+
+
+.screen-dots i {
+
+    width: 7px;
+
+    height: 7px;
+
+    border-radius: 50%;
+
+    background:
+        #bfc3bc;
+
+}
+
+
+.screen-title {
+
+    color:
+        #7e827a;
+
+    font-size: 8px;
+
+    font-weight: 600;
+
+}
+
+
+.screen-window {
+
+    position: absolute;
+
+    width: 58%;
+
+    height: 61%;
+
+    left: 21%;
+
+    top: 18%;
+
+    background:
+        rgba(255,255,255,.9);
+
+    border:
+        1px solid
+        rgba(255,255,255,.95);
+
+    border-radius: 17px;
+
+    box-shadow:
+        0 25px 45px
+        rgba(0,0,0,.1);
+
+}
+
+
+.window-header {
+
+    height: 32px;
+
+    border-bottom:
+        1px solid
+        #ebebe8;
+
+}
+
+
+.window-body {
+
+    padding: 24px;
+
+}
+
+
+.fake-small {
+
+    color:
+        #969a93;
+
+    font-size: 7px;
+
+}
+
+
+.fake-title {
+
+    margin-top: 5px;
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+    letter-spacing:
+        -.07em;
+
+}
+
+
+.fake-line {
+
+    height: 5px;
+
+    width: 65%;
+
+    margin-top: 10px;
+
+    border-radius:
+        999px;
+
+    background:
+        #e2e4df;
+
+}
+
+
+.fake-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 7px;
+
+    margin-top: 22px;
+
+}
+
+
+.fake-box {
+
+    height: 55px;
+
+    border-radius: 9px;
+
+    background:
+        #eef0ec;
+
+}
+
+
+.product-copy h3 {
+
+    font-size:
+        clamp(
+            34px,
+            4vw,
+            54px
+        );
+
+    line-height: 1;
+
+    letter-spacing:
+        -.065em;
+
+}
+
+
+.product-copy p {
+
+    margin-top: 22px;
+
+    color:
+        var(--gray);
+
+    font-size: 13px;
+
+    line-height: 2;
+
+}
+
+
+.product-tags {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 28px;
+
+}
+
+
+.product-tag {
+
+    padding:
+        8px 12px;
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius:
+        999px;
+
+    color:
+        #72766f;
+
+    background:
+        rgba(255,255,255,.6);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================================
+   TECHNOLOGY
+========================================================= */
+
+.tech-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap: 15px;
+
+    margin-top: 70px;
+
+}
+
+
+.tech-card {
+
+    padding:
+        31px;
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius:
+        var(--radius);
+
+    background:
+        rgba(255,255,255,.6);
+
+}
+
+
+.tech-number {
+
+    color:
+        #a1a59e;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: .1em;
+
+}
+
+
+.tech-card h3 {
+
+    margin-top: 42px;
+
+    font-size: 23px;
+
+    letter-spacing:
+        -.05em;
+
+}
+
+
+.tech-card p {
+
+    margin-top: 10px;
+
+    color:
+        var(--gray);
+
+    font-size: 12px;
+
+    line-height: 1.9;
+
+}
+
+
+/* =========================================================
+   ACTIVITIES
+========================================================= */
+
+.activities {
+
+    margin-top: 70px;
+
+    border-top:
+        1px solid
+        var(--line);
+
+}
+
+
+.activity {
+
+    display: grid;
+
+    grid-template-columns:
+        150px 1fr 100px;
+
+    gap: 30px;
+
+    align-items: center;
+
+    padding:
+        25px 5px;
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+}
+
+
+.activity-type {
+
+    color:
+        var(--green-dark);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: .12em;
+
+}
+
+
+.activity-title {
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+}
+
+
+.activity-text {
+
+    margin-top: 3px;
+
+    color:
+        var(--gray);
+
+    font-size: 11px;
+
+}
+
+
+.activity-arrow {
+
+    text-align: right;
+
+    color:
+        #999d96;
+
+    font-size: 18px;
+
+}
+
+
+/* =========================================================
+   ORGANIZATION
+========================================================= */
+
+.organization {
+
+    display: grid;
+
+    grid-template-columns:
+        .8fr 1.2fr;
+
+    gap: 100px;
+
+    margin-top: 75px;
+
+}
+
+
+.organization-box {
+
+    padding:
+        35px;
+
+    border-radius:
+        var(--radius);
+
+    background:
+        #ebece8;
+
+}
+
+
+.organization-box-label {
+
+    color:
+        #888d85;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: .13em;
+
+}
+
+
+.organization-name {
+
+    margin-top: 16px;
+
+    font-size: 28px;
+
+    font-weight: 800;
+
+    letter-spacing:
+        -.06em;
+
+}
+
+
+.organization-name small {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color:
+        var(--gray);
+
+    font-size: 10px;
+
+    letter-spacing: .08em;
+
+}
+
+
+.organization-info {
+
+    margin-top: 28px;
+
+    border-top:
+        1px solid
+        rgba(0,0,0,.07);
+
+}
+
+
+.organization-row {
+
+    display: grid;
+
+    grid-template-columns:
+        120px 1fr;
+
+    padding:
+        14px 0;
+
+    border-bottom:
+        1px solid
+        rgba(0,0,0,.07);
+
+}
+
+
+.organization-key {
+
+    color:
+        #8d9189;
+
+    font-size: 10px;
+
+}
+
+
+.organization-value {
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+}
+
+
+.organization-text {
+
+    color:
+        var(--gray);
+
+    font-size: 13px;
+
+    line-height: 2;
+
+}
+
+
+/* =========================================================
+   SPONSORSHIP
+========================================================= */
+
+.sponsor-panel {
+
+    margin-top: 70px;
+
+    padding:
+        65px;
+
+    border-radius:
+        var(--radius-large);
+
+    background:
+        linear-gradient(
+            135deg,
+            #e2e9e1,
+            #f1eee6
+        );
+
+    border:
+        1px solid
+        #dce2d9;
+
+}
+
+
+.sponsor-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 80px;
+
+    align-items: center;
+
+}
+
+
+.sponsor-title {
+
+    font-size:
+        clamp(
+            35px,
+            4vw,
+            54px
+        );
+
+    line-height: 1;
+
+    letter-spacing:
+        -.065em;
+
+}
+
+
+.sponsor-text {
+
+    margin-top: 18px;
+
+    color:
+        #777b74;
+
+    font-size: 12px;
+
+    line-height: 1.95;
+
+}
+
+
+.sponsor-list {
+
+    display: grid;
+
+    gap: 10px;
+
+}
+
+
+.sponsor-item {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        16px 18px;
+
+    border:
+        1px solid
+        rgba(60,80,60,.1);
+
+    border-radius:
+        14px;
+
+    background:
+        rgba(255,255,255,.55);
+
+}
+
+
+.sponsor-item span:first-child {
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+}
+
+
+.sponsor-item span:last-child {
+
+    color:
+        #8a9189;
+
+    font-size: 10px;
+
+}
+
+
+/* =========================================================
+   GOVERNANCE
+========================================================= */
+
+.governance-layout {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 80px;
+
+    margin-top: 70px;
+
+}
+
+
+.governance-text {
+
+    color:
+        var(--gray);
+
+    font-size: 13px;
+
+    line-height: 2;
+
+}
+
+
+.governance-table {
+
+    border-top:
+        1px solid
+        var(--line);
+
+}
+
+
+.governance-row {
+
+    display: grid;
+
+    grid-template-columns:
+        130px 1fr;
+
+    padding:
+        18px 5px;
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+}
+
+
+.governance-key {
+
+    color:
+        #969a92;
+
+    font-size: 10px;
+
+}
+
+
+.governance-value {
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================================
+   TIMELINE
+========================================================= */
+
+.timeline {
+
+    position: relative;
+
+    margin-top: 70px;
+
+    padding-left: 30px;
+
+}
+
+
+.timeline::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 5px;
+
+    top: 0;
+
+    bottom: 0;
+
+    width: 1px;
+
+    background:
+        var(--line);
+
+}
+
+
+.timeline-item {
+
+    position: relative;
+
+    padding:
+        0 0 60px 45px;
+
+}
+
+
+.timeline-dot {
+
+    position: absolute;
+
+    left: 0;
+
+    top: 6px;
+
+    width: 11px;
+
+    height: 11px;
+
+    border-radius: 50%;
+
+    background:
+        var(--bg);
+
+    border:
+        2px solid
+        var(--green);
+
+}
+
+
+.timeline-phase {
+
+    color:
+        var(--green-dark);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: .15em;
+
+}
+
+
+.timeline-item h3 {
+
+    margin-top: 7px;
+
+    font-size: 25px;
+
+    letter-spacing:
+        -.05em;
+
+}
+
+
+.timeline-item p {
+
+    max-width: 620px;
+
+    margin-top: 8px;
+
+    color:
+        var(--gray);
+
+    font-size: 12px;
+
+    line-height: 1.9;
+
+}
+
+
+/* =========================================================
+   FAQ
+========================================================= */
+
+.faq {
+
+    margin-top: 65px;
+
+    border-top:
+        1px solid
+        var(--line);
+
+}
+
+
+.faq-item {
+
+    border-bottom:
+        1px solid
+        var(--line);
+
+}
+
+
+.faq-question {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        24px 5px;
+
+    border: 0;
+
+    background: transparent;
+
+    color:
+        var(--black);
+
+    text-align: left;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+}
+
+
+.faq-plus {
+
+    width: 27px;
+
+    height: 27px;
+
+    display: grid;
+
+    place-items: center;
+
+    border:
+        1px solid
+        var(--line);
+
+    border-radius: 50%;
+
+    color:
+        #777;
+
+    transition: .3s;
+
+}
+
+
+.faq-answer {
+
+    max-height: 0;
+
+    overflow: hidden;
+
+    transition:
+        max-height .4s ease;
+
+}
+
+
+.faq-answer p {
+
+    max-width: 700px;
+
+    padding:
+        0 5px
+        25px;
+
+    color:
+        var(--gray);
+
+    font-size: 12px;
+
+    line-height: 2;
+
+}
+
+
+.faq-item.active
+.faq-plus {
+
+    transform:
+        rotate(45deg);
+
+}
+
+
+.faq-item.active
+.faq-answer {
+
+    max-height:
+        250px;
+
+}
+
+
+/* =========================================================
+   CONTACT CTA
+========================================================= */
+
+.contact {
+
+    padding:
+        80px 0
+        150px;
+
+}
+
+
+.contact-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding:
+        100px 60px;
+
+    text-align: center;
+
+    border-radius:
+        var(--radius-large);
+
+    background:
+        var(--black);
+
+    color:
+        white;
+
+}
+
+
+.contact-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 600px;
+
+    height: 600px;
+
+    left: 50%;
+
+    top: -450px;
+
+    transform:
+        translateX(-50%);
+
+    border:
+        1px solid
+        rgba(150,180,155,.15);
+
+    border-radius: 50%;
+
+}
+
+
+.contact-label {
+
+    position: relative;
+
+    color:
+        #96ad99;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: .18em;
+
+}
+
+
+.contact-title {
+
+    position: relative;
+
+    margin-top: 15px;
+
+    font-size:
+        clamp(
+            48px,
+            7vw,
+            85px
+        );
+
+    line-height: .95;
+
+    letter-spacing:
+        -.08em;
+
+}
+
+
+.contact-description {
+
+    position: relative;
+
+    max-width: 500px;
+
+    margin:
+        22px auto 0;
+
+    color:
+        #a4a9a3;
+
+    font-size: 12px;
+
+    line-height: 1.9;
+
+}
+
+
+.contact-actions {
+
+    position: relative;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 31px;
+
+}
+
+
+.contact-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 155px;
+
+    padding:
+        14px 21px;
+
+    border-radius: 14px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    transition: .3s;
+
+}
+
+
+.contact-primary {
+
+    background:
+        white;
+
+    color:
+        var(--black);
+
+}
+
+
+.contact-secondary {
+
+    border:
+        1px solid
+        rgba(255,255,255,.15);
+
+    color:
+        #d5d8d3;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    padding:
+        60px 0
+        75px;
+
+    border-top:
+        1px solid
+        var(--line);
+
+}
+
+
+.footer-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1.5fr
+        1fr
+        1fr
+        1fr;
+
+    gap: 45px;
+
+}
+
+
+.footer-brand {
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    letter-spacing:
+        -.05em;
+
+}
+
+
+.footer-sub {
+
+    margin-top: 3px;
+
+    color:
+        #969a93;
+
+    font-size: 8px;
+
+    letter-spacing:
+        .17em;
+
+}
+
+
+.footer-description {
+
+    max-width: 260px;
+
+    margin-top: 15px;
+
+    color:
+        #999c96;
+
+    font-size: 10px;
+
+    line-height: 1.8;
+
+}
+
+
+.footer-column h4 {
+
+    margin-bottom: 13px;
+
+    color:
+        #777b74;
+
+    font-size: 9px;
+
+    letter-spacing: .12em;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+.footer-column a {
+
+    display: block;
+
+    margin-top: 7px;
+
+    color:
+        #989c95;
+
+    font-size: 10px;
+
+    transition: .2s;
+
+}
+
+
+.footer-column a:hover {
+
+    color:
+        var(--black);
+
+}
+
+
+.footer-bottom {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 60px;
+
+    padding-top: 20px;
+
+    border-top:
+        1px solid
+        var(--line);
+
+    color:
+        #a2a59f;
+
+    font-size: 9px;
+
+}
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+.reveal {
+
+    opacity: 0;
+
+    transform:
+        translateY(30px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+
+}
+
+
+.reveal.visible {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+
+}
+
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+@keyframes fadeUp {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(18px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+@keyframes titleIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(35px)
+            scale(.97);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media(max-width:900px) {
+
+    .nav-links {
+
+        display: none;
+
+    }
+
+
+    .hero-info {
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+
+    .hero-info-item:nth-child(2) {
+
+        border-right: 0;
+
+    }
+
+
+    .mission-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .about-layout,
+
+    .product-layout,
+
+    .organization,
+
+    .governance-layout,
+
+    .sponsor-grid {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 45px;
+
+    }
+
+
+    .tech-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .footer-grid {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:600px) {
+
+    .container {
+
+        width:
+            calc(100% - 32px);
+
+    }
+
+
+    .nav {
+
+        height: 61px;
+
+    }
+
+
+    .logo-text {
+
+        font-size: 12px;
+
+    }
+
+
+    .nav-button {
+
+        padding:
+            9px 13px;
+
+        font-size: 9px;
+
+    }
+
+
+    .hero {
+
+        padding:
+            145px 0
+            75px;
+
+    }
+
+
+    .hero-title {
+
+        font-size:
+            clamp(
+                57px,
+                17vw,
+                86px
+            );
+
+    }
+
+
+    .hero-description {
+
+        font-size: 12px;
+
+    }
+
+
+    .hero-actions {
+
+        flex-direction:
+            column;
+
+        width:
+            280px;
+
+        max-width:
+            100%;
+
+    }
+
+
+    .button {
+
+        width: 100%;
+
+    }
+
+
+    .hero-info {
+
+        margin-top: 65px;
+
+    }
+
+
+    .hero-info-item {
+
+        padding:
+            18px 10px;
+
+    }
+
+
+    .section {
+
+        padding:
+            95px 0;
+
+    }
+
+
+    .section-title {
+
+        font-size:
+            45px;
+
+    }
+
+
+    .about-large {
+
+        font-size:
+            32px;
+
+    }
+
+
+    .dark-section {
+
+        padding:
+            40px 0
+            95px;
+
+    }
+
+
+    .dark-card {
+
+        padding:
+            70px 25px;
+
+        border-radius:
+            27px;
+
+    }
+
+
+    .dark-title {
+
+        font-size:
+            48px;
+
+    }
+
+
+    .product {
+
+        padding:
+            95px 0;
+
+    }
+
+
+    .product-screen {
+
+        border-radius:
+            19px;
+
+    }
+
+
+    .screen-inner {
+
+        border-radius:
+            15px;
+
+    }
+
+
+    .window-body {
+
+        padding:
+            14px;
+
+    }
+
+
+    .fake-title {
+
+        font-size:
+            14px;
+
+    }
+
+
+    .fake-grid {
+
+        margin-top:
+            12px;
+
+    }
+
+
+    .fake-box {
+
+        height:
+            35px;
+
+    }
+
+
+    .activity {
+
+        grid-template-columns:
+            85px 1fr 20px;
+
+        gap:
+            12px;
+
+    }
+
+
+    .activity-title {
+
+        font-size:
+            12px;
+
+    }
+
+
+    .activity-text {
+
+        font-size:
+            9px;
+
+    }
+
+
+    .sponsor-panel {
+
+        padding:
+            40px 23px;
+
+        border-radius:
+            27px;
+
+    }
+
+
+    .organization-row,
+
+    .governance-row {
+
+        grid-template-columns:
+            90px 1fr;
+
+    }
+
+
+    .contact {
+
+        padding:
+            40px 0
+            95px;
+
+    }
+
+
+    .contact-card {
+
+        padding:
+            70px 22px;
+
+        border-radius:
+            27px;
+
+    }
+
+
+    .contact-title {
+
+        font-size:
+            48px;
+
+    }
+
+
+    .contact-actions {
+
+        flex-direction:
+            column;
+
+        width:
+            280px;
+
+        max-width:
+            100%;
+
+        margin-inline:
+            auto;
+
+    }
+
+
+    .contact-button {
+
+        width: 100%;
+
+    }
+
+
+    .footer-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .footer-bottom {
+
+        flex-direction:
+            column;
+
+        gap: 8px;
+
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce) {
+
+    * {
+
+        animation-duration:
+            .01ms !important;
+
+        transition-duration:
+            .01ms !important;
+
+        scroll-behavior:
+            auto !important;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =======================================================
+     NAVIGATION
+======================================================= -->
+
+<nav class="nav">
+
+
+    <a href="#" class="logo">
+
+        <span class="logo-symbol">
+            S
+        </span>
+
+        <span class="logo-text">
+
+            Nagisinnra Technology
+
+            <small>
+                Nagisinnra Technology
+            </small>
+
+        </span>
+
+    </a>
+
+
+    <div class="nav-links">
+
+        <a href="#about">
+            About
+        </a>
+
+        <a href="#technology">
+            Technology
+        </a>
+
+        <a href="#organization">
+            Organization
+        </a>
+
+        <a href="#governance">
+            Governance
+        </a>
+
+    </div>
+
+
+    <a
+        href="#contact"
+        class="nav-button">
+
+        Contact
+
+    </a>
+
+</nav>
+
+
+
+<!-- =======================================================
+     HERO
+======================================================= -->
+
+<header class="hero">
+
+
+    <div class="container">
+
+        <div class="hero-content">
+
+
+            <div class="hero-label">
+
+                <span class="hero-dot"></span>
+
+                Nagisinnra Technology
+                · EST. 2026
+
+            </div>
+
+
+            <h1 class="hero-title">
+
+                <span class="gray">
+                    Technology,
+                </span>
+
+                <br>
+
+                <span>
+                    made
+                </span>
+
+                <span class="green">
+                    human.
+                </span>
+
+            </h1>
+
+
+            <p class="hero-description">
+
+                Nagisinnra Technologyは、
+                オープンソースとコンピューティング技術を軸に、
+                新しいソフトウェア体験をつくる技術組織です。
+
+                <br><br>
+
+                超軽量Linuxディストリビューション
+                「NagisinnraLinux」を中心として、
+                技術開発と情報発信を行っています。
+
+            </p>
+
+
+            <div class="hero-actions">
+
+                <a
+                    href="#about"
+                    class="button button-dark">
+
+                    私たちについて
+
+                    <span>
+                        →
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="#technology"
+                    class="button button-light">
+
+                    Technology
+
+                </a>
+
+            </div>
+
+
+            <div class="hero-info">
+
+
+                <div class="hero-info-item">
+
+                    <div class="hero-info-label">
+                        ORGANIZATION
+                    </div>
+
+                    <div class="hero-info-value">
+                        Nagisinnra Technology
+                    </div>
+
+                </div>
+
+
+                <div class="hero-info-item">
+
+                    <div class="hero-info-label">
+                        PROJECT
+                    </div>
+
+                    <div class="hero-info-value">
+                        NagisinnraLinux
+                    </div>
+
+                </div>
+
+
+                <div class="hero-info-item">
+
+                    <div class="hero-info-label">
+                        FIELD
+                    </div>
+
+                    <div class="hero-info-value">
+                        Linux / Open Source
+                    </div>
+
+                </div>
+
+
+                <div class="hero-info-item">
+
+                    <div class="hero-info-label">
+                        ESTABLISHED
+                    </div>
+
+                    <div class="hero-info-value">
+                        2026
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =======================================================
+     ABOUT
+======================================================= -->
+
+<section
+    class="section reveal"
+    id="about">
+
+    <div class="container">
+
+
+        <div class="section-header">
+
+            <div class="eyebrow">
+                ABOUT SINNRA
+            </div>
+
+
+            <h2 class="section-title">
+
+                技術を、
+                <br>
+                もっと自由に。
+
+            </h2>
+
+
+            <p class="section-description">
+
+                Nagisinnra Technologyは、
+                小さなアイデアを技術として形にし、
+                それを世界へ届けることを目指しています。
+
+            </p>
+
+        </div>
+
+
+        <div class="about-layout">
+
+
+            <div class="about-large">
+
+                私たちは
+                <span>
+                    「使う人」
+                </span>
+                の視点から、
+                技術を考えます。
+
+            </div>
+
+
+            <div class="about-text">
+
+                <p>
+
+                    高性能であること。
+                    新しいこと。
+                    複雑であること。
+
+                    それだけが、
+                    良い技術ではありません。
+
+                </p>
+
+
+                <p>
+
+                    必要なものを必要なだけ。
+                    わかりやすく、
+                    軽く、
+                    美しく。
+
+                    Nagisinnra Technologyでは、
+                    コンピューターを使う人が
+                    技術そのものに振り回されるのではなく、
+                    技術によって自由になれる環境を
+                    目指しています。
+
+                </p>
+
+
+                <p>
+
+                    その思想を形にしたものが、
+                    私たちの主要プロジェクト
+                    「NagisinnraLinux」です。
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     MISSION
+======================================================= -->
+
+<section
+    class="section reveal">
+
+    <div class="container">
+
+
+        <div class="section-header">
+
+            <div class="eyebrow">
+                OUR MISSION
+            </div>
+
+
+            <h2 class="section-title">
+
+                三つの
+                <br>
+                基本思想。
+
+            </h2>
+
+        </div>
+
+
+        <div class="mission-grid">
+
+
+            <article class="mission-card">
+
+                <div class="mission-index">
+                    01 / OPEN
+                </div>
+
+
+                <div class="mission-icon">
+                    OPEN
+                </div>
+
+
+                <h3>
+                    オープンであること。
+                </h3>
+
+
+                <p>
+
+                    オープンソースの思想を尊重し、
+                    技術を一部の人だけのものにせず、
+                    学び、改良し、共有できる環境を
+                    つくります。
+
+                </p>
+
+            </article>
+
+
+
+            <article class="mission-card">
+
+                <div class="mission-index">
+                    02 / LIGHT
+                </div>
+
+
+                <div class="mission-icon">
+                    LIGHT
+                </div>
+
+
+                <h3>
+                    軽くあること。
+                </h3>
+
+
+                <p>
+
+                    ハードウェアの性能を
+                    OS自身が使い切るのではなく、
+                    ユーザーのために残す。
+
+                    軽量で効率的な
+                    コンピューティングを追求します。
+
+                </p>
+
+            </article>
+
+
+
+            <article class="mission-card">
+
+                <div class="mission-index">
+                    03 / HUMAN
+                </div>
+
+
+                <div class="mission-icon">
+                    HUMAN
+                </div>
+
+
+                <h3>
+                    人を中心にすること。
+                </h3>
+
+
+                <p>
+
+                    技術仕様だけではなく、
+                    実際に使う人の感覚、
+                    わかりやすさ、
+                    美しさまで含めて
+                    プロダクトを設計します。
+
+                </p>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     PHILOSOPHY
+======================================================= -->
+
+<section class="dark-section reveal">
+
+    <div class="container">
+
+
+        <div class="dark-card">
+
+
+            <div class="dark-label">
+                THE SINNRA APPROACH
+            </div>
+
+
+            <h2 class="dark-title">
+
+                Small teams.
+                <br>
+
+                <span>
+                    Serious technology.
+                </span>
+
+            </h2>
+
+
+            <p class="dark-description">
+
+                私たちは大規模な組織ではありません。
+
+                <br><br>
+
+                だからこそ、
+                一つひとつの技術について考え、
+                実際に手を動かし、
+                必要であれば何度でも作り直す。
+
+                <br><br>
+
+                小さな組織だからできる
+                技術への向き合い方を大切にしています。
+
+            </p>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     NAGISINNRALINUX
+======================================================= -->
+
+<section
+    class="product reveal"
+    id="technology">
+
+    <div class="container">
+
+
+        <div class="section-header">
+
+            <div class="eyebrow">
+                FLAGSHIP PROJECT
+            </div>
+
+
+            <h2 class="section-title">
+
+                NagisinnraLinux
+
+            </h2>
+
+
+            <p class="section-description">
+
+                Nagisinnra Technologyが独自に開発・運営する
+                超軽量Linuxディストリビューション。
+
+            </p>
+
+        </div>
+
+
+        <div class="product-layout">
+
+
+            <div class="product-screen">
+
+
+                <div class="screen-inner">
+
+
+                    <div class="screen-bar">
+
+
+                        <div class="screen-dots">
+
+                            <i></i>
+                            <i></i>
+                            <i></i>
+
+                        </div>
+
+
+                        <div class="screen-title">
+                            NagisinnraLinux
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="screen-window">
+
+
+                        <div class="window-header"></div>
+
+
+                        <div class="window-body">
+
+                            <div class="fake-small">
+                                Welcome to
+                            </div>
+
+
+                            <div class="fake-title">
+                                NagisinnraLinux
+                            </div>
+
+
+                            <div class="fake-line"></div>
+
+
+                            <div class="fake-grid">
+
+                                <div class="fake-box"></div>
+
+                                <div class="fake-box"></div>
+
+                                <div class="fake-box"></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <div class="product-copy">
+
+
+                <h3>
+
+                    軽く。
+                    <br>
+
+                    速く。
+                    <br>
+
+                    美しく。
+
+                </h3>
+
+
+                <p>
+
+                    NagisinnraLinuxは、
+                    「Linuxだから難しい」という
+                    固定観念を変えることを目指した
+                    Linuxディストリビューションです。
+
+                </p>
+
+
+                <p>
+
+                    カーネルを基盤としながら、
+                    システム構成を見直し、
+                    必要な環境をコンパクトにまとめる。
+
+                    そして、技術的な中身だけではなく、
+                    デスクトップの体験まで
+                    一つのプロダクトとして考えます。
+
+                </p>
+
+
+                <div class="product-tags">
+
+                    <span class="product-tag">
+                        Lightweight
+                    </span>
+
+                    <span class="product-tag">
+                        Linux
+                    </span>
+
+                    <span class="product-tag">
+                        Debian
+                    </span>
+
+                    <span class="product-tag">
+                        Japanese
+                    </span>
+
+                    <span class="product-tag">
+                        Open Source
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     TECHNOLOGY AREAS
+======================================================= -->
+
+<section
+    class="section reveal">
+
+    <div class="container">
+
+
+        <div class="section-header">
+
+            <div class="eyebrow">
+                TECHNOLOGY
+            </div>
+
+
+            <h2 class="section-title">
+
+                技術領域。
+
+            </h2>
+
+
+            <p class="section-description">
+
+                Nagisinnra Technologyでは、
+                Linuxを中心に複数の技術領域へ
+                継続的に取り組みます。
+
+            </p>
+
+        </div>
+
+
+        <div class="tech-grid">
+
+
+            <article class="tech-card">
+
+                <div class="tech-number">
+                    TECHNOLOGY / 01
+                </div>
+
+                <h3>
+                    Linux Engineering
+                </h3>
+
+                <p>
+
+                    Linuxカーネル、
+                    システム構成、
+                    パッケージング、
+                    起動プロセスなどを含めた
+                    OSレベルの技術研究。
+
+                </p>
+
+            </article>
+
+
+
+            <article class="tech-card">
+
+                <div class="tech-number">
+                    TECHNOLOGY / 02
+                </div>
+
+                <h3>
+                    System Optimization
+                </h3>
+
+                <p>
+
+                    CPU、メモリ、ストレージなどの
+                    ハードウェア資源を効率的に利用するための
+                    システム最適化。
+
+                </p>
+
+            </article>
+
+
+
+            <article class="tech-card">
+
+                <div class="tech-number">
+                    TECHNOLOGY / 03
+                </div>
+
+                <h3>
+                    Open Source
+                </h3>
+
+                <p>
+
+                    オープンソースコミュニティへの参加、
+                    技術情報の公開、
+                    開発成果の共有を通じて
+                    OSSエコシステムへ貢献します。
+
+                </p>
+
+            </article>
+
+
+
+            <article class="tech-card">
+
+                <div class="tech-number">
+                    TECHNOLOGY / 04
+                </div>
+
+                <h3>
+                    Computing Experience
+                </h3>
+
+                <p>
+
+                    技術仕様だけではなく、
+                    UI、UX、デザイン、
+                    インストール体験まで含めた
+                    コンピューティング体験の設計。
+
+                </p>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     ACTIVITIES
+======================================================= -->
+
+<section
+    class="section reveal">
+
+    <div class="container">
+
+
+        <div class="section-header">
+
+            <div class="eyebrow">
+                ACTIVITIES
+            </div>
+
+
+            <h2 class="section-title">
+
+                活動内容。
+
+            </h2>
+
+        </div>
+
+
+        <div class="activities">
+
+
+            <div class="activity">
+
+                <div class="activity-type">
+                    DEVELOPMENT
+                </div>
+
+                <div>
+
+                    <div class="activity-title">
+                        NagisinnraLinux 開発
+                    </div>
+
+                    <div class="activity-text">
+                        カーネル最適化、ビルド、アップデートなど
+                    </div>
+
+                </div>
+
+                <div class="activity-arrow">
+                    →
+                </div>
+
+            </div>
+
+
+
+            <div class="activity">
+
+                <div class="activity-type">
+                    MEDIA
+                </div>
+
+                <div>
+
+                    <div class="activity-title">
+                        技術情報発信
+                    </div>
+
+                    <div class="activity-text">
+                        公式ウェブサイト、Zenn等を通じた技術発信
+                    </div>
+
+                </div>
+
+                <div class="activity-arrow">
+                    →
+                </div>
+
+            </div>
+
+
+
+            <div class="activity">
+
+                <div class="activity-type">
+                    COMMUNITY
+                </div>
+
+                <div>
+
+                    <div class="activity-title">
+                        オープンソース活動
+                    </div>
+
+                    <div class="activity-text">
+                        OSSコミュニティへの技術的貢献
+                    </div>
+
+                </div>
+
+                <div class="activity-arrow">
+                    →
+                </div>
+
+            </div>
+
+
+
+            <div class="activity">
+
+                <div class="activity-type">
+                    PARTNERSHIP
+                </div>
+
+                <div>
+
+                    <div class="activity-title">
+                        技術連携
+                    </div>
+
+                    <div class="activity-text">
+                        国内外の企業・団体との技術的な連携
+                    </div>
+
+                </div>
+
+                <div class="activity-arrow">
+                    →
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     ORGANIZATION
+======================================================= -->
+
+<section
+    class="section reveal"
+    id="organization">
+
+    <div class="container">
+
+
+        <div class="section-header">
+
+            <div class="eyebrow">
+                ORGANIZATION
+            </div>
+
+
+            <h2 class="section-title">
+
+                組織について。
+
+            </h2>
+
+        </div>
+
+
+        <div class="organization">
+
+
+            <div class="organization-box">
+
+
+                <div class="organization-box-label">
+                    ORGANIZATION
+                </div>
+
+
+                <div class="organization-name">
+
+                    Nagisinnra Technology
+
+                    <small>
+                        Nagisinnra Technology
+                    </small>
+
+                </div>
+
+
+                <div class="organization-info">
+
+
+                    <div class="organization-row">
+
+                        <div class="organization-key">
+                            Organization
+                        </div>
+
+                        <div class="organization-value">
+                            Nagisinnra Technology
+                        </div>
+
+                    </div>
+
+
+                    <div class="organization-row">
+
+                        <div class="organization-key">
+                            Location
+                        </div>
+
+                        <div class="organization-value">
+                            栃木県宇都宮市
+                        </div>
+
+                    </div>
+
+
+                    <div class="organization-row">
+
+                        <div class="organization-key">
+                            Founder
+                        </div>
+
+                        <div class="organization-value">
+                            Nagisinnra
+                        </div>
+
+                    </div>
+
+
+                    <div class="organization-row">
+
+                        <div class="organization-key">
+                            Main Project
+                        </div>
+
+                        <div class="organization-value">
+                            NagisinnraLinux
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <div class="organization-text">
+
+                <p>
+
+                    Nagisinnra Technologyは、
+                    NagisinnraLinuxの独自開発・運営を中心として
+                    活動する技術組織です。
+
+                </p>
+
+
+                <p>
+
+                    会員は本会の目的に賛同し、
+                    開発または運営に協力する者によって構成されます。
+
+                </p>
+
+
+                <p>
+
+                    組織としての意思決定、
+                    技術開発、
+                    情報発信、
+                    外部との連携を通じて、
+                    長期的に活動できる
+                    技術コミュニティを目指します。
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     SPONSORSHIP
+======================================================= -->
+
+<section
+    class="section reveal">
+
+    <div class="container">
+
+
+        <div class="section-header">
+
+            <div class="eyebrow">
+                PARTNERSHIP
+            </div>
+
+
+            <h2 class="section-title">
+
+                技術を、
+                <br>
+                一緒につくる。
+
+            </h2>
+
+        </div>
+
+
+        <div class="sponsor-panel">
+
+
+            <div class="sponsor-grid">
+
+
+                <div>
+
+                    <h3 class="sponsor-title">
+
+                        Support
+                        <br>
+                        the project.
+
+                    </h3>
+
+
+                    <p class="sponsor-text">
+
+                        Nagisinnra Technologyでは、
+                        NagisinnraLinuxをはじめとする
+                        技術活動を支援していただける
+                        企業・団体との連携を歓迎しています。
+
+                        <br><br>
+
+                        資金だけではなく、
+                        機材、開発環境、
+                        技術的な協力など、
+                        さまざまな形での支援を想定しています。
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="sponsor-list">
+
+
+                    <div class="sponsor-item">
+
+                        <span>
+                            Financial Support
+                        </span>
+
+                        <span>
+                            資金支援
+                        </span>
+
+                    </div>
+
+
+                    <div class="sponsor-item">
+
+                        <span>
+                            Hardware
+                        </span>
+
+                        <span>
+                            機材提供
+                        </span>
+
+                    </div>
+
+
+                    <div class="sponsor-item">
+
+                        <span>
+                            Infrastructure
+                        </span>
+
+                        <span>
+                            開発環境
+                        </span>
+
+                    </div>
+
+
+                    <div class="sponsor-item">
+
+                        <span>
+                            Technical Partnership
+                        </span>
+
+                        <span>
+                            技術連携
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     GOVERNANCE
+======================================================= -->
+
+<section
+    class="section reveal"
+    id="governance">
+
+    <div class="container">
+
+
+        <div class="section-header">
+
+            <div class="eyebrow">
+                GOVERNANCE
+            </div>
+
+
+            <h2 class="section-title">
+
+                透明性と、
+                <br>
+                責任。
+
+            </h2>
+
+
+            <p class="section-description">
+
+                Nagisinnra Technologyは、
+                技術組織としての自由さと、
+                対外的な責任の両立を目指します。
+
+            </p>
+
+        </div>
+
+
+        <div class="governance-layout">
+
+
+            <div class="governance-text">
+
+                <p>
+
+                    組織の活動内容、
+                    資産、
+                    会計年度、
+                    会員、
+                    代表などについて
+                    会則を定めています。
+
+                </p>
+
+
+                <p style="margin-top:25px;">
+
+                    また、代表が未成年者である期間については、
+                    法的な契約行為や重大な意思決定に際して
+                    保護者の同意または法的アドバイスを得ることを
+                    会則上の特約として定めています。
+
+                </p>
+
+
+                <p style="margin-top:25px;">
+
+                    技術活動だけではなく、
+                    組織としての信頼性についても
+                    継続的に改善していきます。
+
+                </p>
+
+            </div>
+
+
+
+            <div class="governance-table">
+
+
+                <div class="governance-row">
+
+                    <div class="governance-key">
+                        Name
+                    </div>
+
+                    <div class="governance-value">
+                        Nagisinnra Technology
+                    </div>
+
+                </div>
+
+
+                <div class="governance-row">
+
+                    <div class="governance-key">
+                        English
+                    </div>
+
+                    <div class="governance-value">
+                        Nagisinnra Technology
+                    </div>
+
+                </div>
+
+
+                <div class="governance-row">
+
+                    <div class="governance-key">
+                        Office
+                    </div>
+
+                    <div class="governance-value">
+                        栃木県宇都宮市
+                    </div>
+
+                </div>
+
+
+                <div class="governance-row">
+
+                    <div class="governance-key">
+                        Representative
+                    </div>
+
+                    <div class="governance-value">
+                        Nagisinnra
+                    </div>
+
+                </div>
+
+
+                <div class="governance-row">
+
+                    <div class="governance-key">
+                        Fiscal Year
+                    </div>
+
+                    <div class="governance-value">
+                        4月1日 — 3月31日
+                    </div>
+
+                </div>
+
+
+                <div class="governance-row">
+
+                    <div class="governance-key">
+                        Effective
+                    </div>
+
+                    <div class="governance-value">
+                        2026年9月4日
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     TIMELINE
+======================================================= -->
+
+<section
+    class="section reveal">
+
+    <div class="container">
+
+
+        <div class="section-header">
+
+            <div class="eyebrow">
+                OUR JOURNEY
+            </div>
+
+
+            <h2 class="section-title">
+
+                ここから、
+                <br>
+                始まる。
+
+            </h2>
+
+        </div>
+
+
+        <div class="timeline">
+
+
+            <div class="timeline-item">
+
+                <span class="timeline-dot"></span>
+
+
+                <div class="timeline-phase">
+                    ORIGIN
+                </div>
+
+
+                <h3>
+                    NagisinnraLinux
+                </h3>
+
+
+                <p>
+
+                    軽量で、自分が使いたいと思える
+                    Linuxをつくるというアイデアから
+                    プロジェクトが始まりました。
+
+                </p>
+
+            </div>
+
+
+
+            <div class="timeline-item">
+
+                <span class="timeline-dot"></span>
+
+
+                <div class="timeline-phase">
+                    DEVELOPMENT
+                </div>
+
+
+                <h3>
+                    軽量化への挑戦
+                </h3>
+
+
+                <p>
+
+                    システム構成を見直し、
+                    より小さく、
+                    より高速なLinux環境を目指して
+                    開発を進めました。
+
+                </p>
+
+            </div>
+
+
+
+            <div class="timeline-item">
+
+                <span class="timeline-dot"></span>
+
+
+                <div class="timeline-phase">
+                    SINNRA
+                </div>
+
+
+                <h3>
+                    Nagisinnra Technology
+                </h3>
+
+
+                <p>
+
+                    NagisinnraLinuxだけではなく、
+                    技術発信やオープンソース活動、
+                    外部との連携までを含めた
+                    組織としての活動へ。
+
+                </p>
+
+            </div>
+
+
+
+            <div class="timeline-item">
+
+                <span class="timeline-dot"></span>
+
+
+                <div class="timeline-phase">
+                    FUTURE
+                </div>
+
+
+                <h3>
+                    次の技術へ。
+                </h3>
+
+
+                <p>
+
+                    Linuxに限らず、
+                    コンピューティングの未来につながる
+                    技術を研究し、
+                    新しいプロジェクトへ挑戦していきます。
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     FAQ
+======================================================= -->
+
+<section
+    class="section reveal">
+
+    <div class="container">
+
+
+        <div class="section-header">
+
+            <div class="eyebrow">
+                FAQ
+            </div>
+
+
+            <h2 class="section-title">
+                よくある質問。
+            </h2>
+
+        </div>
+
+
+        <div class="faq">
+
+
+            <div class="faq-item">
+
+
+                <button
+                    class="faq-question">
+
+                    <span>
+                        Nagisinnra Technologyとは何ですか？
+                    </span>
+
+                    <span class="faq-plus">
+                        +
+                    </span>
+
+                </button>
+
+
+                <div class="faq-answer">
+
+                    <p>
+
+                        NagisinnraLinuxの独自開発・運営を中心に、
+                        Linux、オープンソース、
+                        システム最適化などの技術活動を行う
+                        技術組織です。
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="faq-item">
+
+
+                <button
+                    class="faq-question">
+
+                    <span>
+                        NagisinnraLinuxとの関係は？
+                    </span>
+
+                    <span class="faq-plus">
+                        +
+                    </span>
+
+                </button>
+
+
+                <div class="faq-answer">
+
+                    <p>
+
+                        NagisinnraLinuxは、
+                        Nagisinnra Technologyが独自に開発・運営する
+                        主要プロジェクトです。
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="faq-item">
+
+
+                <button
+                    class="faq-question">
+
+                    <span>
+                        企業との技術連携は可能ですか？
+                    </span>
+
+                    <span class="faq-plus">
+                        +
+                    </span>
+
+                </button>
+
+
+                <div class="faq-answer">
+
+                    <p>
+
+                        技術連携、機材提供、
+                        開発環境の提供、
+                        スポンサーシップなど、
+                        活動目的に沿ったさまざまな形の連携を
+                        想定しています。
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="faq-item">
+
+
+                <button
+                    class="faq-question">
+
+                    <span>
+                        会員になるには？
+                    </span>
+
+                    <span class="faq-plus">
+                        +
+                    </span>
+
+                </button>
+
+
+                <div class="faq-answer">
+
+                    <p>
+
+                        本会の目的に賛同し、
+                        開発または運営に協力する方を
+                        会員としています。
+
+                        詳細については
+                        今後の案内をご確認ください。
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="faq-item">
+
+
+                <button
+                    class="faq-question">
+
+                    <span>
+                        会則は公開されていますか？
+                    </span>
+
+                    <span class="faq-plus">
+                        +
+                    </span>
+
+                </button>
+
+
+                <div class="faq-answer">
+
+                    <p>
+
+                        Nagisinnra Technologyでは、
+                        組織の名称、目的、活動、
+                        会員、会計、
+                        未成年者保護に関する特約などを
+                        会則として定めています。
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     CONTACT
+======================================================= -->
+
+<section
+    class="contact reveal"
+    id="contact">
+
+    <div class="container">
+
+
+        <div class="contact-card">
+
+
+            <div class="contact-label">
+                Nagisinnra Technology
+            </div>
+
+
+            <h2 class="contact-title">
+
+                Let's build
+                <br>
+                what's next.
+
+            </h2>
+
+
+            <p class="contact-description">
+
+                技術連携、
+                NagisinnraLinuxに関するお問い合わせ、
+                スポンサーシップなどについては
+                Nagisinnra Technologyまでご連絡ください。
+
+            </p>
+
+
+            <div class="contact-actions">
+
+
+                <a href="/cdn-cgi/l/email-protection#65060a0b1104061125001d04081509004b060a08" class="contact-button contact-primary">
+
+                    Contact us
+                    →
+                    
+                </a>
+
+
+                <a
+                    href="#technology"
+                    class="contact-button contact-secondary">
+
+                    Explore technology
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     FOOTER
+======================================================= -->
+
+<footer>
+
+
+    <div class="container">
+
+
+        <div class="footer-grid">
+
+
+            <div>
+
+
+                <div class="footer-brand">
+                    Nagisinnra Technology
+                </div>
+
+
+                <div class="footer-sub">
+                    Nagisinnra Technology
+                </div>
+
+
+                <p class="footer-description">
+
+                    Linux、
+                    オープンソース、
+                    コンピューティング技術を通じて、
+                    次の技術をつくる。
+
+                </p>
+
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Company
+                </h4>
+
+                <a href="#about">
+                    About
+                </a>
+
+                <a href="#organization">
+                    Organization
+                </a>
+
+                <a href="#governance">
+                    Governance
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Technology
+                </h4>
+
+                <a href="#technology">
+                    NagisinnraLinux
+                </a>
+
+                <a href="#technology">
+                    Linux Engineering
+                </a>
+
+                <a href="#technology">
+                    Open Source
+                </a>
+
+            </div>
+
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Connect
+                </h4>
+
+                <a href="#contact">
+                    Contact
+                </a>
+
+                <a href="#">
+                    GitHub
+                </a>
+
+                <a href="#">
+                    Zenn
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 Nagisinnra Technology
+            </span>
+
+
+            <span>
+                Effective September 4, 2026
+            </span>
+
+        </div>
+
+
+    </div>
+
+</footer>
+
+
+
+<!-- =======================================================
+     JAVASCRIPT
+======================================================= -->
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+const reveal =
+    document.querySelectorAll(
+        ".reveal"
+    );
+
+
+const observer =
+    new IntersectionObserver(
+
+        entries => {
+
+            entries.forEach(
+                entry => {
+
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        entry.target.classList.add(
+                            "visible"
+                        );
+
+                        observer.unobserve(
+                            entry.target
+                        );
+
+                    }
+
+                }
+            );
+
+        },
+
+        {
+            threshold: .12
+        }
+
+    );
+
+
+reveal.forEach(
+    element => {
+
+        observer.observe(
+            element
+        );
+
+    }
+);
+
+
+/* =========================================================
+   FAQ
+========================================================= */
+
+const faq =
+    document.querySelectorAll(
+        ".faq-item"
+    );
+
+
+faq.forEach(
+    item => {
+
+        const question =
+            item.querySelector(
+                ".faq-question"
+            );
+
+
+        question.addEventListener(
+            "click",
+            () => {
+
+                const active =
+                    item.classList.contains(
+                        "active"
+                    );
+
+
+                faq.forEach(
+                    other => {
+
+                        other.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+                if (!active) {
+
+                    item.classList.add(
+                        "active"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
+   NAV SHADOW
+========================================================= */
+
+const nav =
+    document.querySelector(
+        ".nav"
+    );
+
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        if (
+            window.scrollY > 40
+        ) {
+
+            nav.style.boxShadow =
+                "0 18px 50px rgba(0,0,0,.09)";
+
+        } else {
+
+            nav.style.boxShadow =
+                "0 12px 40px rgba(0,0,0,.055)";
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   SMALL HERO PARALLAX
+========================================================= */
+
+const hero =
+    document.querySelector(
+        ".hero-content"
+    );
+
+
+window.addEventListener(
+    "mousemove",
+    event => {
+
+        if (
+            window.innerWidth < 900
+        ) {
+
+            return;
+
+        }
+
+
+        const x =
+            (
+                event.clientX /
+                window.innerWidth -
+                .5
+            ) * 2;
+
+
+        const y =
+            (
+                event.clientY /
+                window.innerHeight -
+                .5
+            ) * 2;
+
+
+        hero.style.transform =
+            `translate(${x * 2}px, ${y * 1.5}px)`;
+
+    }
+);
+
+
+/* =========================================================
+   CURRENT YEAR
+========================================================= */
+
+const year =
+    new Date().getFullYear();
+
+
+document
+    .querySelectorAll(
+        ".footer-bottom span:first-child"
+    )
+    .forEach(
+        element => {
+
+            element.textContent =
+                `© ${year} Nagisinnra Technology`;
+
+        }
+    );
+
+
+</script>
+
+
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"94c79d4d951745d085049dd7f2bbd8f8","r":1,"spa":2}' crossorigin="anonymous"></script>
+</body>
+
+</html>
+```
+
+
+<script defer data-domain="html.cafe" src="https://milkymouse.com/js/script.js"></script>
+
+   
